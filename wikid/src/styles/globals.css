@@ -1,0 +1,53 @@
+/* global.css */
+
+:root {
+  --rounded-normal: 10px;
+  --rounded-heavy: 15px;
+
+  --gray50: #ffffff;
+  --gray100: #f7f7fa;
+  --gray200: #e4e5f0;
+  --gray300: #c6cada;
+  --gray400: #8f95b2;
+  --gray500: #474d66;
+  --gray600: #3b415b;
+
+  --green100: #eef9f6;
+  --green200: #4cbfa5;
+  --green300: #32a68a;
+
+  --red100: #fbeded;
+  --red200: #d14343;
+
+  --purple100: #8e66ff;
+
+  --yellow100: #fdd181;
+
+  --font-size-xxxs: 12px;
+  --font-size-xxs: 13px;
+  --font-size-xs: 14px;
+  --font-size-sm: 16px;
+  --font-size-md: 18px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-xxxl: 40px;
+  --font-size-bg: 48px;
+
+  --font-weight-rg: 400;
+  --font-weight-md: 500;
+  --font-weight-sb: 600;
+  --font-weight-bo: 700;
+
+  --line-height-xxs: 18px;
+  --line-height-xs: 20px;
+  --line-height-sm: 22px;
+  --line-height-md: 24px;
+  --line-height-lg: 26px;
+  --line-height-xl: 32px;
+  --line-height-xxl: 42px;
+  --line-height-xxxl: 46px;
+
+  --box-shadow-normal: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+  --box-shadow-heavy: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+}
