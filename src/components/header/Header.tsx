@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import style from '@/components/header/Header.module.css';
 import Image from 'next/image';
 import bell from '@/assets/header/alarmBell.png';
@@ -5,9 +6,14 @@ import logo from '@/assets/header/mainLogo.png';
 import basicProfile from '@/assets/header/basicUserProfile.png';
 import menuImg from '@/assets/header/menuImg.png';
 import { useRouter } from 'next/router';
+import Modal from '@/components/header/HeaderModal';
 
 const Header = () => {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const navigateToHome = () => {
     router.push('/');
@@ -16,7 +22,10 @@ const Header = () => {
   const navigateToLogin = () => {
     router.push('/signup');
   };
+
+  //test
   const user = false;
+
   return (
     <div className={style.headerContainer}>
       <div className={style.headerNavContainer}>
@@ -35,7 +44,6 @@ const Header = () => {
       {user ? (
         <div className={style.imgContainer}>
           <Image className={style.bell} src={bell} alt="alarmbell" />
-          {/* if user.image?  */}
           <Image
             className={style.userProfile}
             src={basicProfile}
@@ -52,9 +60,11 @@ const Header = () => {
             src={menuImg}
             alt="menuImg"
             title="menu"
+            onClick={toggleModal}
           />
         </div>
       )}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

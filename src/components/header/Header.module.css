@@ -1,6 +1,5 @@
 .headerContainer {
   display: flex;
-  max-width: 1920px;
   height: 80px;
   justify-content: space-between;
   align-items: center;
@@ -21,6 +20,7 @@
   font-weight: var(--font-weight-rg);
   font-size: var(--font-size-xs);
   line-height: var(--line-height-md);
+  cursor: pointer;
 }
 
 .logo {

@@ -1,0 +1,34 @@
+.modalOverlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 176px;
+  right: 10px;
+  top: 60px;
+  background-color: var(--gray50);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-heavy);
+}
+
+.modalUl {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--line-height-md);
+}
+
+.modalUl > li {
+  cursor: pointer;
+}
+
+@media (min-width: 424px) {
+  .modalOverlay {
+    display: none;
+  }
+}
