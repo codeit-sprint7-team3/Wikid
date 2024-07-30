@@ -14,8 +14,6 @@ interface User {
 
 interface AuthState {
   user: User | null;
-  accessToken: string | null;
-  refreshToken: string | null;
   isPending: boolean;
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => void;
@@ -25,8 +23,6 @@ interface AuthState {
 
 const UseAuthStore = create<AuthState>((set, get) => ({
   user: null,
-  accessToken: null,
-  refreshToken: null,
   isPending: false,
 
   signIn: async (email, password) => {
@@ -36,7 +32,7 @@ const UseAuthStore = create<AuthState>((set, get) => ({
       const { user, accessToken, refreshToken } = response.data;
       Cookies.set('accessToken', accessToken);
       Cookies.set('refreshToken', refreshToken);
-      set({ user, accessToken, refreshToken, isPending: false });
+      set({ user, isPending: false });
       return true;
     } catch (error) {
       console.error(error);
@@ -48,7 +44,7 @@ const UseAuthStore = create<AuthState>((set, get) => ({
   signOut: () => {
     Cookies.remove('accessToken', { path: '/' });
     Cookies.remove('refreshToken', { path: '/' });
-    set({ user: null, accessToken: null, refreshToken: null });
+    set({ user: null });
   },
 
   checkAuth: async () => {
@@ -57,7 +53,7 @@ const UseAuthStore = create<AuthState>((set, get) => ({
     const refreshToken = Cookies.get('refreshToken');
 
     if (!accessToken || !refreshToken) {
-      set({ user: null, accessToken: null, refreshToken: null });
+      set({ user: null });
       return;
     }
     try {
@@ -68,8 +64,6 @@ const UseAuthStore = create<AuthState>((set, get) => ({
       });
       set({
         user: response.data,
-        accessToken,
-        refreshToken,
         isPending: false,
       });
     } catch (error) {
@@ -79,8 +73,6 @@ const UseAuthStore = create<AuthState>((set, get) => ({
         console.error(error);
         set({
           user: null,
-          accessToken: null,
-          refreshToken: null,
           isPending: false,
         });
       }
@@ -90,17 +82,16 @@ const UseAuthStore = create<AuthState>((set, get) => ({
   refreshAccessToken: async () => {
     const refreshToken = Cookies.get('refreshToken');
     if (!refreshToken) {
-      set({ user: null, accessToken: null, refreshToken: null });
+      set({ user: null });
       return;
     }
     try {
       const response = await api.post('/auth/refresh', { refreshToken });
       const { accessToken } = response.data;
       Cookies.set('accessToken', accessToken);
-      set({ accessToken });
     } catch (error) {
       console.error(error);
-      set({ user: null, accessToken: null, refreshToken: null });
+      set({ user: null });
     }
   },
 }));
