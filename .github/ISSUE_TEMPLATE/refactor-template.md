@@ -4,16 +4,6 @@ about: 리팩토링 이슈 템플릿
 title: "[REFACTOR] "
 labels: ''
 assignees: ''
-
----
-
----
-name: Refactor Template
-about: 리팩터링 이슈 템플릿
-title: "[REFACTOR] "
-labels: refactor
-assignees: ''
-
 ---
 
 ## 📌 어떤 기능을 리팩터링 하나요?
