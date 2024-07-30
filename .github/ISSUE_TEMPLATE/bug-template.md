@@ -4,16 +4,6 @@ about: 버그 이슈 템플릿
 title: "[BUG] "
 labels: ''
 assignees: ''
-
----
-
----
-name: Bug Template
-about: 버그 이슈 템플릿
-title: "[BUG] "
-labels: bug
-assignees: ''
-
 ---
 
 ## 🐞 어떤 버그인가요?
