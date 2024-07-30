@@ -1,0 +1,82 @@
+.headerContainer {
+  display: flex;
+  max-width: 1920px;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--gray50);
+  box-shadow: var(--box-shadow-normal);
+  padding: 25px 80px;
+}
+.headerNavContainer {
+  display: flex;
+  gap: 40px;
+}
+
+.headerNav {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  align-items: center;
+  font-weight: var(--font-weight-rg);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-md);
+}
+
+.logo {
+  width: 107px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.imgContainer {
+  display: flex;
+  gap: 24px;
+}
+
+.bell,
+.userProfile {
+  width: 32px;
+  height: 32px;
+}
+
+.loginText {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--line-height-md);
+  color: var(--gray400);
+  cursor: pointer;
+}
+
+.menuImg {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 375px) {
+  .bell,
+  .userProfile {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 424px) {
+  .headerNav {
+    display: none;
+  }
+  .menuImg {
+    display: block;
+  }
+  .loginText {
+    display: none;
+  }
+}
+
+@media (max-width: 744px) {
+  .headerContainer {
+    padding: 15px 20px;
+  }
+}
