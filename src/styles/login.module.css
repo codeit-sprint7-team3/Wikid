@@ -1,0 +1,23 @@
+.LoginContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 341px auto;
+  max-width: 400px;
+  max-height: 405px;
+}
+.RegisterContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 223px auto;
+  max-width: 400px;
+  max-height: 405px;
+}
+
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.LoginTitle {
+  text-align: center;
+}
