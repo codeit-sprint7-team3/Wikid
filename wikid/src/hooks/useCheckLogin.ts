@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import UseAuthStore from '@/store/AuthStore';
 
-const IsLogin = () => {
+const useCheckLogin = () => {
   const { user, checkAuth } = UseAuthStore();
 
   useEffect(() => {
@@ -14,4 +14,4 @@ const IsLogin = () => {
   return { user };
 };
 
-export default IsLogin;
+export default useCheckLogin;
