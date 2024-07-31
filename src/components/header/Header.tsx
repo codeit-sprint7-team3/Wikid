@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   const navigateToLogin = () => {
-    router.push('/signup');
+    router.push('/login');
   };
   return (
     <div className={style.headerContainer}>
