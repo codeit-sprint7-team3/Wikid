@@ -12,10 +12,11 @@
     "@tinymce/tinymce-react": "^5.1.1",
     "axios": "^1.7.2",
     "js-cookie": "^3.0.5",
-    "next": "14.2.5",
+    "next": "^14.2.5",
     "react": "^18",
     "react-dom": "^18",
     "react-quill": "^2.0.0",
+    "tinymce": "^7.2.1",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
