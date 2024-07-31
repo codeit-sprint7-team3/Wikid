@@ -3,25 +3,19 @@ import { useRouter } from 'next/router';
 import UseAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
 import useCheckLogin from '@/hooks/useCheckLogin';
-
-// 이메일 유효성 검사 함수
-const validateEmail = (email: string) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
+import { ValidateEmail } from '@/utils/ValidateEmail';
 
 const Login = () => {
   const [values, setValues] = useState({ email: '', password: '' });
-  const [emailError, setEmailError] = useState(''); // 이메일 에러
-  const [passwordError, setPasswordError] = useState(''); // 비밀번호 에러
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true); // 버튼 비활성화
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { user } = useCheckLogin();
   const { signIn } = UseAuthStore();
   const router = useRouter();
 
   useEffect(() => {
-    //버튼을 활성화
-    const isEmailValid = validateEmail(values.email);
+    const isEmailValid = ValidateEmail(values.email);
     const isPasswordValid = values.password.length >= 8;
     setIsButtonDisabled(!(isEmailValid && isPasswordValid));
   }, [values]);
@@ -36,8 +30,7 @@ const Login = () => {
   };
 
   const handleEmailCheckBlur = () => {
-    // 포커스 아웃 시 이메일 유효성 검사
-    if (!validateEmail(values.email)) {
+    if (!ValidateEmail(values.email)) {
       setEmailError('잘못된 이메일 형식입니다.');
     }
   };
