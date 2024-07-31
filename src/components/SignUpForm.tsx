@@ -1,6 +1,8 @@
 import api from "@/lib/axios";
 import { useRouter } from "next/router";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import style from "@/styles/signup.module.css";
+import classNames from "classnames";
 
 interface formValues {
   name: string;
@@ -122,47 +124,81 @@ const SignUpForm: React.FC = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">닉네임</label>
-        <input
-          onBlur={handleNameBlur}
-          onChange={handleInputChange}
-          value={formValue.name}
-          name="name"
-          placeholder="닉네임을 입력해 주세요"
-        />
-        {nameError && <p>{nameError}</p>}
-        <label htmlFor="email">이메일</label>
-        <input
-          onBlur={handleEmailBlur}
-          onChange={handleInputChange}
-          value={formValue.email}
-          type="email"
-          name="email"
-          placeholder="이메일을 입력해 주세요"
-        />
-        {emailError && <p>{emailError}</p>}
-        <label htmlFor="password">비밀번호</label>
-        <input
-          onBlur={handlePasswordBlur}
-          onChange={handleInputChange}
-          value={formValue.password}
-          type="password"
-          name="password"
-          placeholder="비밀번호를 입력해 주세요"
-        />
-        {passwordError && <p>{passwordError}</p>}
-        <label htmlFor="passwordConfirmation">비밀번호 확인</label>
-        <input
-          onBlur={handlePasswordConfirmationBlur}
-          onChange={handleInputChange}
-          value={formValue.passwordConfirmation}
-          type="password"
-          name="passwordConfirmation"
-          placeholder="비밀번호를 입력해 주세요"
-        />
-        {passwordConfirmationError && <p>{passwordConfirmationError}</p>}
-        <button type="submit">가입하기</button>
+      <form className={style.form} onSubmit={handleSubmit}>
+        <div className={style.inputGroup}>
+          <label className={style.label} htmlFor="name">
+            닉네임
+          </label>
+          <input
+            className={classNames(style.input, {
+              [style.errorInput]: nameError,
+            })}
+            onBlur={handleNameBlur}
+            onChange={handleInputChange}
+            value={formValue.name}
+            name="name"
+            placeholder="닉네임을 입력해 주세요"
+          />
+          {nameError && <p className={style.errorMessage}>{nameError}</p>}
+        </div>
+        <div className={style.inputGroup}>
+          <label className={style.label} htmlFor="email">
+            이메일
+          </label>
+          <input
+            className={classNames(style.input, {
+              [style.errorInput]: emailError,
+            })}
+            onBlur={handleEmailBlur}
+            onChange={handleInputChange}
+            value={formValue.email}
+            type="email"
+            name="email"
+            placeholder="이메일을 입력해 주세요"
+          />
+          {emailError && <p className={style.errorMessage}>{emailError}</p>}
+        </div>
+        <div className={style.inputGroup}>
+          <label className={style.label} htmlFor="password">
+            비밀번호
+          </label>
+          <input
+            className={classNames(style.input, {
+              [style.errorInput]: passwordError,
+            })}
+            onBlur={handlePasswordBlur}
+            onChange={handleInputChange}
+            value={formValue.password}
+            type="password"
+            name="password"
+            placeholder="비밀번호를 입력해 주세요"
+          />
+          {passwordError && (
+            <p className={style.errorMessage}>{passwordError}</p>
+          )}
+        </div>
+        <div className={style.inputGroup}>
+          <label className={style.label} htmlFor="passwordConfirmation">
+            비밀번호 확인
+          </label>
+          <input
+            className={classNames(style.input, {
+              [style.errorInput]: passwordConfirmationError,
+            })}
+            onBlur={handlePasswordConfirmationBlur}
+            onChange={handleInputChange}
+            value={formValue.passwordConfirmation}
+            type="password"
+            name="passwordConfirmation"
+            placeholder="비밀번호를 입력해 주세요"
+          />
+          {passwordConfirmationError && (
+            <p className={style.errorMessage}>{passwordConfirmationError}</p>
+          )}
+        </div>
+        <button className={style.submitBtn} type="submit">
+          가입하기
+        </button>
       </form>
     </div>
   );
