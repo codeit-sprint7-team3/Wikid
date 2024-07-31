@@ -114,7 +114,7 @@ const SignUpForm: React.FC = () => {
   };
 
   //비밀번호 확인 검사
-  const handlepasswordConfirmationBlur = () => {
+  const handlePasswordConfirmationBlur = () => {
     if (formValue.password !== formValue.passwordConfirmation) {
       setPasswordConfirmationError("비밀번호가 일치하지 않습니다");
     }
@@ -154,7 +154,7 @@ const SignUpForm: React.FC = () => {
         {passwordError && <p>{passwordError}</p>}
         <label htmlFor="passwordConfirmation">비밀번호 확인</label>
         <input
-          onBlur={handlepasswordConfirmationBlur}
+          onBlur={handlePasswordConfirmationBlur}
           onChange={handleInputChange}
           value={formValue.passwordConfirmation}
           type="password"
