@@ -86,8 +86,11 @@ const Login = () => {
           value={values.email}
           onChange={handleChange}
           onBlur={handleEmailCheckBlur}
+          style={{
+            backgroundColor: emailError ? 'var(--red100)' : 'var(--gray100)',
+          }}
         />
-        {emailError && <p className={style.ErrorMessage}>{emailError}</p>}
+        {emailError && <p className={style.ErrorMessage1}>{emailError}</p>}
         <label htmlFor="password">비밀번호</label>
         <input
           type="password"
@@ -95,13 +98,24 @@ const Login = () => {
           name="password"
           value={values.password}
           onChange={handleChange}
+          style={{
+            backgroundColor: passwordError ? 'var(--red100)' : 'var(--gray100)',
+          }}
         />
-        {passwordError && <p className={style.ErrorMessage}>{passwordError}</p>}
-        <button type="submit" disabled={isButtonDisabled}>
+        {passwordError && (
+          <p className={style.ErrorMessage2}>{passwordError}</p>
+        )}
+        <button
+          className={style.subButton}
+          type="submit"
+          disabled={isButtonDisabled}
+        >
           로그인
         </button>
       </form>
-      <p onClick={navigateToRegister}>회원 가입</p>
+      <p className={style.goRegister} onClick={navigateToRegister}>
+        회원 가입
+      </p>
     </div>
   );
 };
