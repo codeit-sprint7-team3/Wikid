@@ -7,8 +7,10 @@ import basicProfile from '@/assets/header/basicUserProfile.png';
 import menuImg from '@/assets/header/menuImg.png';
 import { useRouter } from 'next/router';
 import Modal from '@/components/header/HeaderModal';
+import useCheckLogin from '@/hooks/useCheckLogin';
 
 const Header = () => {
+  const { user } = useCheckLogin();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => {
@@ -22,10 +24,6 @@ const Header = () => {
   const navigateToLogin = () => {
     router.push('/signup');
   };
-
-  //test
-  const user = false;
-
   return (
     <div className={style.headerContainer}>
       <div className={style.headerNavContainer}>
