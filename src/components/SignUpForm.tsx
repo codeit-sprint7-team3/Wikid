@@ -8,15 +8,24 @@ const SignUpForm = () => {
     password: "",
     passwordConfirmation: "",
   });
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordConfirmationError, setPasswordConfirmationError] =
+    useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!validateName(formValue.name)) {
+      setNameError("닉네임은 10자 내로 입력해주세요");
+      return;
+    }
     if (!validateEmail(formValue.email)) {
       setEmailError("잘못된 이메일 형식입니다");
       return;
     }
     if (formValue.password.length < 8) {
-      setPasswordError("비밀번호는 최소 8자 이상이여야 합니다");
+      setPasswordError("비밀번호는 8자 이상이여야 합니다");
       return;
     }
     if (formValue.password !== formValue.passwordConfirmation) {
@@ -25,13 +34,19 @@ const SignUpForm = () => {
     }
     try {
       await api.post("/auth/signUp", formValue);
-      setFormValue({
-        name: "",
-        email: "",
-        password: "",
-        passwordConfirmation: "",
-      });
-    } catch (error) {}
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        if (error.response.data.message === "이미 사용중인 이메일입니다.") {
+          setEmailError("이미 사용중인 이메일입니다");
+        }
+      } else if (error.response && error.response.status === 500) {
+        if (error.response.data.message === "Internal Server Error") {
+          setNameError("이미 사용중인 닉네임입니다");
+        }
+      } else {
+        console.log("회원가입에 실패했습니다");
+      }
+    }
   };
 
   const handleInputChange = (e) => {
@@ -40,12 +55,36 @@ const SignUpForm = () => {
       ...prevState,
       [name]: value,
     }));
+    switch (name) {
+      case "name":
+        setNameError("");
+        break;
+      case "email":
+        setEmailError("");
+        break;
+      case "password":
+        setPasswordError("");
+        break;
+      case "passwordConfirmation":
+        setPasswordConfirmationError("");
+        break;
+      default:
+        break;
+    }
   };
 
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [passwordConfirmationError, setPasswordConfirmationError] =
-    useState("");
+  //닉네임 유효성 검사
+  const validateName = (name: string) => {
+    return name.length > 1 && name.length <= 10;
+  };
+
+  const handleNameBlur = () => {
+    if (!validateName(formValue.name)) {
+      setNameError("닉네임은 10자 내로 입력해주세요");
+    } else {
+      setNameError("");
+    }
+  };
 
   // 이메일 유효성 검사
   const validateEmail = (email: string) => {
@@ -56,17 +95,13 @@ const SignUpForm = () => {
   const handleEmailBlur = () => {
     if (!validateEmail(formValue.email)) {
       setEmailError("잘못된 이메일 형식입니다");
-    } else {
-      setEmailError("");
     }
   };
 
   //비밀번호 길이 검사
   const handlePasswordBlur = () => {
     if (formValue.password.length < 8) {
-      setPasswordError("비밀번호는 최소 8자 이상이여야 합니다");
-    } else {
-      setPasswordError("");
+      setPasswordError("비밀번호는 8자 이상이여야 합니다");
     }
   };
 
@@ -74,8 +109,6 @@ const SignUpForm = () => {
   const handlepasswordConfirmationBlur = () => {
     if (formValue.password !== formValue.passwordConfirmation) {
       setPasswordConfirmationError("비밀번호가 일치하지 않습니다");
-    } else {
-      setPasswordConfirmationError("");
     }
   };
 
@@ -84,11 +117,13 @@ const SignUpForm = () => {
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">닉네임</label>
         <input
+          onBlur={handleNameBlur}
           onChange={handleInputChange}
           value={formValue.name}
           name="name"
           placeholder="닉네임을 입력해 주세요"
         />
+        {nameError && <p>{nameError}</p>}
         <label htmlFor="email">이메일</label>
         <input
           onBlur={handleEmailBlur}
