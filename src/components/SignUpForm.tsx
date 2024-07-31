@@ -1,20 +1,29 @@
 import api from "@/lib/axios";
-import React, { FormEvent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
-const SignUpForm = () => {
-  const [formValue, setFormValue] = useState({
+interface formValues {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+const SignUpForm: React.FC = () => {
+  const router = useRouter();
+  const [formValue, setFormValue] = useState<formValues>({
     name: "",
     email: "",
     password: "",
     passwordConfirmation: "",
   });
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [nameError, setNameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
   const [passwordConfirmationError, setPasswordConfirmationError] =
-    useState("");
+    useState<string>("");
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateName(formValue.name)) {
       setNameError("닉네임은 10자 내로 입력해주세요");
@@ -34,7 +43,8 @@ const SignUpForm = () => {
     }
     try {
       await api.post("/auth/signUp", formValue);
-    } catch (error) {
+      router.push("/login");
+    } catch (error: any) {
       if (error.response && error.response.status === 400) {
         if (error.response.data.message === "이미 사용중인 이메일입니다.") {
           setEmailError("이미 사용중인 이메일입니다");
@@ -49,7 +59,7 @@ const SignUpForm = () => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValue((prevState) => ({
       ...prevState,
@@ -81,8 +91,6 @@ const SignUpForm = () => {
   const handleNameBlur = () => {
     if (!validateName(formValue.name)) {
       setNameError("닉네임은 10자 내로 입력해주세요");
-    } else {
-      setNameError("");
     }
   };
 
