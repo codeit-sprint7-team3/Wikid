@@ -27,18 +27,12 @@ const UseAuthStore = create<AuthState>((set, get) => ({
 
   signIn: async (email, password) => {
     set({ isPending: true });
-    try {
-      const response = await api.post('/auth/signIn', { email, password });
-      const { user, accessToken, refreshToken } = response.data;
-      Cookies.set('accessToken', accessToken);
-      Cookies.set('refreshToken', refreshToken);
-      set({ user, isPending: false });
-      return true;
-    } catch (error) {
-      console.error(error);
-      set({ isPending: false });
-      return false;
-    }
+    const response = await api.post('/auth/signIn', { email, password });
+    const { user, accessToken, refreshToken } = response.data;
+    Cookies.set('accessToken', accessToken);
+    Cookies.set('refreshToken', refreshToken);
+    set({ user, isPending: false });
+    return true;
   },
 
   signOut: () => {

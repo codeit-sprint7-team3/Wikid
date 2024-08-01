@@ -1,0 +1,105 @@
+.LoginContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 261px auto;
+  max-width: 400px;
+  height: 405px;
+}
+.RegisterContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 223px auto;
+  max-width: 400px;
+  max-height: 405px;
+}
+
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.LoginTitle {
+  text-align: center;
+  font-weight: var(--font-weight-sb);
+  font-size: var(--line-height-md);
+  line-height: var(--line-height-xl);
+}
+
+.LoginForm > input {
+  margin-top: 10px;
+  width: 100%;
+  height: 45px;
+  border-radius: var(--rounded-normal);
+  border: 1.5px solid transparent;
+  background-color: var(--gray100);
+  padding: 14px 20px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--line-height-md);
+  color: var(--gray400);
+}
+
+.LoginForm > input:focus {
+  outline: none;
+  border: 1.5px solid var(--green200);
+}
+
+.LoginForm > label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--line-height-md);
+  color: var(--gray500);
+  margin-top: 24px;
+}
+
+.subButton {
+  margin-top: 32px;
+  height: 45px;
+  background-color: var(--green200);
+  color: var(--gray100);
+  cursor: pointer;
+  border-radius: var(--rounded-normal);
+  border: transparent;
+}
+
+.subButton:disabled {
+  background-color: var(--gray300);
+  border: transparent;
+}
+
+.goRegister {
+  text-align: center;
+  font-weight: var(--font-weight-rg);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-md);
+  color: var(--green200);
+  margin-top: 40px;
+  cursor: pointer;
+}
+
+.ErrorMessage1,
+.ErrorMessage2 {
+  font-size: var(--font-size-xxxs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--line-height-xxs);
+  color: var(--red200);
+}
+
+.ErrorMessage1 {
+  position: absolute;
+  top: 103px;
+  left: 10px;
+}
+
+.ErrorMessage2 {
+  position: absolute;
+  top: 206px;
+  left: 10px;
+}
+
+@media (max-width: 419px) {
+  .LoginContainer {
+    margin: 143.5px 20px;
+  }
+}
