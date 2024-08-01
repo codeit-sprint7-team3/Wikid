@@ -8,7 +8,10 @@ interface User {
   teamId: string;
   createdAt: string;
   updatedAt: string;
-  profile: null | string;
+  profile: {
+    id: number;
+    code: string;
+  };
   email: string | null;
 }
 
