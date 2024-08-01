@@ -60,7 +60,7 @@ const Login = () => {
   };
 
   const navigateToRegister = () => {
-    router.push('/register');
+    router.push('/signup');
   };
 
   if (user) {
