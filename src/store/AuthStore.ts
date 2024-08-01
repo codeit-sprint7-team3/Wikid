@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import api from '../lib/axios';
 import Cookies from 'js-cookie';
 
@@ -8,7 +8,10 @@ interface User {
   teamId: string;
   createdAt: string;
   updatedAt: string;
-  profile: null | string;
+  profile: {
+    id: number;
+    code: string;
+  };
   email: string | null;
 }
 
