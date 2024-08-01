@@ -6,6 +6,11 @@
   font-family: 'pretendard', sans-serif, Arial;
 }
 
+div.tox-editor-header {
+  background-color: #3b415b;
+  border-radius: 10px; /* 테두리 */
+}
+
 @font-face {
   font-family: 'pretendard';
   src: url('../assets/font/PretendardVariable.ttf');
