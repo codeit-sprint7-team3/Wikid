@@ -3,12 +3,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "pretendard", sans-serif, Arial;
+  font-family: 'pretendard', sans-serif, Arial;
 }
 
 @font-face {
-  font-family: "pretendard";
-  src: url("../assets/font/PretendardVariable.ttf");
+  font-family: 'pretendard';
+  src: url('../assets/font/PretendardVariable.ttf');
 }
 
 :root {
@@ -24,7 +24,7 @@
   --gray600: #3b415b;
 
   --green100: #eef9f6;
-  --green200: #4cbfa5;
+  --green200: #4cbfa4;
   --green300: #32a68a;
 
   --red100: #fbeded;
