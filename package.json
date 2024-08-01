@@ -17,6 +17,7 @@
     "react-dom": "^18",
     "react-quill": "^2.0.0",
     "tinymce": "^7.2.1",
+    "classnames": "^2.5.1",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
