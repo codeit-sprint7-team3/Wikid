@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import api from '../lib/axios';
 import Cookies from 'js-cookie';
 
