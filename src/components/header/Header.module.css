@@ -38,6 +38,26 @@
 .userProfile {
   width: 32px;
   height: 32px;
+  cursor: pointer;
+}
+
+.userProfile {
+  border-radius: 50%;
+}
+@keyframes draw-border {
+  0% {
+    border: 2px solid transparent;
+  }
+  50% {
+    border: 2px solid var(--green200);
+  }
+  100% {
+    border: 2px solid var(--green300);
+  }
+}
+
+.userProfile:hover {
+  animation: draw-border 1s linear forwards;
 }
 
 .loginText {

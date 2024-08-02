@@ -7,6 +7,7 @@ import basicProfile from '@/assets/header/basicUserProfile.png';
 import menuImg from '@/assets/header/menuImg.png';
 import { useRouter } from 'next/router';
 import Modal from '@/components/header/HeaderModal';
+import UserModal from '@/components/header/HeaderUserModal';
 import useCheckLogin from '@/hooks/useCheckLogin';
 import api from '@/lib/axios';
 
@@ -14,6 +15,7 @@ const Header = () => {
   const { user } = useCheckLogin();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [userImg, setUserImg] = useState(null);
 
   useEffect(() => {
@@ -33,6 +35,10 @@ const Header = () => {
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const toggleUserModal = () => {
+    setIsUserModalOpen(!isUserModalOpen);
   };
 
   const navigateToHome = () => {
@@ -66,7 +72,12 @@ const Header = () => {
             className={style.userProfile}
             src={userImg ? userImg : basicProfile}
             alt="유저프로필"
+            onClick={toggleUserModal}
             priority={true}
+          />
+          <UserModal
+            isOpen={isUserModalOpen}
+            onClose={() => setIsUserModalOpen(false)}
           />
         </div>
       ) : (
@@ -84,11 +95,7 @@ const Header = () => {
           />
         </div>
       )}
-      <Modal
-        isOpen={isModalOpen}
-        user={user}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
