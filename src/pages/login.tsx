@@ -44,7 +44,7 @@ const Login = () => {
       const { email, password } = values;
       const success = await signIn(email, password);
       if (success) {
-        router.push('/me');
+        router.push('/');
       }
     } catch (error: any) {
       const errorMessage = error.response.data.message;

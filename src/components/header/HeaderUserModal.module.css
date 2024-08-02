@@ -1,0 +1,47 @@
+.userModalContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  top: 60px;
+  right: 10px;
+  background-color: var(--gray50);
+  border-radius: var(--rounded-normal);
+  box-shadow: var(--box-shadow-heavy);
+  padding: 6px;
+  width: 110px;
+}
+
+.wikiList,
+.boards,
+.accSettings,
+.myWiki,
+.logout {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--font-size-xl);
+  cursor: pointer;
+}
+
+.logout {
+  color: var(--gray400);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--font-size-xl);
+}
+
+@media (min-width: 424px) {
+  .wikiList,
+  .boards {
+    display: none;
+  }
+}
+
+@media (min-width: 744px) {
+  .userModalContainer {
+    top: 80px;
+    right: 35px;
+  }
+}
