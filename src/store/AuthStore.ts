@@ -1,19 +1,7 @@
 import { create } from 'zustand';
 import api from '../lib/axios';
 import Cookies from 'js-cookie';
-
-interface User {
-  id: number;
-  name: string;
-  teamId: string;
-  createdAt: string;
-  updatedAt: string;
-  profile: {
-    id: number;
-    code: string;
-  };
-  email: string | null;
-}
+import { User } from '@/types/UserType';
 
 interface AuthState {
   user: User | null;

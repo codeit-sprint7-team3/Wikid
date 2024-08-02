@@ -84,7 +84,11 @@ const Header = () => {
           />
         </div>
       )}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Modal
+        isOpen={isModalOpen}
+        user={user}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };

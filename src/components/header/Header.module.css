@@ -79,4 +79,8 @@
   .headerContainer {
     padding: 15px 20px;
   }
+
+  .headerContainer {
+    height: 60px;
+  }
 }
