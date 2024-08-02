@@ -1,4 +1,7 @@
 import style from '@/components/header/HeaderUserModal.module.css';
+import Link from 'next/link';
+import useAuthStore from '@/store/AuthStore';
+import { useRouter } from 'next/router';
 
 interface HeaderModal {
   isOpen: boolean;
@@ -6,14 +9,36 @@ interface HeaderModal {
 }
 
 const HeaderUserModal = ({ isOpen, onClose }: HeaderModal) => {
+  const { signOut } = useAuthStore();
+  const router = useRouter();
+
+  const handleSignOutClick = () => {
+    signOut();
+    alert('See ya');
+    window.location.reload();
+    router.push('/');
+  };
+
   if (!isOpen) return null;
+
   return (
     <div className={style.userModalContainer}>
-      <div className={style.wikiList}>위키 목록</div>
-      <div className={style.boards}>자유게시판</div>
-      <div>계정 설정</div>
-      <div>내 위키</div>
-      <div className={style.logout}>로그아웃</div>
+      <Link href="/wikilist" onClick={onClose}>
+        <div className={style.wikiList}>위키 목록</div>
+      </Link>
+      <Link href="/boards" onClick={onClose}>
+        <div className={style.boards}>자유게시판</div>
+      </Link>
+      <Link href="/mypage" onClick={onClose}>
+        <div>계정 설정</div>
+      </Link>
+      <Link href="/wiki/" onClick={onClose}>
+        {/* 수정해야함 */}
+        <div>내 위키</div>
+      </Link>
+      <div className={style.logout} onClick={handleSignOutClick}>
+        로그아웃
+      </div>
     </div>
   );
 };
