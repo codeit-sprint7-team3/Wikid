@@ -30,11 +30,11 @@ const HeaderUserModal = ({ isOpen, onClose }: HeaderModal) => {
         <div className={style.boards}>자유게시판</div>
       </Link>
       <Link href="/mypage" onClick={onClose}>
-        <div>계정 설정</div>
+        <div className={style.accSettings}>계정 설정</div>
       </Link>
       <Link href="/wiki/" onClick={onClose}>
         {/* 수정해야함 */}
-        <div>내 위키</div>
+        <div className={style.myWiki}>내 위키</div>
       </Link>
       <div className={style.logout} onClick={handleSignOutClick}>
         로그아웃

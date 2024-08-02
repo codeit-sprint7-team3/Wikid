@@ -14,7 +14,11 @@
   width: 110px;
 }
 
-.userModalContainer > div {
+.wikiList,
+.boards,
+.accSettings,
+.myWiki,
+.logout {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-rg);
   line-height: var(--font-size-xl);
@@ -23,6 +27,9 @@
 
 .logout {
   color: var(--gray400);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--font-size-xl);
 }
 
 @media (min-width: 424px) {
@@ -34,7 +41,7 @@
 
 @media (min-width: 744px) {
   .userModalContainer {
-    top: 70px;
+    top: 80px;
     right: 35px;
   }
 }
