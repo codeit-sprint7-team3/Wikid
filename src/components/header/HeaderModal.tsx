@@ -1,5 +1,5 @@
 import style from '@/components/header/HeaderModal.module.css';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 interface HeaderModal {
   isOpen: boolean;
@@ -7,22 +7,24 @@ interface HeaderModal {
 }
 
 const HeaderModal = ({ isOpen, onClose }: HeaderModal) => {
-  const router = useRouter();
-  const navigateTowikilist = () => {
-    router.push('/wikilist');
-  };
-  const navigateToboards = () => {
-    router.push('/boards');
-  };
   if (!isOpen) return null;
 
   return (
-    <div className={style.modalOverlay} onClick={onClose}>
-      <div className={style.modalContent} onClick={(e) => e.stopPropagation()}>
-        <ul className={style.modalUl}>
-          <li onClick={navigateTowikilist}>위키목록</li>
-          <li onClick={navigateToboards}>자유게시판</li>
-        </ul>
+    <div className={style.modalContainer}>
+      <div>
+        <Link href="/wikilist" onClick={onClose}>
+          위키목록
+        </Link>
+      </div>
+      <div>
+        <Link href="/boards" onClick={onClose}>
+          자유게시판
+        </Link>
+      </div>
+      <div>
+        <Link href="/login" onClick={onClose}>
+          로그인
+        </Link>
       </div>
     </div>
   );
