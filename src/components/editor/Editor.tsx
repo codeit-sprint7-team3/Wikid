@@ -52,10 +52,17 @@ const addCustomButton = (
   });
 };
 
-const TinyMceEditor: React.FC = () => {
+const tinyMceEditor: React.FC = () => {
   const editorRef = useRef<any>(null);
 
-  const tinymcePlugins = ['link', 'lists', 'autoresize', 'media', 'quickbars'];
+  const tinymcePlugins = [
+    'link',
+    'lists',
+    'autoresize',
+    'media',
+    'quickbars',
+    'image',
+  ];
   const tinymceToolbar =
     'customBold customItalic customUnderline |' +
     'blocks customBullist customNumlist |' +
@@ -115,15 +122,21 @@ const TinyMceEditor: React.FC = () => {
             editor,
             'customImage',
             imageIcon,
-            'quickimage',
-            'quickimage'
+            'Insert Image',
+            'mceImage'
           );
-          addCustomButton(editor, 'customVideo', videoIcon, 'media', 'media');
-          addCustomButton(editor, 'customLink', linkIcon, 'link', 'link');
+          addCustomButton(
+            editor,
+            'customVideo',
+            videoIcon,
+            'Media',
+            'mceMedia'
+          );
+          addCustomButton(editor, 'customLink', linkIcon, 'Link', 'mceLink');
         },
       }}
     />
   );
 };
 
-export default TinyMceEditor;
+export default tinyMceEditor;
