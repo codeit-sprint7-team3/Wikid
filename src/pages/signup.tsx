@@ -10,7 +10,7 @@ const signUp = () => {
       <SignUpForm />
       <div className={style.bottom}>
         <span>이미 회원이신가요?</span>
-        <Link href="/login">로그인하기</Link>
+        <Link href='/login'>로그인하기</Link>
       </div>
     </div>
   );

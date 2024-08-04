@@ -19,7 +19,7 @@ const Header = () => {
 
   useEffect(() => {
     const fetchUserImage = async () => {
-      if (user?.profile.code) {
+      if (user?.profile?.code) {
         try {
           const response = await api.get(`/profiles/${user.profile.code}`);
           setUserImg(response.data.image);
@@ -43,12 +43,12 @@ const Header = () => {
   return (
     <div className={style.headerContainer}>
       <div className={style.headerNavContainer}>
-        <Link href="/">
+        <Link href='/'>
           <Image
             className={style.logo}
             src={logo}
-            alt="logo"
-            title="home"
+            alt='logo'
+            title='home'
             priority={true}
           />
         </Link>
@@ -59,13 +59,13 @@ const Header = () => {
       </div>
       {user ? (
         <div className={style.imgContainer}>
-          <Image className={style.bell} src={bell} alt="alarmbell" title="🔔" />
+          <Image className={style.bell} src={bell} alt='alarmbell' title='🔔' />
           <Image
             className={style.userProfile}
             src={userImg ? userImg : basicProfile}
-            alt="유저프로필"
+            alt='유저프로필'
             onClick={toggleUserModal}
-            title="❤️"
+            title='❤️'
             priority={true}
           />
           <UserModal
@@ -75,14 +75,14 @@ const Header = () => {
         </div>
       ) : (
         <div>
-          <Link href="/login">
+          <Link href='/login'>
             <p className={style.loginText}>로그인</p>
           </Link>
           <Image
             className={style.menuImg}
             src={menuImg}
-            alt="menuImg"
-            title="menu"
+            alt='menuImg'
+            title='menu'
             onClick={toggleModal}
             priority={true}
           />

@@ -47,14 +47,12 @@ const SignUpForm: React.FC = () => {
       await api.post('/auth/signUp', formValue);
       router.push('/login');
     } catch (error: any) {
-      if (error.response && error.response.status === 400) {
-        if (error.response.data.message === '이미 사용중인 이메일입니다.') {
-          setEmailError('이미 사용중인 이메일입니다');
-        }
-      } else if (error.response && error.response.status === 500) {
-        if (error.response.data.message === 'Internal Server Error') {
-          setNameError('이미 사용중인 닉네임입니다');
-        }
+      const errorMessage = error.response.data.message;
+      if (errorMessage === '이미 사용중인 이메일입니다.') {
+        setEmailError('이미 사용중인 이메일입니다');
+      }
+      if (errorMessage === 'Internal Server Error') {
+        setNameError('이미 사용중인 닉네임입니다');
       } else {
         console.log('회원가입에 실패했습니다');
       }
@@ -126,7 +124,7 @@ const SignUpForm: React.FC = () => {
     <div>
       <form className={style.form} onSubmit={handleSubmit}>
         <div className={style.inputGroup}>
-          <label className={style.label} htmlFor="name">
+          <label className={style.label} htmlFor='name'>
             닉네임
           </label>
           <input
@@ -136,13 +134,13 @@ const SignUpForm: React.FC = () => {
             onBlur={handleNameBlur}
             onChange={handleInputChange}
             value={formValue.name}
-            name="name"
-            placeholder="닉네임을 입력해 주세요"
+            name='name'
+            placeholder='닉네임을 입력해 주세요'
           />
           {nameError && <p className={style.errorMessage}>{nameError}</p>}
         </div>
         <div className={style.inputGroup}>
-          <label className={style.label} htmlFor="email">
+          <label className={style.label} htmlFor='email'>
             이메일
           </label>
           <input
@@ -152,14 +150,14 @@ const SignUpForm: React.FC = () => {
             onBlur={handleEmailBlur}
             onChange={handleInputChange}
             value={formValue.email}
-            type="email"
-            name="email"
-            placeholder="이메일을 입력해 주세요"
+            type='email'
+            name='email'
+            placeholder='이메일을 입력해 주세요'
           />
           {emailError && <p className={style.errorMessage}>{emailError}</p>}
         </div>
         <div className={style.inputGroup}>
-          <label className={style.label} htmlFor="password">
+          <label className={style.label} htmlFor='password'>
             비밀번호
           </label>
           <input
@@ -169,16 +167,16 @@ const SignUpForm: React.FC = () => {
             onBlur={handlePasswordBlur}
             onChange={handleInputChange}
             value={formValue.password}
-            type="password"
-            name="password"
-            placeholder="비밀번호를 입력해 주세요"
+            type='password'
+            name='password'
+            placeholder='비밀번호를 입력해 주세요'
           />
           {passwordError && (
             <p className={style.errorMessage}>{passwordError}</p>
           )}
         </div>
         <div className={style.inputGroup}>
-          <label className={style.label} htmlFor="passwordConfirmation">
+          <label className={style.label} htmlFor='passwordConfirmation'>
             비밀번호 확인
           </label>
           <input
@@ -188,15 +186,15 @@ const SignUpForm: React.FC = () => {
             onBlur={handlePasswordConfirmationBlur}
             onChange={handleInputChange}
             value={formValue.passwordConfirmation}
-            type="password"
-            name="passwordConfirmation"
-            placeholder="비밀번호를 입력해 주세요"
+            type='password'
+            name='passwordConfirmation'
+            placeholder='비밀번호를 입력해 주세요'
           />
           {passwordConfirmationError && (
             <p className={style.errorMessage}>{passwordConfirmationError}</p>
           )}
         </div>
-        <button className={style.submitBtn} type="submit">
+        <button className={style.submitBtn} type='submit'>
           가입하기
         </button>
       </form>
