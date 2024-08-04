@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import api from '../lib/axios';
+import authApi from '../lib/authAxios';
 import Cookies from 'js-cookie';
 import { User } from '@/types/UserType';
 import { persist } from 'zustand/middleware';
@@ -20,7 +20,10 @@ const UseAuthStore = create(
 
       signIn: async (email, password) => {
         set({ isPending: true });
-        const response = await api.post('/auth/signIn', { email, password });
+        const response = await authApi.post('/auth/signIn', {
+          email,
+          password,
+        });
         const { user, accessToken, refreshToken } = response.data;
         Cookies.set('accessToken', accessToken);
         Cookies.set('refreshToken', refreshToken);
@@ -37,7 +40,7 @@ const UseAuthStore = create(
 
       checkAuth: async () => {
         set({ isPending: true });
-        const response = await api.get('/users/me');
+        const response = await authApi.get('/users/me');
         set({ user: response.data });
         set({ isPending: false });
       },

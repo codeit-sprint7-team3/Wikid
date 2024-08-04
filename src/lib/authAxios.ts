@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-const api: AxiosInstance = axios.create({
+const authApi: AxiosInstance = axios.create({
   baseURL,
   headers: {
     'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-api.interceptors.request.use(
+authApi.interceptors.request.use(
   (config) => {
     const accessToken = Cookies.get('accessToken');
     if (accessToken) {
@@ -24,7 +24,7 @@ api.interceptors.request.use(
   }
 );
 
-api.interceptors.response.use(
+authApi.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
@@ -36,11 +36,13 @@ api.interceptors.response.use(
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
-          const response = await api.post('/auth/refresh', { refreshToken });
+          const response = await authApi.post('/auth/refresh', {
+            refreshToken,
+          });
           const { accessToken } = response.data;
           Cookies.set('accessToken', accessToken);
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          return api(originalRequest);
+          return authApi(originalRequest);
         } catch (refreshError) {
           console.error('토큰 갱신 실패:', refreshError);
         }
@@ -50,4 +52,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default authApi;
