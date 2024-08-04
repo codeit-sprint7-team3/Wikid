@@ -13,7 +13,7 @@ interface AuthState {
   checkAuth: () => Promise<void>;
 }
 
-const UseAuthStore = create(
+const useAuthStore = create(
   persist<AuthState>(
     (set) => ({
       user: null,
@@ -53,4 +53,4 @@ const UseAuthStore = create(
   )
 );
 
-export default UseAuthStore;
+export default useAuthStore;
