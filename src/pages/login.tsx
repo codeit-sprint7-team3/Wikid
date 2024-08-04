@@ -10,7 +10,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const clientUser = useCheckLogin();
+  const { clientUser, isLoading } = useCheckLogin();
   const { signIn } = UseAuthStore();
   const router = useRouter();
 
@@ -63,9 +63,11 @@ const Login = () => {
     router.push('/signup');
   };
 
-  if (clientUser) {
-    router.replace('/');
-  }
+  useEffect(() => {
+    if (!isLoading && clientUser) {
+      router.replace('/');
+    }
+  }, [clientUser, isLoading, router]);
 
   return (
     <div className={style.LoginContainer}>
