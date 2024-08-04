@@ -12,7 +12,7 @@ import useCheckLogin from '@/hooks/useCheckLogin';
 import api from '@/lib/axios';
 
 const Header = () => {
-  const clientUser = useCheckLogin();
+  const { clientUser, isLoading } = useCheckLogin();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [userImg, setUserImg] = useState(null);
@@ -41,6 +41,8 @@ const Header = () => {
   const toggleUserModal = () => {
     setIsUserModalOpen(!isUserModalOpen);
   };
+
+  if (isLoading) return null;
 
   return (
     <div className={style.headerContainer}>
