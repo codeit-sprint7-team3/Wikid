@@ -9,3 +9,5 @@ const basicApi: AxiosInstance = axios.create({
     Accept: 'application/json',
   },
 });
+
+export default basicApi;

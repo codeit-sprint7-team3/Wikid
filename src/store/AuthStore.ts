@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import authApi from '../lib/authAxios';
+import basicApi from '@/lib/basicAxios';
 import Cookies from 'js-cookie';
 import { User } from '@/types/UserType';
 import { persist } from 'zustand/middleware';
@@ -20,7 +21,7 @@ const UseAuthStore = create(
 
       signIn: async (email, password) => {
         set({ isPending: true });
-        const response = await authApi.post('/auth/signIn', {
+        const response = await basicApi.post('/auth/signIn', {
           email,
           password,
         });
