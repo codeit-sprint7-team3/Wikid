@@ -10,7 +10,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { user } = useCheckLogin();
+  const clientUser = useCheckLogin();
   const { signIn } = UseAuthStore();
   const router = useRouter();
 
@@ -63,7 +63,7 @@ const Login = () => {
     router.push('/signup');
   };
 
-  if (user) {
+  if (clientUser) {
     router.replace('/');
   }
 
