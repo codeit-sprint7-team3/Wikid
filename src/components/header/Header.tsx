@@ -19,7 +19,7 @@ const Header = () => {
 
   useEffect(() => {
     const fetchUserImage = async () => {
-      if (clientUser?.profile.code) {
+      if (clientUser?.profile?.code) {
         try {
           const response = await api.get(
             `/profiles/${clientUser.profile.code}`
