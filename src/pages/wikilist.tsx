@@ -95,14 +95,23 @@ const Wikilist = () => {
       <div className={style.itemContainer}>
         {searchResults.map((item: UserProfile, index: number) => (
           <div key={index} className={style.wikikItem}>
-            <Image
-              src={item.image || basicProfile}
-              alt="프로필사진"
-              width={50}
-              height={50}
-              className={style.userProfile}
-            />
-            <div>{item.name}</div>
+            <div className={style.imgAndName}>
+              <Image
+                src={item.image || basicProfile}
+                alt="프로필사진"
+                width={50}
+                height={50}
+                className={style.userProfile}
+              />
+              <div className={style.hoverContainer}>
+                <div className={style.userName}>{item.name}</div>
+                <div className={style.hoverItem}>
+                  <div>{item.nationality ? item.nationality : null}</div>
+                  <div>{item.city ? item.city : null}</div>
+                  <div>{item.job ? item.job : null}</div>
+                </div>
+              </div>
+            </div>
             <WikiLink code={item.code} name={item.name} />
           </div>
         ))}

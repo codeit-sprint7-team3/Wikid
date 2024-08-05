@@ -18,7 +18,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
+  padding: 10px;
   border: 1px solid transparent;
   border-radius: 30px;
   overflow: hidden;
@@ -27,7 +29,7 @@
   box-shadow: var(--box-shadow-heavy);
 }
 .wikikItem:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
 }
 
 .userProfile {
@@ -82,6 +84,35 @@
   align-items: center;
   margin-top: 20px;
   position: absolute;
+}
+
+.hoverItem {
+  display: none;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--font-size-xl);
+  color: var(--gray400);
+}
+.imgAndName {
+  display: flex;
+}
+
+.hoverContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+}
+
+.wikikItem:hover .hoverItem {
+  display: block;
+}
+
+.userName {
+  color: var(--gray500);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-sb);
+  line-height: var(--line-height-xl);
 }
 
 @media (max-width: 907px) {
