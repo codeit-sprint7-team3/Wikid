@@ -20,9 +20,11 @@ const UpdatePasswordForm: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (formValue.currentPassword === formValue.password) {
-      setPasswordError('기존 비밀번호와 일치합니다');
-      return;
+    if (formValue.password !== '') {
+      if (formValue.currentPassword === formValue.password) {
+        setPasswordError('기존과 동일한 비밀번호입니다');
+        return;
+      }
     }
     if (formValue.password !== formValue.passwordConfirmation) {
       setPasswordConfirmationError('비밀번호가 일치하지 않습니다');
@@ -68,17 +70,15 @@ const UpdatePasswordForm: React.FC = () => {
     }
   };
 
-  //기존 비밀번호 유효성 검사
-  const handleCurrentPasswordBlur = () => {
-    if (formValue.currentPassword === formValue.password) {
-      setPasswordError('기존 비밀번호와 일치합니다');
-    }
-  };
-
   //비밀번호 길이 검사
   const handlePasswordBlur = () => {
     if (formValue.password.length < 8) {
       setPasswordError('비밀번호는 8자 이상이여야 합니다');
+    }
+    if (formValue.password !== '') {
+      if (formValue.currentPassword === formValue.password) {
+        setPasswordError('기존과 동일한 비밀번호입니다');
+      }
     }
   };
 
@@ -94,7 +94,6 @@ const UpdatePasswordForm: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <label>비밀번호 변경</label>
         <input
-          onBlur={handleCurrentPasswordBlur}
           onChange={handleInputChange}
           value={formValue.currentPassword}
           name='currentPassword'

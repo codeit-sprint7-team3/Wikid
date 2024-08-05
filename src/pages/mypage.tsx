@@ -1,12 +1,14 @@
-import UpdatePasswordForm from '@/components/UpdatePasswordForm';
+import CreateWiki from '@/components/mypage/CreateWiki';
+import UpdatePasswordForm from '@/components/mypage/UpdatePasswordForm';
 
-const setting = () => {
+const MyPage = () => {
   return (
     <>
       <h1>계정 설정</h1>
       <UpdatePasswordForm />
+      <CreateWiki />
     </>
   );
 };
 
-export default setting;
+export default MyPage;
