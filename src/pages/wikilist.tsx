@@ -86,7 +86,7 @@ const Wikilist = () => {
                 className={style.foundUserText2}
               >{`"${inputValue}"님을 총 `}</div>
               <div className={style.totalCountText2}> {totalCount}</div>
-              <div className={style.foundUserText2}> 명 찾았습니다</div>
+              <div className={style.foundUserText2}> 명 찾았답니당</div>
             </div>
           )}
         </div>
