@@ -7,6 +7,7 @@ import { UserProfile } from '@/types/UserType';
 import basicProfile from '@/assets/header/basicUserProfile.png';
 import { debounce } from 'lodash';
 import noSearch from '@/assets/wikilist/teong.png';
+import WikiLink from '@/components/link/WikiLink';
 
 const Wikilist = () => {
   const [inputValue, setInputValue] = useState('');
@@ -102,6 +103,7 @@ const Wikilist = () => {
               className={style.userProfile}
             />
             <div>{item.name}</div>
+            <WikiLink code={item.code} name={item.name} />
           </div>
         ))}
       </div>
