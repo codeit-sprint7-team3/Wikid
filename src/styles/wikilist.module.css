@@ -36,6 +36,10 @@
   border-radius: 50%;
   width: 100px;
   height: 100px;
+  border: 3px solid transparent;
+}
+.wikikItem:hover .userProfile {
+  border: 3px solid var(--green300);
 }
 
 .notFoundUserContainer {
@@ -102,6 +106,7 @@
   flex-direction: column;
   flex: 1;
   text-align: center;
+  gap: 10px;
 }
 
 .wikikItem:hover .hoverItem {
