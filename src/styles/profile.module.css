@@ -1,0 +1,157 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: var(--font-size-xxl);
+}
+
+.joinButton,
+.saveButton,
+.cancelButton {
+  background-color: var(--green200);
+  border: none;
+  border-radius: var(--rounded-normal);
+  padding: 10px 20px;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  color: var(--gray100);
+}
+
+.cancelButton {
+  background-color: var(--gray300);
+  margin-left: 10px;
+}
+
+.main {
+  display: flex;
+}
+
+.content {
+  flex: 2;
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  margin-top: 20px;
+}
+
+.textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: var(--font-size-md);
+  border: 1px solid var(--gray300);
+  border-radius: var(--rounded-normal);
+}
+
+.sidebar {
+  flex: 1;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.profileDetails {
+  list-style: none;
+  padding: 0;
+}
+
+.profileDetails li {
+  font-size: var(--font-size-md);
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 5px;
+  font-size: var(--font-size-md);
+  border: 1px solid var(--gray300);
+  border-radius: var(--rounded-normal);
+}
+
+.editButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.spinnerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+.spinner {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid var(--green200); /* Green */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: var(--rounded-normal);
+  text-align: center;
+}
+
+.modalContent p {
+  margin-bottom: 20px;
+}
+
+.modalContent button {
+  background-color: var(--green200);
+  border: none;
+  border-radius: var(--rounded-normal);
+  padding: 10px 20px;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  color: var(--gray100);
+}
