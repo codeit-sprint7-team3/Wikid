@@ -45,7 +45,9 @@
 }
 
 .foundUserText,
-.totalCountText {
+.totalCountText,
+.foundUserText2,
+.totalCountText2 {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-rg);
   line-height: var(--line-height-lg);
@@ -64,6 +66,18 @@
   position: absolute;
 }
 
-.totalCountText {
+.totalCountText,
+.totalCountText2 {
   color: var(--green300);
+}
+
+.totalCountText2 {
+  margin-left: 5px;
+}
+
+.foundUserTextContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  position: absolute;
 }

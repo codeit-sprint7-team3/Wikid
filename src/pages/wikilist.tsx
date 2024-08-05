@@ -81,12 +81,12 @@ const Wikilist = () => {
               <Image src={noSearch} alt="no-search" />
             </div>
           ) : (
-            <div>
-              <span
-                className={style.foundUserText}
-              >{`"${inputValue}"님을 총`}</span>
-              <span className={style.totalCountText}> {totalCount}</span>
-              <span className={style.foundUserText}>명 찾았습니다</span>
+            <div className={style.foundUserTextContainer}>
+              <div
+                className={style.foundUserText2}
+              >{`"${inputValue}"님을 총 `}</div>
+              <div className={style.totalCountText2}> {totalCount}</div>
+              <div className={style.foundUserText2}>명 찾았습니다</div>
             </div>
           )}
         </div>
