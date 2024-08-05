@@ -131,4 +131,11 @@
   .itemContainer {
     grid-template-columns: repeat(1, 1fr);
   }
+  .hoverItem {
+    display: block;
+  }
+  .userProfile {
+    width: 80px;
+    height: 80px;
+  }
 }
