@@ -9,7 +9,7 @@ import menuImg from '@/assets/header/menuImg.png';
 import Modal from '@/components/header/HeaderModal';
 import UserModal from '@/components/header/HeaderUserModal';
 import useCheckLogin from '@/hooks/useCheckLogin';
-import api from '@/lib/axios';
+import authApi from '@/lib/authAxios';
 
 const Header = () => {
   const { clientUser, isLoading } = useCheckLogin();
@@ -21,7 +21,7 @@ const Header = () => {
     const fetchUserImage = async () => {
       if (clientUser?.profile?.code) {
         try {
-          const response = await api.get(
+          const response = await authApi.get(
             `/profiles/${clientUser.profile.code}`
           );
           setUserImg(response.data.image);

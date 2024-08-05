@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import UseAuthStore from '@/store/AuthStore';
+import useAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
 import useCheckLogin from '@/hooks/useCheckLogin';
 import { ValidateEmail } from '@/utils/ValidateEmail';
@@ -12,7 +12,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { clientUser, isLoading } = useCheckLogin();
-  const { signIn } = UseAuthStore();
+  const { signIn } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
