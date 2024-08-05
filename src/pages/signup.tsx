@@ -1,7 +1,7 @@
-import React from "react";
-import SignUpForm from "@/components/SignUpForm";
-import style from "@/styles/signup.module.css";
-import Link from "next/link";
+import React from 'react';
+import SignUpForm from '@/components/SignUpForm';
+import style from '@/styles/signup.module.css';
+import Link from 'next/link';
 
 const signUp = () => {
   return (
