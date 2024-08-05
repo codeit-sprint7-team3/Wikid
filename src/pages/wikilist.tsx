@@ -1,21 +1,23 @@
 import SearchBar from '@/components/search/SearchBar';
 import style from '@/styles/wikilist.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import { UserProfile } from '@/types/UserType';
 import basicProfile from '@/assets/header/basicUserProfile.png';
+import { debounce } from 'lodash';
 
 const Wikilist = () => {
   const [inputValue, setInputValue] = useState('');
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [searchResults, setSearchResults] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
+  const [searchResults, setSearchResults] = useState<UserProfile[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const isInitialMount = useRef(true);
+
+  const fetchData = useCallback(
+    async (searchTerm: string) => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           'https://wikied-api.vercel.app/6-4/profiles',
@@ -23,35 +25,60 @@ const Wikilist = () => {
             params: {
               page: page,
               pageSize: 6,
-              name: inputValue || null,
+              name: searchTerm || null,
             },
           }
         );
         setTotalCount(response.data.totalCount);
-        setSearchResults(response.data.list); // 검색 결과 저장
+        setSearchResults(response.data.list);
       } catch (error) {
         console.error('Failed to fetch data', error);
+      } finally {
+        setIsLoading(false);
       }
-    };
+    },
+    [page]
+  );
 
-    fetchData();
-  }, [inputValue, page]);
+  const debouncedFetchData = useCallback(
+    debounce((searchTerm: string) => fetchData(searchTerm), 1000),
+    [fetchData]
+  );
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsLoading(true);
+    setInputValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      fetchData(inputValue);
+    } else {
+      debouncedFetchData(inputValue);
+    }
+  }, [inputValue, fetchData, debouncedFetchData]);
+
   return (
     <div>
-      wikilist
+      <h1>Wikilist</h1>
       <SearchBar
         placeholder={'검색어를 입력해주세요'}
         value={inputValue}
         onChange={handleInputChange}
       />
-      {inputValue ? (
-        <div>{`"${inputValue}"님을 총 ${totalCount}명 찾았습니다`}</div>
-      ) : null}
+      {inputValue && (
+        <div>
+          {isLoading
+            ? `"${inputValue}"님을 찾고 있습니다...`
+            : `"${inputValue}"님을 총 ${totalCount}명 찾았습니다`}
+        </div>
+      )}
       <div className={style.itemContainer}>
         {searchResults.map((item: UserProfile, index: number) => (
           <div key={index} className={style.wikikItem}>
             <Image
-              src={item.image ? item.image : basicProfile}
+              src={item.image || basicProfile}
               alt="프로필사진"
               width={50}
               height={50}
