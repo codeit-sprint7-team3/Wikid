@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import UseAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
 import useCheckLogin from '@/hooks/useCheckLogin';
@@ -10,7 +11,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { user } = useCheckLogin();
+  const { clientUser, isLoading } = useCheckLogin();
   const { signIn } = UseAuthStore();
   const router = useRouter();
 
@@ -59,11 +60,9 @@ const Login = () => {
     }
   };
 
-  const navigateToRegister = () => {
-    router.push('/signup');
-  };
-
-  if (user) {
+  if (isLoading) {
+    return null;
+  } else if (!isLoading && clientUser) {
     router.replace('/');
   }
 
@@ -106,9 +105,9 @@ const Login = () => {
           로그인
         </button>
       </form>
-      <p className={style.goRegister} onClick={navigateToRegister}>
-        회원 가입
-      </p>
+      <Link href="/signup">
+        <p className={style.goRegister}>회원 가입</p>
+      </Link>
     </div>
   );
 };

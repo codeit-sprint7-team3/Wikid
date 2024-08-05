@@ -1,17 +1,18 @@
-import { useEffect } from 'react';
-import UseAuthStore from '@/store/AuthStore';
+import { useEffect, useState } from 'react';
+import useAuthStore from '@/store/AuthStore';
+import { User } from '@/types/UserType';
 
 const useCheckLogin = () => {
-  const { user, checkAuth } = UseAuthStore();
+  const { user } = useAuthStore();
+  const [clientUser, setClientUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const initAuth = async () => {
-      await checkAuth();
-    };
-    initAuth();
-  }, [checkAuth]);
+    setClientUser(user);
+    setIsLoading(false);
+  }, [user]);
 
-  return { user };
+  return { clientUser, isLoading };
 };
 
 export default useCheckLogin;
