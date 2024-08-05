@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { UserProfile } from '@/types/UserType';
 import basicProfile from '@/assets/header/basicUserProfile.png';
 import { debounce } from 'lodash';
+import noSearch from '@/assets/wikilist/teong.png';
 
 const Wikilist = () => {
   const [inputValue, setInputValue] = useState('');
@@ -41,7 +42,7 @@ const Wikilist = () => {
   );
 
   const debouncedFetchData = useCallback(
-    debounce((searchTerm: string) => fetchData(searchTerm), 1000),
+    debounce((searchTerm: string) => fetchData(searchTerm), 1300),
     [fetchData]
   );
 
@@ -60,8 +61,7 @@ const Wikilist = () => {
   }, [inputValue, fetchData, debouncedFetchData]);
 
   return (
-    <div>
-      <h1>Wikilist</h1>
+    <div className={style.listPageConatainer}>
       <SearchBar
         placeholder={'검색어를 입력해주세요'}
         value={inputValue}
@@ -69,9 +69,26 @@ const Wikilist = () => {
       />
       {inputValue && (
         <div>
-          {isLoading
-            ? `"${inputValue}"님을 찾고 있습니다...`
-            : `"${inputValue}"님을 총 ${totalCount}명 찾았습니다`}
+          {isLoading ? (
+            <div
+              className={style.foundUserText}
+            >{`"${inputValue}" 님을 찾아볼게요!! 잠시만요!`}</div>
+          ) : totalCount === 0 ? (
+            <div className={style.notFoundUserContainer}>
+              <div className={style.notFoundText}>
+                {`"${inputValue}" 님은 아무래도 없는것 같아요 ㅠㅠ`}
+              </div>
+              <Image src={noSearch} alt="no-search" />
+            </div>
+          ) : (
+            <div>
+              <span
+                className={style.foundUserText}
+              >{`"${inputValue}"님을 총`}</span>
+              <span className={style.totalCountText}> {totalCount}</span>
+              <span className={style.foundUserText}>명 찾았습니다</span>
+            </div>
+          )}
         </div>
       )}
       <div className={style.itemContainer}>
@@ -82,6 +99,7 @@ const Wikilist = () => {
               alt="프로필사진"
               width={50}
               height={50}
+              className={style.userProfile}
             />
             <div>{item.name}</div>
           </div>

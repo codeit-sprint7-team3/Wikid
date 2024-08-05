@@ -1,4 +1,69 @@
+.listPageConatainer {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 80px;
+  max-width: 860px;
+}
+
+.itemContainer {
+  margin-top: 99px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
 .wikikItem {
+  position: relative;
   height: 200px;
   width: 100%;
+  display: flex;
+  gap: 30px;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--box-shadow-heavy);
+}
+.wikikItem:hover {
+  transform: translateY(-10px);
+}
+
+.userProfile {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.notFoundUserContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 278px;
+  top: 250px;
+}
+
+.foundUserText,
+.totalCountText {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--line-height-lg);
+  color: var(--gray400);
+}
+.notFoundText {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-md);
+  line-height: var(--line-height-xl);
+  color: var(--gray400);
+}
+
+.foundUserText,
+.totalCountText {
+  margin-top: 20px;
+  position: absolute;
+}
+
+.totalCountText {
+  color: var(--green300);
 }
