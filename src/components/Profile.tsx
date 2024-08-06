@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import style from "@/styles/profile.module.css";
+import React, { useState, useEffect } from 'react';
+import style from '@/styles/profile.module.css';
+import QuizModal from '@/components/QuizModal';
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isTimeout, setIsTimeout] = useState(false);
+  const [isQuizModalOpen, setIsQuizModalOpen] = useState(false);
   const [profile, setProfile] = useState({
     overview: "코드잇의 콘텐츠 프로듀서이자, 프론트엔드 엔지니어...",
     hobby: "식물을 키우는 것을 좋아한다...",
@@ -36,6 +38,7 @@ const Profile = () => {
     setBackupProfile({ ...profile });
     setIsEditing(true);
     setIsTimeout(false);
+    setIsQuizModalOpen(true); // Open the quiz modal
   };
 
   const handleSaveClick = () => {
@@ -58,13 +61,29 @@ const Profile = () => {
     setProfile(backupProfile);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const { name, value } = e.target;
     setProfile((prevProfile) => ({
       ...prevProfile,
       [name]: value,
     }));
   };
+
+  const handleCloseQuizModal = () => {
+    setIsQuizModalOpen(false);
+  };
+
+  const handleQuizSubmit = (inputAnswer: string) => {
+    const correctAnswer = localStorage.getItem('quizAnswer');
+    if (inputAnswer === correctAnswer) {
+      setIsEditing(true);
+      setIsQuizModalOpen(false);
+    } else {
+      alert('정답이 아닙니다.');
+    }
+  };
+
+  const quizQuestion = localStorage.getItem('quizQuestion') || '특별히 싫어하는 음식은?';
 
   return (
     <div className={style.container}>
@@ -157,6 +176,12 @@ const Profile = () => {
           </div>
         </div>
       )}
+      <QuizModal 
+        isOpen={isQuizModalOpen} 
+        onClose={handleCloseQuizModal} 
+        onSubmit={handleQuizSubmit} 
+        question={quizQuestion} 
+      />
     </div>
   );
 };

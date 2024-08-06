@@ -118,8 +118,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .modal {
@@ -140,13 +144,39 @@
   padding: 20px;
   border-radius: var(--rounded-normal);
   text-align: center;
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  height:215px;
 }
 
 .modalContent p {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.modalContent button {
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--gray400);
+}
+
+.timeoutMessage {
+  color: black; /* 기존 색상 유지 */
+}
+
+.timeoutDescription {
+  color: var(--gray400);
+  margin-top: 10px;
+}
+
+.timeoutConfirmButton {
+  margin-top: 20px;
   background-color: var(--green200);
   border: none;
   border-radius: var(--rounded-normal);
@@ -154,4 +184,7 @@
   font-size: var(--font-size-md);
   cursor: pointer;
   color: var(--gray100);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
