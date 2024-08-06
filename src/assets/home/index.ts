@@ -1,0 +1,10 @@
+export { default as AlarmImg } from './alarm.svg';
+export { default as BellImg } from '@/assets/home/bell.svg';
+export { default as DialogueImg } from '@/assets/home/dialogue.svg';
+export { default as InfoImg } from '@/assets/home/info.svg';
+export { default as IntroImg } from '@/assets/home/intro.svg';
+export { default as PhoneImg } from '@/assets/home/phone.svg';
+export { default as ProfileImg } from '@/assets/home/profile.svg';
+export { default as SpeakerImg } from '@/assets/home/speaker.svg';
+export { default as TypingImg } from '@/assets/home/typing.svg';
+export { default as WikiImg } from '@/assets/home/wiki.svg';
