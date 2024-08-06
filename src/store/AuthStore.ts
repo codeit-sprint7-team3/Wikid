@@ -11,6 +11,7 @@ interface AuthState {
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => void;
   checkAuth: () => Promise<void>;
+  setProfile: (id: number, code: string) => void;
 }
 
 const useAuthStore = create(
@@ -44,6 +45,19 @@ const useAuthStore = create(
         const response = await authApi.get('/users/me');
         set({ user: response.data });
         set({ isPending: false });
+      },
+      setProfile: (id: number, code: string) => {
+        set((state) => {
+          if (state.user) {
+            return {
+              user: {
+                ...state.user,
+                profile: { ...state.user.profile, code, id },
+              },
+            };
+          }
+          return state;
+        });
       },
     }),
     {
