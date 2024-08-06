@@ -9,19 +9,21 @@ import menuImg from '@/assets/header/menuImg.png';
 import Modal from '@/components/header/HeaderModal';
 import UserModal from '@/components/header/HeaderUserModal';
 import useCheckLogin from '@/hooks/useCheckLogin';
-import api from '@/lib/axios';
+import authApi from '@/lib/authAxios';
 
 const Header = () => {
-  const { user } = useCheckLogin();
+  const { clientUser, isLoading } = useCheckLogin();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [userImg, setUserImg] = useState(null);
 
   useEffect(() => {
     const fetchUserImage = async () => {
-      if (user?.profile?.code) {
+      if (clientUser?.profile?.code) {
         try {
-          const response = await api.get(`/profiles/${user.profile.code}`);
+          const response = await authApi.get(
+            `/profiles/${clientUser.profile.code}`
+          );
           setUserImg(response.data.image);
         } catch (error) {
           console.error('유저 이미지 불러오기 오류:', error);
@@ -30,7 +32,7 @@ const Header = () => {
       }
     };
     fetchUserImage();
-  }, [user]);
+  }, [clientUser]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -39,6 +41,8 @@ const Header = () => {
   const toggleUserModal = () => {
     setIsUserModalOpen(!isUserModalOpen);
   };
+
+  if (isLoading) return null;
 
   return (
     <div className={style.headerContainer}>
@@ -57,7 +61,7 @@ const Header = () => {
           <li>자유게시판</li>
         </ul>
       </div>
-      {user ? (
+      {clientUser ? (
         <div className={style.imgContainer}>
           <Image className={style.bell} src={bell} alt='alarmbell' title='🔔' />
           <Image

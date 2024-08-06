@@ -1,5 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import api from '@/lib/axios';
+import authAxios from '@/lib/authAxios';
+import useAuthStore from '@/store/AuthStore';
+import { useRouter } from 'next/router';
 
 interface formValues {
   currentPassword: string;
@@ -17,6 +19,8 @@ const UpdatePasswordForm: React.FC = () => {
     useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
   const [currentPasswordError, setCurrentPasswordError] = useState<string>('');
+  const { signOut } = useAuthStore();
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,7 +39,10 @@ const UpdatePasswordForm: React.FC = () => {
       return;
     }
     try {
-      await api.patch('/users/me/password', formValue);
+      await authAxios.patch('/users/me/password', formValue);
+      alert('비밀번호가 변경되었습니다. 다시 로그인해주세요.');
+      signOut();
+      router.replace('/');
     } catch (error: any) {
       const errorMessage = error.response.data.message;
       if (errorMessage === '비밀번호가 일치하지 않습니다.') {

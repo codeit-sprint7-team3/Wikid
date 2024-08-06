@@ -1,4 +1,4 @@
-import api from '@/lib/axios';
+import basicApi from '@/lib/basicAxios';
 import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import style from '@/styles/signup.module.css';
@@ -44,17 +44,20 @@ const SignUpForm: React.FC = () => {
       return;
     }
     try {
-      await api.post('/auth/signUp', formValue);
+      await basicApi.post('/auth/signUp', formValue);
+      alert('회원가입이 완료되었습니다.');
       router.push('/login');
     } catch (error: any) {
-      const errorMessage = error.response.data.message;
-      if (errorMessage === '이미 사용중인 이메일입니다.') {
-        setEmailError('이미 사용중인 이메일입니다');
-      }
-      if (errorMessage === 'Internal Server Error') {
-        setNameError('이미 사용중인 닉네임입니다');
+      if (error.response && error.response.status === 400) {
+        if (error.response.data.message === '이미 사용중인 이메일입니다.') {
+          setEmailError('이미 사용중인 이메일입니다');
+        }
+      } else if (error.response && error.response.status === 500) {
+        if (error.response.data.message === 'Internal Server Error') {
+          setNameError('이미 사용중인 닉네임입니다');
+        }
       } else {
-        console.log('회원가입에 실패했습니다');
+        alert('회원가입에 실패했습니다');
       }
     }
   };
