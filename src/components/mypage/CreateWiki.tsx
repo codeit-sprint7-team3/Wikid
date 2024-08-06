@@ -23,14 +23,8 @@ const CreateWiki = () => {
       alert('프로필 생성이 완료되었습니다.');
       setProfile(code, id);
     } catch (error: any) {
-      if (error.response && error.response.status === 400) {
-        if (error.response.data.message === '이미 프로필이 존재합니다.') {
-          alert('이미 프로필이 존재합니다');
-        }
-      } else {
-        console.log(error);
-        alert('프로필 생성에 실패했습니다');
-      }
+      console.log(error);
+      alert('프로필 생성에 실패했습니다');
     }
   };
 
