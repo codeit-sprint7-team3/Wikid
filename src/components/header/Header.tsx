@@ -57,8 +57,12 @@ const Header = () => {
           />
         </Link>
         <ul className={style.headerNav}>
-          <li>위키목록</li>
-          <li>자유게시판</li>
+          <Link href={'/wikilist'}>
+            <li>위키목록</li>
+          </Link>
+          <Link href={'#'}>
+            <li>자유게시판</li>
+          </Link>
         </ul>
       </div>
       {clientUser ? (
