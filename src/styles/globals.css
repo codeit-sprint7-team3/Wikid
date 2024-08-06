@@ -90,6 +90,7 @@ a {
 ::-webkit-scrollbar-track {
   background-color: #ffffff;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: var(--green200);
   border-radius: 10px;
