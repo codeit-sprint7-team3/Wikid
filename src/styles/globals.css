@@ -16,6 +16,21 @@ a {
   src: url('../assets/font/PretendardVariable.ttf');
 }
 
+@font-face {
+  font-family: 'nexonGothic300';
+  src: url('../assets/font/NEXONLv1GothicLight.ttf');
+}
+
+@font-face {
+  font-family: 'nexonGothic400';
+  src: url('../assets/font/NEXONLv1GothicRegular.ttf');
+}
+
+@font-face {
+  font-family: 'nexonGothic700';
+  src: url('../assets/font/NEXONLv1GothicBold.ttf');
+}
+
 :root {
   --rounded-normal: 10px;
   --rounded-heavy: 15px;
@@ -66,4 +81,22 @@ a {
 
   --box-shadow-normal: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
   --box-shadow-heavy: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--green200);
+  border-radius: 10px;
+  border: 5px solid #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--green300);
 }
