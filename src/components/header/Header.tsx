@@ -47,29 +47,33 @@ const Header = () => {
   return (
     <div className={style.headerContainer}>
       <div className={style.headerNavContainer}>
-        <Link href="/">
+        <Link href='/'>
           <Image
             className={style.logo}
             src={logo}
-            alt="logo"
-            title="home"
+            alt='logo'
+            title='home'
             priority={true}
           />
         </Link>
         <ul className={style.headerNav}>
-          <li>위키목록</li>
-          <li>자유게시판</li>
+          <Link href={'/wikilist'}>
+            <li>위키목록</li>
+          </Link>
+          <Link href={'#'}>
+            <li>자유게시판</li>
+          </Link>
         </ul>
       </div>
       {clientUser ? (
         <div className={style.imgContainer}>
-          <Image className={style.bell} src={bell} alt="alarmbell" title="🔔" />
+          <Image className={style.bell} src={bell} alt='alarmbell' title='🔔' />
           <Image
             className={style.userProfile}
             src={userImg ? userImg : basicProfile}
-            alt="유저프로필"
+            alt='유저프로필'
             onClick={toggleUserModal}
-            title="❤️"
+            title='❤️'
             priority={true}
           />
           <UserModal
@@ -79,14 +83,14 @@ const Header = () => {
         </div>
       ) : (
         <div>
-          <Link href="/login">
+          <Link href='/login'>
             <p className={style.loginText}>로그인</p>
           </Link>
           <Image
             className={style.menuImg}
             src={menuImg}
-            alt="menuImg"
-            title="menu"
+            alt='menuImg'
+            title='menu'
             onClick={toggleModal}
             priority={true}
           />

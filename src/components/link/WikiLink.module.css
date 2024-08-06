@@ -1,0 +1,19 @@
+.container {
+  background-color: var(--green100);
+  color: var(--green200);
+  display: flex;
+  gap: 2px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--line-height-md);
+  width: 240px;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--rounded-normal);
+  padding: 5px 10px;
+  transition: transform 0.2s ease;
+}
+
+.container:hover {
+  transform: translateX(-20px);
+}

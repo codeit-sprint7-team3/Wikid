@@ -1,0 +1,141 @@
+.listPageConatainer {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 80px;
+  max-width: 860px;
+}
+
+.itemContainer {
+  margin-top: 99px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.wikikItem {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--box-shadow-heavy);
+}
+.wikikItem:hover {
+  transform: translateY(-5px);
+}
+
+.userProfile {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border: 3px solid transparent;
+}
+.wikikItem:hover .userProfile {
+  border: 3px solid var(--green300);
+}
+
+.notFoundUserContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.foundUserText,
+.totalCountText,
+.foundUserText2,
+.totalCountText2 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--line-height-lg);
+  color: var(--gray400);
+}
+.notFoundText {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-md);
+  line-height: var(--line-height-xl);
+  color: var(--gray400);
+}
+
+.foundUserText,
+.totalCountText {
+  margin-top: 20px;
+  position: absolute;
+}
+
+.totalCountText,
+.totalCountText2 {
+  color: var(--green300);
+}
+
+.totalCountText2 {
+  margin-left: 5px;
+}
+
+.foundUserTextContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  position: absolute;
+}
+
+.hoverItem {
+  display: none;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-rg);
+  line-height: var(--font-size-xl);
+  color: var(--gray400);
+}
+.imgAndName {
+  display: flex;
+}
+
+.hoverContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: center;
+  gap: 10px;
+}
+
+.wikikItem:hover .hoverItem {
+  display: block;
+}
+
+.userName {
+  color: var(--gray500);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-sb);
+  line-height: var(--line-height-xl);
+}
+
+@media (max-width: 907px) {
+  .listPageConatainer {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .itemContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .hoverItem {
+    display: block;
+  }
+  .userProfile {
+    width: 80px;
+    height: 80px;
+  }
+}
