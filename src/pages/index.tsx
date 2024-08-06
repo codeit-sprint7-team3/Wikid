@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import style from '@/styles/home.module.css';
@@ -17,20 +18,49 @@ import {
 const Home = () => {
   return (
     <>
-      <div className={style.body}>
-        <section className={style.introSection}>
+      <motion.div
+        className={style.body}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.section
+          className={style.introSection}
+          initial={{ y: -120 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: false }}
+        >
           <h1 className={style.introWrapper}>
             <div className={style.introFont300}>남들이 만드는</div>
-            <div className={style.introFont700}>나만의 위키</div>
+            <motion.div
+              className={style.introFont700}
+              initial={{ scale: 0.6 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: false }}
+            >
+              나만의 위키
+            </motion.div>
           </h1>
-          <button className={style.createButton}>
-            {/* <Link href='위키생성페이지'>위키 만들기</Link> */}
+          <motion.button
+            className={style.createButton}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
             위키 만들기
-          </button>
+          </motion.button>
           <Image className={style.profileImg} src={ProfileImg} alt='프로필' />
-        </section>
+        </motion.section>
+
         <section className={style.writeSection}>
-          <div className={style.writeWrapper}>
+          <motion.div
+            className={style.writeWrapper}
+            initial={{ x: -100 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: false }}
+          >
             <div className={style.h2Wrapper}>
               <h2 className={style.h2}>WRITE</h2>
               <p className={style.p}>
@@ -41,10 +71,17 @@ const Home = () => {
             <div className={style.imageWrapper}>
               <Image className={style.typingImg} src={TypingImg} alt='키보드' />
             </div>
-          </div>
+          </motion.div>
           <Image className={style.introImg} src={IntroImg} alt='인트로' />
         </section>
-        <section className={style.shareSection}>
+
+        <motion.section
+          className={style.shareSection}
+          initial={{ y: -150 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 2 }}
+          viewport={{ once: false }}
+        >
           <div className={style.h2Wrapper}>
             <h2 className={style.h2}>SHARE</h2>
             <p className={style.p}>
@@ -58,8 +95,15 @@ const Home = () => {
             <Image className={style.phoneImg} src={PhoneImg} alt='핸드폰' />
             <Image className={style.dialogueImg} src={DialogueImg} alt='말풍선' />
           </div>
-        </section>
-        <section className={style.viewSection}>
+        </motion.section>
+
+        <motion.section
+          className={style.viewSection}
+          initial={{ y: -150 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 2 }}
+          viewport={{ once: false }}
+        >
           <div className={style.h2Wrapper}>
             <h2 className={style.h2}>VIEW</h2>
             <p className={style.p}>
@@ -68,21 +112,38 @@ const Home = () => {
             </p>
           </div>
           <div className={style.viewContainer}>
-            <Image className={style.infoImg} src={InfoImg} alt='확성기' />
+            <Image className={style.infoImg} src={InfoImg} alt='정보' />
             <div className={style.viewWrapper}>
-              <Image className={style.bellImg} src={BellImg} alt='위키' />
-              <Image className={style.alarmImg} src={AlarmImg} alt='핸드폰' />
+              <Image className={style.bellImg} src={BellImg} alt='종' />
+              <Image className={style.alarmImg} src={AlarmImg} alt='알림' />
             </div>
           </div>
-        </section>
+        </motion.section>
+
         <section className={style.startSection}>
-          <h2>나만의 위키 만들어 보기</h2>
-          <button className={style.startButton}>
+          <motion.h2
+            initial={{ scale: 0.6 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: false }}
+          >
+            나만의 위키 만들어 보기
+          </motion.h2>
+          <motion.button
+            className={style.startButton}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <Link href='/login'>지금 시작하기</Link>
-          </button>
+          </motion.button>
         </section>
-      </div>
-      <footer className={style.footer}>
+      </motion.div>
+      <motion.footer
+        className={style.footer}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         <div className={style.footerWrapper}>
           <strong>Copyright ⓒ Wikied. All Rights Reserved</strong>
           <p>
@@ -96,7 +157,7 @@ const Home = () => {
             <p>전자금융거래 기본약관 </p>
           </div>
         </div>
-      </footer>
+      </motion.footer>
     </>
   );
 };
