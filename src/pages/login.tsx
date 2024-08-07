@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
-import useCheckLogin from '@/hooks/useCheckLogin';
 import { ValidateEmail } from '@/utils/ValidateEmail';
 
 const Login = () => {
@@ -11,8 +10,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { clientUser, isLoading } = useCheckLogin();
-  const { signIn } = useAuthStore();
+  const { user, isPending, signIn, checkAuth } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -20,6 +18,10 @@ const Login = () => {
     const isPasswordValid = values.password.length >= 8;
     setIsButtonDisabled(!(isEmailValid && isPasswordValid));
   }, [values]);
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailError('');
@@ -60,11 +62,8 @@ const Login = () => {
     }
   };
 
-  if (isLoading) {
-    return null;
-  } else if (!isLoading && clientUser) {
-    router.replace('/');
-  }
+  if (isPending) return null;
+  if (user) return router.replace('/');
 
   return (
     <div className={style.LoginContainer}>
