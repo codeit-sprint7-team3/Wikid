@@ -8,6 +8,7 @@ import basicProfile from '@/assets/header/basicUserProfile.png';
 import { debounce } from 'lodash';
 import noSearch from '@/assets/wikilist/teong.png';
 import WikiLink from '@/components/link/WikiLink';
+import useAuthStore from '@/store/AuthStore';
 
 const Wikilist = () => {
   const [inputValue, setInputValue] = useState('');
@@ -16,6 +17,11 @@ const Wikilist = () => {
   const [searchResults, setSearchResults] = useState<UserProfile[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const isInitialMount = useRef(true);
+  const { checkAuth, user } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   const fetchData = useCallback(
     async (searchTerm: string) => {

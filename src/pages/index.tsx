@@ -22,7 +22,6 @@ const Home = () => {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-  if (isPending) return null;
   return (
     <>
       <motion.div
@@ -59,7 +58,6 @@ const Home = () => {
           </motion.button>
           <Image className={style.profileImg} src={ProfileImg} alt="프로필" />
         </motion.section>
-
         <section className={style.writeSection}>
           <motion.div
             className={style.writeWrapper}

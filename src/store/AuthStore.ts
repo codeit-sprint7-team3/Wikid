@@ -3,6 +3,7 @@ import authApi from '../lib/authAxios';
 import basicApi from '@/lib/basicAxios';
 import Cookies from 'js-cookie';
 import { User } from '@/types/UserType';
+import { cookies } from 'next/headers';
 
 interface AuthState {
   user: User | null;
@@ -39,6 +40,11 @@ const useAuthStore = create<AuthState>((set) => ({
 
   checkAuth: async () => {
     set({ isPending: true });
+    const accessToken = Cookies.get('accessToken');
+    if (!accessToken) {
+      set({ user: null, isPending: false });
+      return;
+    }
     const response = await authApi.get('/users/me');
     set({ user: response.data });
     set({ isPending: false });

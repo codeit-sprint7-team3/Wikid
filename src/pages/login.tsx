@@ -4,6 +4,7 @@ import Link from 'next/link';
 import useAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
 import { ValidateEmail } from '@/utils/ValidateEmail';
+import { divide } from 'lodash';
 
 const Login = () => {
   const [values, setValues] = useState({ email: '', password: '' });
@@ -20,8 +21,17 @@ const Login = () => {
   }, [values]);
 
   useEffect(() => {
-    checkAuth();
+    const verifyAuth = async () => {
+      await checkAuth();
+      if (user) return router.replace('/');
+    };
+    verifyAuth();
   }, [checkAuth]);
+  useEffect(() => {
+    if (user) {
+      router.replace('/');
+    }
+  }, [user, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailError('');
@@ -61,9 +71,6 @@ const Login = () => {
       }
     }
   };
-
-  if (isPending) return null;
-  if (user) return router.replace('/');
 
   return (
     <div className={style.LoginContainer}>
