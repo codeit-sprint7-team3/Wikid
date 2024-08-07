@@ -18,7 +18,7 @@ import useAuthStore from '@/store/AuthStore';
 import { useEffect } from 'react';
 
 const Home = () => {
-  const { checkAuth, isPending } = useAuthStore();
+  const { checkAuth } = useAuthStore();
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);

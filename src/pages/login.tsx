@@ -4,34 +4,21 @@ import Link from 'next/link';
 import useAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
 import { ValidateEmail } from '@/utils/ValidateEmail';
-import { divide } from 'lodash';
+import useCheckAlreadyLogin from '@/hooks/useCheckAlreadyLogin';
 
 const Login = () => {
   const [values, setValues] = useState({ email: '', password: '' });
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { user, isPending, signIn, checkAuth } = useAuthStore();
+  const { signIn } = useAuthStore();
   const router = useRouter();
-
+  useCheckAlreadyLogin();
   useEffect(() => {
     const isEmailValid = ValidateEmail(values.email);
     const isPasswordValid = values.password.length >= 8;
     setIsButtonDisabled(!(isEmailValid && isPasswordValid));
   }, [values]);
-
-  useEffect(() => {
-    const verifyAuth = async () => {
-      await checkAuth();
-      if (user) return router.replace('/');
-    };
-    verifyAuth();
-  }, [checkAuth]);
-  useEffect(() => {
-    if (user) {
-      router.replace('/');
-    }
-  }, [user, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailError('');

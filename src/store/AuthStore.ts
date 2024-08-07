@@ -3,7 +3,6 @@ import authApi from '../lib/authAxios';
 import basicApi from '@/lib/basicAxios';
 import Cookies from 'js-cookie';
 import { User } from '@/types/UserType';
-import { cookies } from 'next/headers';
 
 interface AuthState {
   user: User | null;

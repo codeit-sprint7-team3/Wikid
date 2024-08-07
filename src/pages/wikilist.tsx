@@ -17,7 +17,7 @@ const Wikilist = () => {
   const [searchResults, setSearchResults] = useState<UserProfile[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const isInitialMount = useRef(true);
-  const { checkAuth, user } = useAuthStore();
+  const { checkAuth } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
