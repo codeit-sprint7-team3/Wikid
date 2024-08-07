@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
-import useCheckLogin from '@/hooks/useCheckLogin';
 import { ValidateEmail } from '@/utils/ValidateEmail';
 
 const Login = () => {
@@ -11,8 +10,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { clientUser, isLoading } = useCheckLogin();
-  const { signIn } = useAuthStore();
+  const { signIn, checkAuth, isPending, user } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -60,9 +58,9 @@ const Login = () => {
     }
   };
 
-  if (isLoading) {
+  if (isPending) {
     return null;
-  } else if (!isLoading && clientUser) {
+  } else if (!isPending && user) {
     router.replace('/');
   }
 

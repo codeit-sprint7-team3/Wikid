@@ -8,22 +8,20 @@ import basicProfile from '@/assets/header/basicUserProfile.png';
 import menuImg from '@/assets/header/menuImg.png';
 import Modal from '@/components/header/HeaderModal';
 import UserModal from '@/components/header/HeaderUserModal';
-import useCheckLogin from '@/hooks/useCheckLogin';
 import authApi from '@/lib/authAxios';
+import useAuthStore from '@/store/AuthStore';
 
 const Header = () => {
-  const { clientUser, isLoading } = useCheckLogin();
+  const { user, isPending } = useAuthStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [userImg, setUserImg] = useState(null);
 
   useEffect(() => {
     const fetchUserImage = async () => {
-      if (clientUser?.profile?.code) {
+      if (user?.profile?.code) {
         try {
-          const response = await authApi.get(
-            `/profiles/${clientUser.profile.code}`
-          );
+          const response = await authApi.get(`/profiles/${user.profile.code}`);
           setUserImg(response.data.image);
         } catch (error) {
           console.error('유저 이미지 불러오기 오류:', error);
@@ -32,7 +30,7 @@ const Header = () => {
       }
     };
     fetchUserImage();
-  }, [clientUser]);
+  }, [user]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -42,17 +40,17 @@ const Header = () => {
     setIsUserModalOpen(!isUserModalOpen);
   };
 
-  if (isLoading) return null;
+  if (isPending) return null;
 
   return (
     <div className={style.headerContainer}>
       <div className={style.headerNavContainer}>
-        <Link href='/'>
+        <Link href="/">
           <Image
             className={style.logo}
             src={logo}
-            alt='logo'
-            title='home'
+            alt="logo"
+            title="home"
             priority={true}
           />
         </Link>
@@ -65,15 +63,15 @@ const Header = () => {
           </Link>
         </ul>
       </div>
-      {clientUser ? (
+      {user ? (
         <div className={style.imgContainer}>
-          <Image className={style.bell} src={bell} alt='alarmbell' title='🔔' />
+          <Image className={style.bell} src={bell} alt="alarmbell" title="🔔" />
           <Image
             className={style.userProfile}
             src={userImg ? userImg : basicProfile}
-            alt='유저프로필'
+            alt="유저프로필"
             onClick={toggleUserModal}
-            title='❤️'
+            title="❤️"
             priority={true}
           />
           <UserModal
@@ -83,19 +81,20 @@ const Header = () => {
         </div>
       ) : (
         <div>
-          <Link href='/login'>
+          <Link href="/login">
             <p className={style.loginText}>로그인</p>
           </Link>
           <Image
             className={style.menuImg}
             src={menuImg}
-            alt='menuImg'
-            title='menu'
+            alt="menuImg"
+            title="menu"
             onClick={toggleModal}
             priority={true}
           />
         </div>
       )}
+
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
