@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import authAxios from '@/lib/authAxios';
 import useAuthStore from '@/store/AuthStore';
 import { useRouter } from 'next/router';
+import style from '@/styles/mypage.module.css';
 
 interface formValues {
   currentPassword: string;
@@ -98,9 +99,10 @@ const UpdatePasswordForm: React.FC = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>비밀번호 변경</label>
+      <form className={style.form} onSubmit={handleSubmit}>
+        <label className={style.label}>비밀번호 변경</label>
         <input
+          className={style.input}
           onChange={handleInputChange}
           value={formValue.currentPassword}
           name='currentPassword'
@@ -109,6 +111,7 @@ const UpdatePasswordForm: React.FC = () => {
         />
         {currentPasswordError && <p>{currentPasswordError}</p>}
         <input
+          className={style.input}
           onBlur={handlePasswordBlur}
           onChange={handleInputChange}
           value={formValue.password}
@@ -119,6 +122,7 @@ const UpdatePasswordForm: React.FC = () => {
         {passwordError && <p>{passwordError}</p>}
         {}
         <input
+          className={style.input}
           onBlur={handlePasswordConfirmationBlur}
           onChange={handleInputChange}
           value={formValue.passwordConfirmation}
@@ -127,7 +131,9 @@ const UpdatePasswordForm: React.FC = () => {
           placeholder='새 비밀번호 확인'
         />
         {passwordConfirmationError && <p>{passwordConfirmationError}</p>}
-        <button type='submit'>변경하기</button>
+        <button className={style.submitBtn} type='submit'>
+          변경하기
+        </button>
       </form>
     </>
   );

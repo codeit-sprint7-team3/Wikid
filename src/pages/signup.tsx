@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const signUp = () => {
   return (
-    <div className={style.signUp}>
+    <div className={style.container}>
       <h1 className={style.headerTitle}>회원가입</h1>
       <SignUpForm />
       <div className={style.bottom}>

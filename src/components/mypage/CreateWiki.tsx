@@ -1,7 +1,7 @@
 import authAxios from '@/lib/authAxios';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import Profiles from '@/components/mypage/Profile';
 import useAuthStore from '@/store/AuthStore';
+import style from '@/styles/mypage.module.css';
 
 interface formValues {
   securityAnswer: string;
@@ -12,7 +12,6 @@ const CreateWiki = () => {
     securityAnswer: '',
     securityQuestion: '',
   });
-  const [code, setCode] = useState('');
   const setProfile = useAuthStore((state) => state.setProfile);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -38,24 +37,26 @@ const CreateWiki = () => {
 
   return (
     <>
-      {code ? null : (
-        <form onSubmit={handleSubmit}>
-          <label>위키 생성하기</label>
-          <input
-            value={formValue.securityQuestion}
-            onChange={handleInputChange}
-            name='securityQuestion'
-            placeholder='질문을 입력해 주세요'
-          />
-          <input
-            value={formValue.securityAnswer}
-            onChange={handleInputChange}
-            name='securityAnswer'
-            placeholder='답을 입력해 주세요'
-          />
-          <button type='submit'>생성하기</button>
-        </form>
-      )}
+      <form className={style.form} onSubmit={handleSubmit}>
+        <label className={style.label}>위키 생성하기</label>
+        <input
+          className={style.input}
+          value={formValue.securityQuestion}
+          onChange={handleInputChange}
+          name='securityQuestion'
+          placeholder='질문을 입력해 주세요'
+        />
+        <input
+          className={style.input}
+          value={formValue.securityAnswer}
+          onChange={handleInputChange}
+          name='securityAnswer'
+          placeholder='답을 입력해 주세요'
+        />
+        <button className={style.submitBtn} type='submit'>
+          생성하기
+        </button>
+      </form>
     </>
   );
 };
