@@ -1,13 +1,16 @@
-import React from 'react';
-import SaveButton from '@/components/SaveButton';
+import TinyMceEditor from '@/components/editor/Editor';
+import WikiProfile from '@/components/WikiProfile';
+import style from '@/styles/editpage.module.css';
 
-const EditPage: React.FC = () => {
+const Edit = () => {
   return (
-    <div>
-      <h1>위키 페이지 수정</h1>
-      <SaveButton />
+    <div className={style.container}>
+      <div className={style.editor}>
+        <TinyMceEditor />
+      </div>
+      <WikiProfile />
     </div>
   );
 };
 
-export default EditPage;
+export default Edit;
