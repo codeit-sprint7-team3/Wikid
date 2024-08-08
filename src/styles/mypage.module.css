@@ -10,7 +10,7 @@
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-sb);
   text-align: center;
-  padding-bottom: 64px;
+  padding-bottom: 32px;
   color: var(--gray500);
   line-height: var(--line-height-xl);
 }
@@ -18,16 +18,12 @@
 .form {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 400px;
   margin: 0 auto;
-}
-
-.inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-bottom: 30px;
-  position: relative;
+  gap: 8px;
+  margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 .label {
@@ -39,6 +35,7 @@
 
 .input {
   color: var(--gray500);
+  width: 100%;
   line-height: var(--line-height-md);
   height: 45px;
   border: none;
@@ -57,18 +54,9 @@
   color: var(--gray400);
 }
 
-.errorInput {
-  background-color: var(--red100);
-}
-
-.errorMessage {
-  font-size: var(--font-size-xxxs);
-  color: var(--red200);
-  position: absolute;
-  top: 78%;
-}
-
 .submitBtn {
+  align-self: flex-end;
+  width: 89px;
   height: 45px;
   background-color: var(--green200);
   border: none;
@@ -77,24 +65,10 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-sb);
   line-height: var(--line-height-md);
-  margin-top: 6px;
-  margin-bottom: 32px;
+  margin-top: 8px;
 }
 
-.bottom {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.bottom > span {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-rg);
-  color: var(--gray400);
-}
-
-.link {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-rg);
-  color: var(--green200);
+.line {
+  border-top: 1px solid var(--gray200);
+  width: 400px;
 }

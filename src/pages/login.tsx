@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import UseAuthStore from '@/store/AuthStore';
+import Link from 'next/link';
+import useAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
-import useCheckLogin from '@/hooks/useCheckLogin';
 import { ValidateEmail } from '@/utils/ValidateEmail';
+import useCheckAlreadyLogin from '@/hooks/useCheckAlreadyLogin';
 
 const Login = () => {
   const [values, setValues] = useState({ email: '', password: '' });
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { user } = useCheckLogin();
-  const { signIn } = UseAuthStore();
+  const { signIn } = useAuthStore();
   const router = useRouter();
-
+  useCheckAlreadyLogin();
   useEffect(() => {
     const isEmailValid = ValidateEmail(values.email);
     const isPasswordValid = values.password.length >= 8;
@@ -59,14 +59,6 @@ const Login = () => {
     }
   };
 
-  const navigateToRegister = () => {
-    router.push('/signup');
-  };
-
-  if (user) {
-    router.replace('/');
-  }
-
   return (
     <div className={style.LoginContainer}>
       <p className={style.LoginTitle}>로그인</p>
@@ -106,9 +98,9 @@ const Login = () => {
           로그인
         </button>
       </form>
-      <p className={style.goRegister} onClick={navigateToRegister}>
-        회원 가입
-      </p>
+      <Link href="/signup">
+        <p className={style.goRegister}>회원 가입</p>
+      </Link>
     </div>
   );
 };
