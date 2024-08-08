@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: #4cbfa4;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.profileImage {
+  border-radius: 50%;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contentSection {
+  margin: 20px 0;
+}
+
+.buttonsSection {
+  display: flex;
+  gap: 10px;
+}
+
+.editButton,
+.shareButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #4cbfa4;
+  color: white;
+}
+
+.shareButton {
+  background-color: #ddd;
+  color: #333;
+}
+
+.footer {
+  background-color: #4cbfa4;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}

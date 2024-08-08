@@ -11,7 +11,7 @@ interface AuthState {
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => void;
   checkAuth: () => Promise<void>;
-  setProfile: (id: number, code: string) => void;
+  setProfile: (id: number, code: string, securityAnswer:string) => void;
 }
 
 const useAuthStore = create(
@@ -46,13 +46,13 @@ const useAuthStore = create(
         set({ user: response.data });
         set({ isPending: false });
       },
-      setProfile: (id: number, code: string) => {
+      setProfile: (id: number, code: string, securityAnswer: string) => {
         set((state) => {
           if (state.user) {
             return {
               user: {
                 ...state.user,
-                profile: { ...state.user.profile, code, id },
+                profile: { ...state.user.profile, code, id, securityAnswer},
               },
             };
           }
