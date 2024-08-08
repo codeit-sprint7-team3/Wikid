@@ -36,7 +36,7 @@ authApi.interceptors.response.use(
       const refreshToken = Cookies.get('refreshToken');
       if (refreshToken) {
         try {
-          const response = await authApi.post('/auth/refresh', {
+          const response = await authApi.post('/auth/refresh-token', {
             refreshToken,
           });
           const { accessToken } = response.data;
