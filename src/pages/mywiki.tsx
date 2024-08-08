@@ -1,9 +1,20 @@
+import { useRouter } from 'next/router';
 import WikiProfile from '@/components/WikiProfile';
 import style from '@/styles/mywiki.module.css';
 import WikiLink from '@/components/link/WikiLink';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const Wiki = () => {
+  const router = useRouter();
+  const [content, setContent] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (router.query.content) {
+      setContent(router.query.content as string);
+    }
+  }, [router.query]);
+
   return (
     <div className={style.contentContainer}>
       <div className={style.leftContainer}>
@@ -17,22 +28,7 @@ const Wiki = () => {
           <WikiLink name='wikicode' code='' />
         </div>
         <div className={style.description}>
-          <div>
-            <h3 className={style.h3}>01. 개요</h3>
-            <p></p>
-          </div>
-          <div>
-            <h3 className={style.h3}>02. 취미</h3>
-            <p></p>
-          </div>
-          <div>
-            <h3 className={style.h3}>03. 여담</h3>
-            <p></p>
-          </div>
-          <div>
-            <h3 className={style.h3}>04. 취향</h3>
-            <p></p>
-          </div>
+          <span dangerouslySetInnerHTML={{ __html: content || '' }}></span>
         </div>
       </div>
       <div className={style.rightContainer}>
