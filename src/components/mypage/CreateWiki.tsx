@@ -1,6 +1,5 @@
 import authAxios from '@/lib/authAxios';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import Profiles from '@/components/mypage/Profile';
 import useAuthStore from '@/store/AuthStore';
 import { Router } from 'next/router';
 import { useRouter } from 'next/router';

@@ -3,18 +3,17 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useAuthStore from '@/store/AuthStore';
 import style from '@/styles/login.module.css';
-import useCheckLogin from '@/hooks/useCheckLogin';
 import { ValidateEmail } from '@/utils/ValidateEmail';
+import useCheckAlreadyLogin from '@/hooks/useCheckAlreadyLogin';
 
 const Login = () => {
   const [values, setValues] = useState({ email: '', password: '' });
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { clientUser, isLoading } = useCheckLogin();
   const { signIn } = useAuthStore();
   const router = useRouter();
-
+  useCheckAlreadyLogin();
   useEffect(() => {
     const isEmailValid = ValidateEmail(values.email);
     const isPasswordValid = values.password.length >= 8;
@@ -59,12 +58,6 @@ const Login = () => {
       }
     }
   };
-
-  if (isLoading) {
-    return null;
-  } else if (!isLoading && clientUser) {
-    router.replace('/');
-  }
 
   return (
     <div className={style.LoginContainer}>
