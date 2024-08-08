@@ -7,7 +7,7 @@ import useCheckAlreadyLogin from '@/hooks/useCheckAlreadyLogin';
 const SignUp = () => {
   useCheckAlreadyLogin();
   return (
-    <div className={style.signUp}>
+    <div className={style.container}>
       <h1 className={style.headerTitle}>회원가입</h1>
       <SignUpForm />
       <div className={style.bottom}>
