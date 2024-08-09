@@ -54,7 +54,7 @@ const useAuthStore = create<AuthState>((set) => ({
         return {
           user: {
             ...state.user,
-            profile: { ...state.user.profile, code, id },
+            profile: { ...state.user.profile, id, code },
           },
         };
       }

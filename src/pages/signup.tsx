@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SignUpForm from '@/components/SignUpForm';
+import SignUpForm from '@/components/signup/SignUpForm';
 import style from '@/styles/signup.module.css';
 import Link from 'next/link';
 import useCheckAlreadyLogin from '@/hooks/useCheckAlreadyLogin';
@@ -12,7 +12,7 @@ const SignUp = () => {
       <SignUpForm />
       <div className={style.bottom}>
         <span>이미 회원이신가요?</span>
-        <Link href="/login" className={style.link}>
+        <Link href='/login' className={style.link}>
           로그인하기
         </Link>
       </div>
