@@ -6,7 +6,7 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-rg);
   line-height: var(--line-height-md);
-  width: 240px;
+  width: 300px;
   justify-content: center;
   align-items: center;
   border-radius: var(--rounded-normal);
@@ -16,4 +16,11 @@
 
 .container:hover {
   transform: translateX(-20px);
+}
+
+@media (max-width: 732px) {
+  .container {
+    width: 260px;
+    justify-content: flex-start;
+  }
 }

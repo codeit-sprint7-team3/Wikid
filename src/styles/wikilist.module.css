@@ -20,7 +20,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid transparent;
   border-radius: 30px;
   overflow: hidden;
@@ -91,14 +91,15 @@
 }
 
 .hoverItem {
-  display: none;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-rg);
   line-height: var(--font-size-xl);
   color: var(--gray400);
+  text-align: left;
 }
 .imgAndName {
   display: flex;
+  gap: 30px;
 }
 
 .hoverContainer {
@@ -109,15 +110,12 @@
   gap: 10px;
 }
 
-.wikikItem:hover .hoverItem {
-  display: block;
-}
-
 .userName {
   color: var(--gray500);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-sb);
   line-height: var(--line-height-xl);
+  text-align: left;
 }
 
 .endMessage {
@@ -131,6 +129,22 @@
   }
 }
 
+@media (max-width: 720px) {
+  .userProfile {
+    width: 80px;
+    height: 80px;
+  }
+  .userName {
+    font-size: var(--font-size-lg);
+  }
+  .hoverItem {
+    font-size: var(--font-size-xxs);
+  }
+  .wikikItem {
+    padding: 10px;
+  }
+}
+
 @media (max-width: 560px) {
   .itemContainer {
     grid-template-columns: repeat(1, 1fr);
@@ -141,5 +155,8 @@
   .userProfile {
     width: 80px;
     height: 80px;
+  }
+  .wikikItem {
+    padding: 20px;
   }
 }
