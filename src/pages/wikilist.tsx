@@ -23,6 +23,8 @@ const Wikilist = () => {
     checkAuth();
   }, [checkAuth]);
 
+  
+
   const fetchData = useCallback(
     async (searchTerm: string) => {
       setIsLoading(true);
