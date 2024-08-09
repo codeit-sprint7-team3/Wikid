@@ -15,6 +15,11 @@
   line-height: var(--line-height-xl);
 }
 
+.error-message {
+  color: red;
+  font-size: var(--font-size-xs);
+}
+
 .form {
   display: flex;
   flex-direction: column;
