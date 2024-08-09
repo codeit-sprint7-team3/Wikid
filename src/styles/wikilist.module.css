@@ -122,6 +122,27 @@
   margin-bottom: 150px;
 }
 
+.goToTop {
+  position: fixed;
+  width: 70px;
+  height: 80px;
+  bottom: 40px;
+  right: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.goToTop:hover {
+  transform: translateY(-8px);
+}
+
+@media (max-width: 1108px) {
+  .goToTop {
+    width: 50px;
+    height: 60px;
+    right: 10px;
+  }
+}
+
 @media (max-width: 907px) {
   .listPageConatainer {
     margin-left: 24px;
@@ -158,5 +179,8 @@
   }
   .wikikItem {
     padding: 20px;
+  }
+  .goToTop {
+    right: 0px;
   }
 }
