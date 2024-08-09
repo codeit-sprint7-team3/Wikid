@@ -10,6 +10,7 @@ import WikiLink from '@/components/link/WikiLink';
 import useAuthStore from '@/store/AuthStore';
 import basicApi from '@/lib/basicAxios';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import top from '@/assets/wikilist/top.png';
 
 const Wikilist = () => {
   const [inputValue, setInputValue] = useState('');
@@ -76,6 +77,10 @@ const Wikilist = () => {
     debouncedFetchData(inputValue);
   }, [inputValue, debouncedFetchData]);
 
+  const handleGotoTopBtn = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className={style.listPageConatainer}>
       <SearchBar
@@ -140,6 +145,13 @@ const Wikilist = () => {
           ))}
         </div>
       </InfiniteScroll>
+      <Image
+        src={top}
+        alt="goTop"
+        onClick={handleGotoTopBtn}
+        className={style.goToTop}
+        title="Top"
+      />
     </div>
   );
 };
