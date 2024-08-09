@@ -1,17 +1,17 @@
-import SearchBar from '@/components/search/SearchBar';
-import style from '@/styles/wikilist.module.css';
-import { useState, useEffect, useCallback, useRef } from 'react';
-import axios from 'axios';
-import Image from 'next/image';
-import { UserProfile } from '@/types/UserType';
-import basicProfile from '@/assets/header/basicUserProfile.png';
-import { debounce } from 'lodash';
-import noSearch from '@/assets/wikilist/teong.png';
-import WikiLink from '@/components/link/WikiLink';
-import useAuthStore from '@/store/AuthStore';
+import SearchBar from "@/components/search/SearchBar";
+import style from "@/styles/wikilist.module.css";
+import { useState, useEffect, useCallback, useRef } from "react";
+import axios from "axios";
+import Image from "next/image";
+import { UserProfile } from "@/types/UserType";
+import basicProfile from "@/assets/header/basicUserProfile.png";
+import { debounce } from "lodash";
+import noSearch from "@/assets/wikilist/teong.png";
+import WikiLink from "@/components/link/WikiLink";
+import useAuthStore from "@/store/AuthStore";
 
 const Wikilist = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState<UserProfile[]>([]);
@@ -28,7 +28,7 @@ const Wikilist = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          'https://wikied-api.vercel.app/6-4/profiles',
+          "https://wikied-api.vercel.app/7-3/profiles",
           {
             params: {
               page: page,
@@ -40,7 +40,7 @@ const Wikilist = () => {
         setTotalCount(response.data.totalCount);
         setSearchResults(response.data.list);
       } catch (error) {
-        console.error('Failed to fetch data', error);
+        console.error("Failed to fetch data", error);
       } finally {
         setIsLoading(false);
       }
@@ -70,7 +70,7 @@ const Wikilist = () => {
   return (
     <div className={style.listPageConatainer}>
       <SearchBar
-        placeholder={'검색어를 입력해주세요'}
+        placeholder={"검색어를 입력해주세요"}
         value={inputValue}
         onChange={handleInputChange}
       />
