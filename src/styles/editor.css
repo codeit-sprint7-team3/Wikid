@@ -1,0 +1,30 @@
+.tox:not(.tox-tinymce-inline) .tox-editor-container .tox-editor-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--gray100);
+  border-radius: var(--rounded-normal);
+  box-shadow: none;
+  margin-bottom: 60px;
+}
+
+.tox .tox-toolbar__group {
+  background-color: var(--gray100);
+  gap: 10px;
+}
+
+.tox .tox-toolbar__group .tox-tbtn {
+  background-color: var(--gray100);
+  margin: 0;
+  padding: 18px;
+}
+
+.tox {
+  border: none !important;
+}
+
+.tox .tox-editor-container {
+  margin-top: 40px;
+  margin-left: 200px;
+  margin-right: 120px;
+}
