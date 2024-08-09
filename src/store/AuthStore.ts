@@ -10,7 +10,7 @@ interface AuthState {
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => void;
   checkAuth: () => Promise<void>;
-  setProfile: (id: number, code: string) => void;
+  setProfile: (id: number, code: string, securityAnswer:string) => void;
 }
 
 const useAuthStore = create<AuthState>((set) => ({

@@ -1,0 +1,59 @@
+/* src/styles/quizModal.module.css */
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.submitButton {
+  background-color: #4cbfa4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.feedback {
+  margin: 10px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ff0000; /* 기본값: 틀린 경우 빨간색 */
+}
+
+.feedback.correct {
+  color: #00ff00; /* 정답인 경우 초록색 */
+}
