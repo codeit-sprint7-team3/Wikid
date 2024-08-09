@@ -85,7 +85,7 @@ const Wikilist = () => {
               <div className={style.notFoundText}>
                 {`"${inputValue}" 님은 아무래도 없는것 같아요 ㅠㅠ`}
               </div>
-              <Image src={noSearch} alt="no-search" />
+              <Image src={noSearch} alt='no-search' />
             </div>
           ) : (
             <div className={style.foundUserTextContainer}>
@@ -104,7 +104,7 @@ const Wikilist = () => {
             <div className={style.imgAndName}>
               <Image
                 src={item.image || basicProfile}
-                alt="프로필사진"
+                alt='프로필사진'
                 width={50}
                 height={50}
                 className={style.userProfile}

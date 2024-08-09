@@ -21,9 +21,9 @@
   align-items: flex-start;
   width: 400px;
   margin: 0 auto;
-  gap: 8px;
   margin-top: 32px;
   margin-bottom: 32px;
+  gap: 8px;
 }
 
 .label {
@@ -66,9 +66,19 @@
   font-weight: var(--font-weight-sb);
   line-height: var(--line-height-md);
   margin-top: 8px;
+  cursor: pointer;
 }
 
 .line {
   border-top: 1px solid var(--gray200);
   width: 400px;
+}
+
+.errorMessage {
+  font-size: var(--font-size-xxxs);
+  color: var(--red200);
+}
+
+.errorInput {
+  background-color: var(--red100);
 }
