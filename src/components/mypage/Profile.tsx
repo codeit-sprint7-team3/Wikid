@@ -1,26 +1,18 @@
 import useAuthStore from '@/store/AuthStore';
 import { useEffect, useState } from 'react';
-import api from '@/lib/authAxios';
+import api from '@/lib/basicAxios';
 import Image from 'next/image';
 import style from '@/components/mypage/Profile.module.css';
 import basicUserImg from '@/assets/header/basicUserProfile.png';
 import { useRouter } from 'next/router';
-import WikiLink from '../link/WikiLink';
+import WikiLink from '@/components/link/WikiLink';
+import { params } from '@/utils/profileParams';
 
 const Profile = () => {
   const { user } = useAuthStore();
   const code = user?.profile?.code;
-  const [myProfile, setMyProfile] = useState({
-    nickname: '',
-    birthday: '',
-    sns: '',
-    job: '',
-    mbti: '',
-    city: '',
-    image: null,
-    name: '',
-    code: '',
-  });
+  const [myProfile, setMyProfile] = useState(params);
+
   const router = useRouter();
 
   const getUserProfile = async () => {
