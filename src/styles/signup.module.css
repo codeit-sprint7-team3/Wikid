@@ -79,6 +79,7 @@
   line-height: var(--line-height-md);
   margin-top: 6px;
   margin-bottom: 32px;
+  cursor: pointer;
 }
 
 .bottom {

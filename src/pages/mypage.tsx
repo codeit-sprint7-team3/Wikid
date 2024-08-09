@@ -14,9 +14,19 @@ const MyPage = () => {
     <>
       <div className={style.container}>
         <h1 className={style.headerTitle}>계정 설정</h1>
-        <UpdatePasswordForm />
-        <div className={style.line}></div>
-        {code ? <Profile /> : <CreateWiki />}
+        {code ? (
+          <div>
+            <Profile />
+            <div className={style.line}></div>
+            <UpdatePasswordForm />
+          </div>
+        ) : (
+          <div>
+            <UpdatePasswordForm />
+            <div className={style.line}></div>
+            <CreateWiki />
+          </div>
+        )}
       </div>
     </>
   );

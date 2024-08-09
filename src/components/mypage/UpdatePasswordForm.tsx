@@ -3,6 +3,7 @@ import authAxios from '@/lib/authAxios';
 import useAuthStore from '@/store/AuthStore';
 import { useRouter } from 'next/router';
 import style from '@/styles/mypage.module.css';
+import classNames from 'classnames';
 
 interface formValues {
   currentPassword: string;
@@ -102,16 +103,22 @@ const UpdatePasswordForm: React.FC = () => {
       <form className={style.form} onSubmit={handleSubmit}>
         <label className={style.label}>비밀번호 변경</label>
         <input
-          className={style.input}
+          className={classNames(style.input, {
+            [style.errorInput]: currentPasswordError,
+          })}
           onChange={handleInputChange}
           value={formValue.currentPassword}
           name='currentPassword'
           type='password'
           placeholder='기존 비밀번호'
         />
-        {currentPasswordError && <p>{currentPasswordError}</p>}
+        {currentPasswordError && (
+          <p className={style.errorMessage}>{currentPasswordError}</p>
+        )}
         <input
-          className={style.input}
+          className={classNames(style.input, {
+            [style.errorInput]: passwordError,
+          })}
           onBlur={handlePasswordBlur}
           onChange={handleInputChange}
           value={formValue.password}
@@ -119,10 +126,11 @@ const UpdatePasswordForm: React.FC = () => {
           type='password'
           placeholder='새 비밀번호'
         />
-        {passwordError && <p>{passwordError}</p>}
-        {}
+        {passwordError && <p className={style.errorMessage}>{passwordError}</p>}
         <input
-          className={style.input}
+          className={classNames(style.input, {
+            [style.errorInput]: passwordConfirmationError,
+          })}
           onBlur={handlePasswordConfirmationBlur}
           onChange={handleInputChange}
           value={formValue.passwordConfirmation}
@@ -130,7 +138,9 @@ const UpdatePasswordForm: React.FC = () => {
           type='password'
           placeholder='새 비밀번호 확인'
         />
-        {passwordConfirmationError && <p>{passwordConfirmationError}</p>}
+        {passwordConfirmationError && (
+          <p className={style.errorMessage}>{passwordConfirmationError}</p>
+        )}
         <button className={style.submitBtn} type='submit'>
           변경하기
         </button>

@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0;
+}
+
+.editor {
+  width: 100%;
+}
