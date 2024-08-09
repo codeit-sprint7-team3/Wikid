@@ -120,6 +120,10 @@
   line-height: var(--line-height-xl);
 }
 
+.endMessage {
+  margin-bottom: 150px;
+}
+
 @media (max-width: 907px) {
   .listPageConatainer {
     margin-left: 24px;
