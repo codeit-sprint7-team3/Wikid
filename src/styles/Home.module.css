@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   background-color: #f1f4fd;
-  animation: fadeIn 1s ease-in-out;
 }
 
 .introSection {
@@ -14,7 +13,6 @@
   align-items: center;
   text-align: center;
   padding-top: 120px;
-  animation: fadeIn 1s ease-in-out;
 }
 
 .introWrapper {
@@ -23,13 +21,11 @@
   row-gap: 15px;
   align-items: center;
   width: 100%;
-  animation: slideIn 1s ease-in-out;
 }
 
 .introFont300 {
   font-family: 'nexonGothic300', sans-serif, Arial;
   color: var(--gray500);
-  animation: fadeIn 1s ease-in-out;
 
   @media screen and (min-width: 768px) {
     font-size: 60px;
