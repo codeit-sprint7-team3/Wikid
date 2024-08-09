@@ -12,6 +12,7 @@
   border-radius: var(--rounded-normal);
   padding: 5px 10px;
   transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
 .container:hover {
