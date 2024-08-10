@@ -23,8 +23,6 @@
 
 .profileImg {
   display: block;
-  width: 160px;
-  height: 160px;
 }
 
 .profileName {
@@ -47,6 +45,11 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
+}
+
+.profileImg {
+  width: 160px;
+  height: 160px;
 }
 
 .profileLabel {
