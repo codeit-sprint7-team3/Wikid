@@ -20,7 +20,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid transparent;
   border-radius: 30px;
   overflow: hidden;
@@ -91,14 +91,15 @@
 }
 
 .hoverItem {
-  display: none;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-rg);
   line-height: var(--font-size-xl);
   color: var(--gray400);
+  text-align: left;
 }
 .imgAndName {
   display: flex;
+  gap: 30px;
 }
 
 .hoverContainer {
@@ -109,21 +110,59 @@
   gap: 10px;
 }
 
-.wikikItem:hover .hoverItem {
-  display: block;
-}
-
 .userName {
   color: var(--gray500);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-sb);
   line-height: var(--line-height-xl);
+  text-align: left;
+}
+
+.endMessage {
+  margin-bottom: 150px;
+}
+
+.goToTop {
+  position: fixed;
+  width: 70px;
+  height: 80px;
+  bottom: 40px;
+  right: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.goToTop:hover {
+  transform: translateY(-8px);
+}
+
+@media (max-width: 1108px) {
+  .goToTop {
+    width: 50px;
+    height: 60px;
+    right: 10px;
+  }
 }
 
 @media (max-width: 907px) {
   .listPageConatainer {
     margin-left: 24px;
     margin-right: 24px;
+  }
+}
+
+@media (max-width: 720px) {
+  .userProfile {
+    width: 80px;
+    height: 80px;
+  }
+  .userName {
+    font-size: var(--font-size-lg);
+  }
+  .hoverItem {
+    font-size: var(--font-size-xxs);
+  }
+  .wikikItem {
+    padding: 10px;
   }
 }
 
@@ -137,5 +176,11 @@
   .userProfile {
     width: 80px;
     height: 80px;
+  }
+  .wikikItem {
+    padding: 20px;
+  }
+  .goToTop {
+    right: 0px;
   }
 }
