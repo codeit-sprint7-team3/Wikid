@@ -60,3 +60,7 @@
 .description span h2 {
   color: var(--gray500);
 }
+
+.description span p {
+  color: var(--gray500);
+}

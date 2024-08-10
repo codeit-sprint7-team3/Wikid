@@ -30,7 +30,7 @@ const Profile = () => {
   }, []);
 
   const handleOnClick = () => {
-    router.push(`/wiki/${code}`);
+    router.push('/');
   };
 
   if (!user) return;
