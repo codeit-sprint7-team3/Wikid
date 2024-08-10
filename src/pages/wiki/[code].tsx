@@ -3,6 +3,7 @@ import basicApi from '@/lib/basicAxios';
 import { useRouter } from 'next/router';
 import WikiProfile from '@/components/WikiProfile';
 import style from '@/styles/mywiki.module.css';
+import WikiLink from '@/components/link/WikiLink';
 
 interface WikiPageProps {
   code: string;
@@ -26,6 +27,7 @@ const WikiPage = ({ code, content, name }: WikiPageProps) => {
               위키 참여하기
             </button>
           </div>
+          <WikiLink name={name} code={code} />
         </div>
         <div className={style.description}>
           <span dangerouslySetInnerHTML={{ __html: content || '' }}></span>{' '}
