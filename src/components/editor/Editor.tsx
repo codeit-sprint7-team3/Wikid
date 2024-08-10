@@ -89,11 +89,10 @@ const TinyMceEditor = ({ code }: TinyMceEditorProps) => {
         await authApi.patch(`/profiles/${code}`, {
           content: editorContent,
         });
-        alert('성공');
+        alert('저장 성공!');
         router.push(`/wiki/${code}`);
       } catch (error) {
-        console.error('저장실패', error);
-        alert('Failed to save content');
+        alert('저장 실패');
       }
     }
   };
