@@ -1,16 +1,24 @@
 import TinyMceEditor from '@/components/editor/Editor';
 import WikiProfile from '@/components/WikiProfile';
 import style from '@/styles/editpage.module.css';
+import { useRouter } from 'next/router';
 
-const Edit = () => {
+const EditWikiPage = () => {
+  const router = useRouter();
+  const { code } = router.query;
+
+  if (!code || Array.isArray(code)) {
+    return <div>Invalid code</div>;
+  }
+
   return (
     <div className={style.container}>
       <div className={style.editor}>
-        <TinyMceEditor />
+        <TinyMceEditor code={code} />
       </div>
       <WikiProfile />
     </div>
   );
 };
 
-export default Edit;
+export default EditWikiPage;

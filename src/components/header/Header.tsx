@@ -22,9 +22,7 @@ const Header = () => {
       if (user?.profile?.code) {
         try {
           const response = await authApi.get(`/profiles/${user.profile.code}`);
-          console.log(response);
           setUserImg(response.data.image);
-          console.log(response.data.image);
         } catch (error) {
           console.error('유저 이미지 불러오기 오류:', error);
           setUserImg(null);
@@ -79,8 +77,6 @@ const Header = () => {
             onClick={toggleUserModal}
             title='❤️'
             priority={true}
-            width={32}
-            height={32}
           />
           <UserModal
             isOpen={isUserModalOpen}

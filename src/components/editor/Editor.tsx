@@ -1,6 +1,8 @@
-import { useRef, forwardRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useRouter } from 'next/router';
+import authApi from '@/lib/authAxios';
+import style from '@/styles/editor.module.css';
 
 const boldIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.85709 18.625C8.43531 18.625 8.07666 18.4772 7.78114 18.1817C7.48564 17.8862 7.33789 17.5275 7.33789 17.1058V6.8942C7.33789 6.47242 7.48564 6.11377 7.78114 5.81825C8.07666 5.52275 8.43531 5.375 8.85709 5.375H12.1994C13.2186 5.375 14.1401 5.69231 14.9638 6.32693C15.7875 6.96154 16.1994 7.81603 16.1994 8.89038C16.1994 9.63779 16.0189 10.2471 15.658 10.7183C15.2971 11.1894 14.9083 11.5314 14.4917 11.7442C15.0045 11.9211 15.4942 12.2708 15.9609 12.7933C16.4276 13.3157 16.6609 14.0192 16.6609 14.9038C16.6609 16.182 16.1897 17.1217 15.2474 17.723C14.3051 18.3243 13.3558 18.625 12.3994 18.625H8.85709ZM9.48782 16.6327H12.3186C13.1058 16.6327 13.6622 16.4141 13.9879 15.9769C14.3135 15.5397 14.4763 15.1205 14.4763 14.7192C14.4763 14.3179 14.3135 13.8987 13.9879 13.4615C13.6622 13.0243 13.0904 12.8057 12.2725 12.8057H9.48782V16.6327ZM9.48782 10.875H12.0821C12.6898 10.875 13.1715 10.7013 13.5273 10.3539C13.8831 10.0064 14.061 9.59037 14.061 9.10575C14.061 8.59035 13.8728 8.16918 13.4965 7.84225C13.1202 7.51533 12.659 7.35188 12.1128 7.35188H9.48782V10.875Z" fill="#8F95B2"/>
@@ -38,6 +40,10 @@ const linkIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xm
 <path d="M11.7017 18.7169C10.8138 19.6048 9.74414 20.0488 8.49265 20.0489C7.24115 20.049 6.17152 19.6051 5.28376 18.7174C4.396 17.8296 3.95203 16.7598 3.95185 15.5081C3.95168 14.2563 4.39552 13.1865 5.28339 12.2986L7.4183 10.1637C7.56856 10.0135 7.74536 9.93837 7.94868 9.93843C8.15201 9.93846 8.32884 10.0136 8.47917 10.164C8.62949 10.3143 8.70459 10.491 8.70448 10.6942C8.70437 10.8974 8.62919 11.0741 8.47893 11.2244L6.3432 13.3601C5.74995 13.9533 5.45332 14.6692 5.45332 15.5078C5.45332 16.3464 5.75022 17.0625 6.34401 17.6563C6.93781 18.2501 7.65398 18.547 8.49254 18.547C9.3311 18.547 10.047 18.2504 10.6403 17.6571L12.776 15.5214C12.9262 15.3711 13.103 15.296 13.3063 15.2961C13.5097 15.2961 13.6865 15.3713 13.8368 15.5216C13.9872 15.672 14.0623 15.8487 14.0622 16.0519C14.062 16.2551 13.9869 16.4318 13.8366 16.582L11.7017 18.7169ZM10.4099 14.6511C10.2596 14.8014 10.0828 14.8765 9.87949 14.8764C9.67615 14.8764 9.49932 14.8012 9.349 14.6509C9.19867 14.5005 9.12357 14.3238 9.12369 14.1206C9.12379 13.9174 9.19897 13.7407 9.34923 13.5905L13.5919 9.34783C13.7421 9.19757 13.9189 9.12246 14.1223 9.1225C14.3256 9.12255 14.5024 9.19774 14.6527 9.34806C14.8031 9.49839 14.8782 9.67514 14.8781 9.8783C14.8779 10.0815 14.8028 10.2582 14.6525 10.4085L10.4099 14.6511ZM16.5834 13.8352C16.4332 13.9855 16.2564 14.0606 16.053 14.0605C15.8497 14.0605 15.6729 13.9853 15.5226 13.835C15.3722 13.6846 15.2971 13.5079 15.2973 13.3047C15.2974 13.1016 15.3725 12.9248 15.5228 12.7746L17.6585 10.6389C18.2518 10.0456 18.5484 9.3297 18.5484 8.49114C18.5484 7.65258 18.2515 6.9364 17.6577 6.34261C17.0639 5.74882 16.3478 5.45192 15.5092 5.45192C14.6706 5.45192 13.9547 5.74855 13.3615 6.3418L11.2258 8.47753C11.0755 8.62779 10.8987 8.70289 10.6954 8.70285C10.492 8.7028 10.3152 8.62762 10.1649 8.4773C10.0146 8.32697 9.93946 8.15021 9.93958 7.94704C9.93969 7.74387 10.0149 7.56716 10.1651 7.4169L12.3 5.28199C13.1879 4.39412 14.2576 3.95015 15.5091 3.95006C16.7606 3.94998 17.8302 4.39382 18.718 5.28158C19.6057 6.16934 20.0497 7.2391 20.0499 8.49086C20.0501 9.74261 19.6062 10.8124 18.7183 11.7003L16.5834 13.8352Z" fill="#8F95B2"/>
 </svg>`;
 
+interface TinyMceEditorProps {
+  code: string;
+}
+
 const addCustomButton = (
   editor: any,
   iconName: string,
@@ -53,21 +59,41 @@ const addCustomButton = (
   });
 };
 
-const TinyMceEditor = forwardRef<any, {}>((props, ref): JSX.Element => {
+const TinyMceEditor = ({ code }: TinyMceEditorProps) => {
   const editorRef = useRef<any>(null);
   const router = useRouter();
-  const [content, setContent] = useState(''); // 에디터 내용을 저장할 상태
+  const [content, setContent] = useState<string>('');
 
-  const saveContent = () => {
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await authApi.get(`/profiles/${code}`);
+        setContent(response.data.content);
+      } catch (error) {
+        console.error('실패', error);
+      }
+    };
+    fetchContent();
+  }, [code]);
+
+  const saveContent = async () => {
     if (editorRef.current) {
       const editorContent = editorRef.current.getContent();
       setContent(editorContent);
-      console.log('Saved Content:', editorContent);
 
-      router.push({
-        pathname: '/mywiki',
-        query: { content: editorContent },
-      });
+      try {
+        await authApi.post(`/profiles/${code}/ping`, {
+          securityAnswer: '빨간색',
+        });
+
+        await authApi.patch(`/profiles/${code}`, {
+          content: editorContent,
+        });
+        alert('저장 성공!');
+        router.push(`/wiki/${code}`);
+      } catch (error) {
+        alert('저장 실패');
+      }
     }
   };
 
@@ -78,7 +104,6 @@ const TinyMceEditor = forwardRef<any, {}>((props, ref): JSX.Element => {
     'media',
     'quickbars',
     'image',
-    'noneditable',
   ];
   const tinymceToolbar =
     'customBold customItalic customUnderline |' +
@@ -91,15 +116,18 @@ const TinyMceEditor = forwardRef<any, {}>((props, ref): JSX.Element => {
       <Editor
         apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue={`<h2 class="noneditable">01. 개요</h2>
+        initialValue={
+          content ||
+          `<h2>01. 개요</h2>
           <p>여기에 기본 내용을 입력하세요.</p>
-          <h2 class="noneditable">02. 취미</h2>
+          <h2>02. 취미</h2>
           <p>여기에 취미에 관한 내용을 입력하세요.</p>
-          <h2 class="noneditable">03. 여담</h2>
+          <h2>03. 여담</h2>
           <p>여기에 여담에 관한 내용을 입력하세요.</p>
-          <h2 class="noneditable">04. 취향</h2>
+          <h2>04. 취향</h2>
           <p>여기에 취향에 관한 내용을 입력하세요.</p>
-        `}
+        `
+        }
         init={{
           plugins: tinymcePlugins,
           toolbar: tinymceToolbar,
@@ -108,7 +136,6 @@ const TinyMceEditor = forwardRef<any, {}>((props, ref): JSX.Element => {
           branding: false,
           statusbar: false,
           block_formats: '제목1=h2;제목2=h3;제목3=h4;내용=p;',
-          noneditable_noneditable_class: 'noneditable',
           setup: (editor) => {
             addCustomButton(editor, 'customBold', boldIcon, 'Bold', 'Bold');
             addCustomButton(
@@ -164,9 +191,14 @@ const TinyMceEditor = forwardRef<any, {}>((props, ref): JSX.Element => {
           },
         }}
       />
-      <button onClick={saveContent}>저장</button>
+      <div>
+        <button className={style.cancelButton}>취소</button>
+        <button className={style.saveButton} onClick={saveContent}>
+          저장
+        </button>
+      </div>
     </div>
   );
-});
+};
 
 export default TinyMceEditor;

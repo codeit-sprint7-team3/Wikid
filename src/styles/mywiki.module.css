@@ -51,33 +51,16 @@
   gap: 64px;
 }
 
-@media (min-width: 768px) and (max-width: 1200px) {
-  .contentContainer {
-    flex-direction: column;
-    align-items: center;
-  }
+.description span {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
 
-  .topContainer {
-    order: 1;
-    margin: 60px 60px 15px 60px;
-  }
+.description span h2 {
+  color: var(--gray500);
+}
 
-  .leftContainer {
-    order: 3;
-    margin: 0;
-  }
-
-  .rightContainer {
-    order: 2; /* 위로 이동시키기 위해 순서 변경 */
-    margin-bottom: 20px;
-  }
-
-  .subjectContainer {
-    margin: 0 0 32px 0;
-    order: 1;
-  }
-
-  .description {
-    margin: 60px;
-  }
+.description span p {
+  color: var(--gray500);
 }

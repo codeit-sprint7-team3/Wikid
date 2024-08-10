@@ -1,5 +1,6 @@
 .tox:not(.tox-tinymce-inline) .tox-editor-container .tox-editor-header {
   display: flex;
+  width: 1120px;
   flex-direction: column;
   align-items: center;
   background-color: var(--gray100);
