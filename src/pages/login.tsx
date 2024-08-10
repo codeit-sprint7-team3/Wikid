@@ -54,7 +54,7 @@ const Login = () => {
         setPasswordError('비밀번호가 일치하지 않습니다.');
       } else {
         alert('서버에 에러가 발생했습니다. 잠시 후 다시 시도해주세요.');
-        router.replace('/');
+        router.replace('/mypage');
       }
     }
   };
@@ -63,11 +63,11 @@ const Login = () => {
     <div className={style.LoginContainer}>
       <p className={style.LoginTitle}>로그인</p>
       <form onSubmit={handleSubmit} className={style.LoginForm}>
-        <label htmlFor="email">이메일</label>
+        <label htmlFor='email'>이메일</label>
         <input
-          type="email"
-          placeholder="이메일을 입력해 주세요"
-          name="email"
+          type='email'
+          placeholder='이메일을 입력해 주세요'
+          name='email'
           value={values.email}
           onChange={handleChange}
           onBlur={handleEmailCheckBlur}
@@ -76,11 +76,11 @@ const Login = () => {
           }}
         />
         {emailError && <p className={style.ErrorMessage1}>{emailError}</p>}
-        <label htmlFor="password">비밀번호</label>
+        <label htmlFor='password'>비밀번호</label>
         <input
-          type="password"
-          placeholder="비밀번호를 입력해 주세요"
-          name="password"
+          type='password'
+          placeholder='비밀번호를 입력해 주세요'
+          name='password'
           value={values.password}
           onChange={handleChange}
           style={{
@@ -92,13 +92,13 @@ const Login = () => {
         )}
         <button
           className={style.subButton}
-          type="submit"
+          type='submit'
           disabled={isButtonDisabled}
         >
           로그인
         </button>
       </form>
-      <Link href="/signup">
+      <Link href='/signup'>
         <p className={style.goRegister}>회원 가입</p>
       </Link>
     </div>
