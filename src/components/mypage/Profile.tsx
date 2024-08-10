@@ -6,7 +6,7 @@ import style from '@/components/mypage/Profile.module.css';
 import basicUserImg from '@/assets/header/basicUserProfile.png';
 import { useRouter } from 'next/router';
 import WikiLink from '@/components/link/WikiLink';
-import { params } from '@/utils/profileParams';
+import { params } from '@/utils/ProfileParams';
 
 const Profile = () => {
   const { user } = useAuthStore();
@@ -30,7 +30,7 @@ const Profile = () => {
   }, []);
 
   const handleOnClick = () => {
-    router.push('/');
+    router.push(`/wiki/${code}`);
   };
 
   if (!user) return;
