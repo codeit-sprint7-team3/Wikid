@@ -12,6 +12,7 @@
   box-shadow: var(--box-shadow-heavy);
   padding: 6px;
   width: 110px;
+  z-index: 1000;
 }
 
 .wikiList,
