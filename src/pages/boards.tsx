@@ -5,20 +5,13 @@ import SearchBar from '@/components/search/SearchBar';
 import axios from 'axios';
 import Table from '@/components/table/Table';
 import Pagination from 'react-js-pagination';
-
-interface Board {
-  id: number;
-  title: string;
-  writer: {
-    name: string;
-  };
-  likeCount: number;
-  createdAt: string;
-}
+import Image from 'next/image';
+import { Board } from '@/types/userArticle';
 
 const Boards = () => {
   const { checkAuth } = useAuthStore();
   const [boardsItems, setBoardsItems] = useState<Board[]>([]);
+  const [bestPosts, setBestPosts] = useState<Board[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
@@ -40,10 +33,24 @@ const Boards = () => {
     setBoardsItems(result.data.list);
     setTotalCount(result.data.totalCount);
   };
+  const fetchBestPosts = async () => {
+    const result = await axios.get(
+      'https://wikied-api.vercel.app/6-4/articles',
+      {
+        params: {
+          page: 1,
+          pageSize: 4,
+          orderBy: 'like',
+        },
+      }
+    );
+    setBestPosts(result.data.list);
+  };
 
   useEffect(() => {
     const getData = async () => {
       await patchData();
+      await fetchBestPosts();
     };
     getData();
   }, [page, orderBy, keyword]);
@@ -68,6 +75,26 @@ const Boards = () => {
     <div>
       <div>
         <div>베스트 게시글</div>
+        <div className={style.bestPostsGrid}>
+          {bestPosts.map((post) => (
+            <div key={post.id} className={style.bestPostCard}>
+              {post.image ? (
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  className={style.bestPostImage}
+                  width={100}
+                  height={100}
+                />
+              ) : null}
+
+              <div className={style.bestPostTitle}>{post.title}</div>
+              <div>{post.writer.name}</div>
+              <div>{new Date(post.createdAt).toLocaleDateString()}</div>
+              <div>❤️ {post.likeCount}</div>
+            </div>
+          ))}
+        </div>
         <button>게시물 등록하기</button>
       </div>
 
