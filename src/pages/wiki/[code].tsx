@@ -16,25 +16,25 @@ const WikiPage = ({ code, content, name }: WikiPageProps) => {
 
   return (
     <div className={style.contentContainer}>
-      <div className={style.leftContainer}>
-        <div className={style.topContainer}>
-          <div className={style.subjectContainer}>
-            <h2 className={style.h2}>{name}</h2>
-            <button
-              className={style.button}
-              onClick={() => router.push(`/wiki/${code}/edit`)}
-            >
-              위키 참여하기
-            </button>
-          </div>
+      <div className={style.topContainer}>
+        <div className={style.subjectContainer}>
+          <h2 className={style.h2}>{name}</h2>
+          <button
+            className={style.button}
+            onClick={() => router.push(`/wiki/${code}/edit`)}
+          >
+            위키 참여하기
+          </button>
+        </div>
+        <div className={style.link}>
           <WikiLink name={name} code={code} />
         </div>
-        <div className={style.description}>
-          <span dangerouslySetInnerHTML={{ __html: content || '' }}></span>{' '}
-        </div>
       </div>
-      <div className={style.rightContainer}>
+      <div className={style.profileContainer}>
         <WikiProfile />
+      </div>
+      <div className={style.description}>
+        <span dangerouslySetInnerHTML={{ __html: content || '' }}></span>{' '}
       </div>
     </div>
   );

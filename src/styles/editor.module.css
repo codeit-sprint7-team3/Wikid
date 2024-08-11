@@ -25,3 +25,31 @@
   background-color: var(--gray50);
   cursor: pointer;
 }
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .saveButton {
+    top: 113px;
+    right: 57px;
+    height: fit-content;
+  }
+
+  .cancelButton {
+    top: 113px;
+    right: 132px;
+    height: fit-content;
+  }
+}
+
+@media (max-width: 767px) {
+  .saveButton {
+    top: 75px;
+    right: 17px;
+    height: fit-content;
+  }
+
+  .cancelButton {
+    top: 75px;
+    right: 92px;
+    height: fit-content;
+  }
+}

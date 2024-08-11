@@ -7,3 +7,27 @@
 .editor {
   width: 100%;
 }
+
+.profile {
+  margin-top: 38px;
+  margin-right: 80px;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .profile {
+    margin-top: 107px;
+    margin-right: 60px;
+    margin-left: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+}
