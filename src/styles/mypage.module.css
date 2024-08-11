@@ -71,6 +71,7 @@
 
 .line {
   border-top: 1px solid var(--gray200);
+  margin: 0 auto;
   width: 400px;
 }
 
@@ -81,4 +82,14 @@
 
 .errorInput {
   background-color: var(--red100);
+}
+
+@media (max-width: 421px) {
+  .form {
+    width: 335px;
+  }
+
+  .line {
+    width: 335px;
+  }
 }
