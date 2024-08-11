@@ -42,10 +42,7 @@ const Login = () => {
 
     try {
       const { email, password } = values;
-      const success = await signIn(email, password);
-      if (success) {
-        router.push('/');
-      }
+      await signIn(email, password);
     } catch (error: any) {
       const errorMessage = error.response.data.message;
       if (errorMessage === '존재하지 않는 이메일입니다.') {
@@ -54,7 +51,7 @@ const Login = () => {
         setPasswordError('비밀번호가 일치하지 않습니다.');
       } else {
         alert('서버에 에러가 발생했습니다. 잠시 후 다시 시도해주세요.');
-        router.replace('/mypage');
+        router.replace('/');
       }
     }
   };
