@@ -6,7 +6,7 @@ import { UserProfile } from '@/types/UserType';
 import basicProfile from '@/assets/header/basicUserProfile.png';
 import { debounce } from 'lodash';
 import noSearch from '@/assets/wikilist/teong.png';
-import WikiLink from '@/components/link/WikiLink';
+import Link from 'next/link'; // next/link 추가
 import useAuthStore from '@/store/AuthStore';
 import basicApi from '@/lib/basicAxios';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -122,26 +122,27 @@ const Wikilist = () => {
       >
         <div className={style.itemContainer}>
           {searchResults.map((item: UserProfile, index: number) => (
-            <div key={index} className={style.wikikItem}>
-              <div className={style.imgAndName}>
-                <Image
-                  src={item.image || basicProfile}
-                  alt="프로필사진"
-                  width={50}
-                  height={50}
-                  className={style.userProfile}
-                />
-                <div className={style.hoverContainer}>
-                  <div className={style.userName}>{item.name}</div>
-                  <div className={style.hoverItem}>
-                    <div>{item.nationality ? item.nationality : null}</div>
-                    <div>{item.city ? item.city : null}</div>
-                    <div>{item.job ? item.job : null}</div>
+            <Link key={index} href={`/wiki/${item.code}`}>
+              <div className={style.wikikItem}>
+                <div className={style.imgAndName}>
+                  <Image
+                    src={item.image || basicProfile}
+                    alt="프로필사진"
+                    width={50}
+                    height={50}
+                    className={style.userProfile}
+                  />
+                  <div className={style.hoverContainer}>
+                    <div className={style.userName}>{item.name}</div>
+                    <div className={style.hoverItem}>
+                      <div>{item.nationality ? item.nationality : null}</div>
+                      <div>{item.city ? item.city : null}</div>
+                      <div>{item.job ? item.job : null}</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <WikiLink code={item.code} name={item.name} />
-            </div>
+            </Link>
           ))}
         </div>
       </InfiniteScroll>
