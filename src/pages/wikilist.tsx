@@ -6,11 +6,12 @@ import { UserProfile } from '@/types/UserType';
 import basicProfile from '@/assets/header/basicUserProfile.png';
 import { debounce } from 'lodash';
 import noSearch from '@/assets/wikilist/teong.png';
-import Link from 'next/link'; // next/link 추가
+import Link from 'next/link';
 import useAuthStore from '@/store/AuthStore';
 import basicApi from '@/lib/basicAxios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import top from '@/assets/wikilist/top.png';
+import WikiLink from '@/components/link/WikiLink';
 
 const Wikilist = () => {
   const [inputValue, setInputValue] = useState('');
@@ -141,6 +142,7 @@ const Wikilist = () => {
                     </div>
                   </div>
                 </div>
+                <WikiLink code={item.code} name={item.name} />
               </div>
             </Link>
           ))}
