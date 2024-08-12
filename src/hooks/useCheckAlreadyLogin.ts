@@ -10,7 +10,7 @@ const useCheckAlreadyLogin = () => {
     const verifyAuth = async () => {
       await checkAuth();
       if (user) {
-        router.replace('/');
+        router.replace('/mypage');
       }
     };
     verifyAuth();

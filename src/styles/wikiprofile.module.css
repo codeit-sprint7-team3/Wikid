@@ -5,8 +5,6 @@
   width: 320px;
   border-radius: var(--rounded-normal);
   background-color: var(--gray50);
-  margin-top: 38px;
-  margin-right: 200px;
   box-shadow: var(--box-shadow-heavy);
 }
 
@@ -45,6 +43,36 @@
 }
 
 @media (min-width: 768px) and (max-width: 1200px) {
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .wikiProfileImg {
+    padding: 20px 40px 40px 30px;
+  }
+
+  .profileDetails {
+    padding-top: 20px;
+  }
+
+  .profileItem {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .hideLabel,
+  .hideValue {
+    display: none;
+  }
+
+  .profileItem:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
   .wrapper {
     display: flex;
     flex-direction: row;

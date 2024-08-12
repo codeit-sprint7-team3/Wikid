@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import style from '@/components/header/Header.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -32,13 +32,45 @@ const Header = () => {
     fetchUserImage();
   }, [user]);
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // 모달
+  const modalRef = useRef<HTMLDivElement>(null);
+  const userModalRef = useRef<HTMLDivElement>(null);
 
-  const toggleUserModal = () => {
-    setIsUserModalOpen(!isUserModalOpen);
-  };
+  const toggleModal = useCallback(() => {
+    setIsModalOpen((prev) => !prev);
+  }, []);
+
+  const toggleUserModal = useCallback(() => {
+    setIsUserModalOpen((prev) => !prev);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        setIsModalOpen(false);
+      }
+
+      if (
+        userModalRef.current &&
+        !userModalRef.current.contains(event.target as Node)
+      ) {
+        setIsUserModalOpen(false);
+      }
+    };
+
+    if (isModalOpen || isUserModalOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isModalOpen, isUserModalOpen]);
 
   return (
     <div className={style.headerContainer}>
@@ -64,43 +96,47 @@ const Header = () => {
       {user ? (
         <div className={style.imgContainer}>
           <Image className={style.bell} src={bell} alt='alarmbell' title='🔔' />
-          <Image
-            width={50}
-            height={50}
-            className={style.userProfile}
-            src={
-              userImg && userImg !== 'https://example.com/...'
-                ? userImg
-                : basicProfile
-            }
-            alt='유저프로필'
-            onClick={toggleUserModal}
-            title='❤️'
-            priority={true}
-          />
-          <UserModal
-            isOpen={isUserModalOpen}
-            onClose={() => setIsUserModalOpen(false)}
-          />
+          <div ref={userModalRef}>
+            <Image
+              width={50}
+              height={50}
+              className={style.userProfile}
+              src={
+                userImg && userImg !== 'https://example.com/...'
+                  ? userImg
+                  : basicProfile
+              }
+              alt='유저프로필'
+              onClick={toggleUserModal}
+              title='❤️'
+              priority={true}
+            />
+            <UserModal
+              isOpen={isUserModalOpen}
+              onClose={() => setIsUserModalOpen(false)}
+            />
+          </div>
         </div>
       ) : (
         <div>
           <Link href='/login'>
             <p className={style.loginText}>로그인</p>
           </Link>
-          <Image
-            width={50}
-            height={50}
-            className={style.menuImg}
-            src={menuImg}
-            alt='menuImg'
-            title='menu'
-            onClick={toggleModal}
-            priority={true}
-          />
+          <div ref={modalRef}>
+            <Image
+              width={50}
+              height={50}
+              className={style.menuImg}
+              src={menuImg}
+              alt='menuImg'
+              title='menu'
+              onClick={toggleModal}
+              priority={true}
+            />
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+          </div>
         </div>
       )}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

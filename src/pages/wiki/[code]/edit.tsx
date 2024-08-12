@@ -16,7 +16,9 @@ const EditWikiPage = () => {
       <div className={style.editor}>
         <TinyMceEditor code={code} />
       </div>
-      <WikiProfile />
+      <div className={style.profile}>
+        <WikiProfile />
+      </div>
     </div>
   );
 };

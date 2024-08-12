@@ -1,21 +1,20 @@
 .contentContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.leftContainer {
-  width: 100%;
-  margin-right: 80px;
-  margin-left: 460px;
+  flex-direction: column;
 }
 
 .subjectContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 78px;
-  margin-bottom: 32px;
+  margin: 40px 20px 24px 20px;
+}
+
+.topContainer {
+  margin-bottom: 12px;
+}
+
+.link {
+  margin-left: 20px;
 }
 
 .h2 {
@@ -44,11 +43,15 @@
   cursor: pointer;
 }
 
+.profileContainer {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .description {
   display: flex;
   flex-direction: column;
-  margin-top: 56px;
-  gap: 64px;
+  margin: 40px 20px 0 20px;
 }
 
 .description span {
@@ -63,4 +66,56 @@
 
 .description span p {
   color: var(--gray500);
+}
+
+@media (min-width: 767px) and (max-width: 1200px) {
+  .subjectContainer {
+    margin: 60px 60px 32px 60px;
+  }
+
+  .topContainer {
+    margin-bottom: 24px;
+  }
+
+  .link {
+    margin-left: 60px;
+  }
+
+  .profileContainer {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+
+  .description {
+    margin: 51px 60px 0 60px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .subjectContainer {
+    width: 50%;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: 600px;
+  }
+
+  .link {
+    margin-left: 350px;
+  }
+
+  .topContainer {
+    margin-bottom: 56px;
+  }
+
+  .description {
+    width: 50%;
+    margin-left: auto;
+    margin-right: 600px;
+  }
+
+  .profileContainer {
+    position: absolute;
+    top: 120px;
+    right: 200px;
+  }
 }
