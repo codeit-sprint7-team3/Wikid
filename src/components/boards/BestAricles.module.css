@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 220px;
+}
+
+.articleImg {
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center 40%;
+}
