@@ -99,3 +99,9 @@
   font-weight: var(--font-weight-rg);
   color: var(--green200);
 }
+
+@media (max-width: 421px) {
+  .form {
+    width: 335px;
+  }
+}

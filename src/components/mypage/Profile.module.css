@@ -94,3 +94,9 @@
   margin-bottom: 32px;
   cursor: pointer;
 }
+
+@media (max-width: 421px) {
+  .profileContainer {
+    width: 335px;
+  }
+}
