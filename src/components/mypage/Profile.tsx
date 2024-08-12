@@ -10,7 +10,7 @@ import { params } from '@/types/ProfileType';
 import Link from 'next/link';
 
 const Profile = () => {
-  const { user,checkAuth } = useAuthStore();
+  const { user, checkAuth } = useAuthStore();
   const code = user?.profile?.code;
   const [myProfile, setMyProfile] = useState(params);
 
@@ -30,8 +30,6 @@ const Profile = () => {
     getUserProfile();
     checkAuth();
   }, []);
-
-
 
   if (!user) return;
   return (
@@ -94,8 +92,9 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <Link href={`/wiki/${code}`} className={style.btn}>내 위키로 이동하기</Link>
-
+        <button className={style.btn}>
+          <Link href={`/wiki/${code}`}>내 위키로 이동하기</Link>
+        </button>
       </div>
     </>
   );
