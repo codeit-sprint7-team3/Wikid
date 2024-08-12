@@ -7,9 +7,10 @@ import basicUserImg from '@/assets/header/basicUserProfile.png';
 import { useRouter } from 'next/router';
 import WikiLink from '@/components/link/WikiLink';
 import { params } from '@/types/ProfileType';
+import Link from 'next/link';
 
 const Profile = () => {
-  const { user } = useAuthStore();
+  const { user,checkAuth } = useAuthStore();
   const code = user?.profile?.code;
   const [myProfile, setMyProfile] = useState(params);
 
@@ -27,11 +28,10 @@ const Profile = () => {
 
   useEffect(() => {
     getUserProfile();
+    checkAuth();
   }, []);
 
-  const handleOnClick = () => {
-    router.push(`/wiki/${code}`);
-  };
+
 
   if (!user) return;
   return (
@@ -94,9 +94,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <button onClick={handleOnClick} className={style.btn}>
-          내 위키로 이동하기
-        </button>
+        <Link href={`/wiki/${code}`} className={style.btn}>내 위키로 이동하기</Link>
+
       </div>
     </>
   );

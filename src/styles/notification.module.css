@@ -1,0 +1,64 @@
+/* Notification.module.css */
+
+.popoverContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.popoverButton {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.popoverContent {
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  z-index: 10;
+  width: 300px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  margin-top: 8px;
+  border: solid 1px #cccccc;
+}
+
+.notificationCard {
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+}
+.notificationCard div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.notificationCard span {
+  font-size: 12px;
+}
+
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.nextPageButton {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}

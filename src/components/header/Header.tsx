@@ -10,6 +10,7 @@ import Modal from '@/components/header/HeaderModal';
 import UserModal from '@/components/header/HeaderUserModal';
 import authApi from '@/lib/authAxios';
 import useAuthStore from '@/store/AuthStore';
+import NotificationPopover from "../common/NotiPopover";
 
 const Header = () => {
   const { user } = useAuthStore();
@@ -33,110 +34,63 @@ const Header = () => {
   }, [user]);
 
   // 모달
-  const modalRef = useRef<HTMLDivElement>(null);
-  const userModalRef = useRef<HTMLDivElement>(null);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
-  const toggleModal = useCallback(() => {
-    setIsModalOpen((prev) => !prev);
-  }, []);
-
-  const toggleUserModal = useCallback(() => {
-    setIsUserModalOpen((prev) => !prev);
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node)
-      ) {
-        setIsModalOpen(false);
-      }
-
-      if (
-        userModalRef.current &&
-        !userModalRef.current.contains(event.target as Node)
-      ) {
-        setIsUserModalOpen(false);
-      }
-    };
-
-    if (isModalOpen || isUserModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isModalOpen, isUserModalOpen]);
+  const toggleUserModal = () => {
+    setIsUserModalOpen(!isUserModalOpen);
+  };
 
   return (
     <div className={style.headerContainer}>
       <div className={style.headerNavContainer}>
-        <Link href='/'>
-          <Image
-            className={style.logo}
-            src={logo}
-            alt='logo'
-            title='home'
-            priority={true}
-          />
+        <Link href="/">
+          <Image className={style.logo} src={logo} alt="logo" title="home" priority={true} width={650} height={650} />
         </Link>
         <ul className={style.headerNav}>
-          <Link href={'/wikilist'}>
+          <Link href={"/wikilist"}>
             <li>위키목록</li>
           </Link>
-          <Link href={'#'}>
+          <Link href={"#"}>
             <li>자유게시판</li>
           </Link>
         </ul>
       </div>
       {user ? (
         <div className={style.imgContainer}>
-          <Image className={style.bell} src={bell} alt='alarmbell' title='🔔' />
-          <div ref={userModalRef}>
+          <NotificationPopover>
+            <Image className={style.bell} src={bell} alt="alarmbell" title="🔔" />
+          </NotificationPopover>
+          <button style={{ background: "none", border: "none", padding: 0 }} onClick={toggleUserModal}>
             <Image
-              width={50}
-              height={50}
               className={style.userProfile}
-              src={
-                userImg && userImg !== 'https://example.com/...'
-                  ? userImg
-                  : basicProfile
-              }
-              alt='유저프로필'
-              onClick={toggleUserModal}
-              title='❤️'
+              src={userImg ? userImg : basicProfile}
+              alt="유저프로필"
+              title="❤️"
               priority={true}
+              height={650}
+              width={650}
             />
-            <UserModal
-              isOpen={isUserModalOpen}
-              onClose={() => setIsUserModalOpen(false)}
-            />
-          </div>
+          </button>
+          <UserModal isOpen={isUserModalOpen} onClose={() => setIsUserModalOpen(false)} />
         </div>
       ) : (
         <div>
-          <Link href='/login'>
+          <Link href="/login">
             <p className={style.loginText}>로그인</p>
           </Link>
-          <div ref={modalRef}>
-            <Image
-              width={50}
-              height={50}
-              className={style.menuImg}
-              src={menuImg}
-              alt='menuImg'
-              title='menu'
-              onClick={toggleModal}
-              priority={true}
-            />
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-          </div>
+          <Image
+            className={style.menuImg}
+            src={menuImg}
+            alt="menuImg"
+            title="menu"
+            onClick={toggleModal}
+            priority={true}
+          />
         </div>
       )}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

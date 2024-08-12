@@ -21,3 +21,24 @@ export interface UserProfile {
   updateAt: string;
   name: string;
 }
+
+export interface Profile {
+  updatedAt: string;
+  securityQuestion: string;
+  securityAnswer: string; // 추가된 부분
+  teamId: string;
+  content: string;
+  nationality: string;
+  family: string;
+  bloodType: string;
+  nickname: string;
+  birthday: string;
+  sns: string;
+  job: string;
+  mbti: string;
+  city: string;
+  image: string;
+  code: string;
+  name: string;
+  id: number;
+}
