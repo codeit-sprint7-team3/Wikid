@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 30px;
+}
+
+.left,
+.right {
+  flex: 1; /* 기본적으로 같은 비율로 크기 조정 */
+}
+
+.left {
+  flex: 7; /* 전체의 70% */
+}
+
+.right {
+  flex: 3; /* 전체의 30% */
+}
+.wikiContent {
+}
+.snackbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: relative;
+  background-color: rgb(218, 218, 218);
+}
+.snackbarWarning {
+  position: absolute;
+  top: 3px;
+  right: 30%;
+  width: fit-content;
+  background-color: #fbeded;
+  border: solid 1px #d14343;
+  word-break: break-all;
+
+  padding: 20px;
+  border-radius: 2rem;
+}
+.header {
+  background-color: #4cbfa4;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.nonDataWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background-color: #eefaff;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.startButton {
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 15px;
+  padding: 15px 30px;
+  text-align: center;
+  border: none;
+
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+    line-height: 28.64px;
+  }
+
+  @media screen and (max-width: 767px) {
+    font-size: 20px;
+    line-height: 23.87px;
+  }
+}
+
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.profileImage {
+  border-radius: 50%;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contentSection {
+  margin: 20px 0;
+}
+
+.buttonsSection {
+  display: flex;
+  gap: 10px;
+}
+
+.editButton,
+.shareButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #4cbfa4;
+  color: white;
+}
+
+.shareButton {
+  background-color: #ddd;
+  color: #333;
+}
+
+.footer {
+  background-color: #4cbfa4;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
