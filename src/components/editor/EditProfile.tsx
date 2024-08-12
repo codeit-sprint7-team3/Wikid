@@ -1,9 +1,9 @@
-import NullUser from "@/assets/header/basicUserProfile.png";
-import { imgUpload } from "@/lib/imageUpload";
-import style from "@/styles/wikiprofile.module.css";
-import { Profile } from "@/types/UserType";
-import Image from "next/image";
-import React, { ChangeEvent, useState } from "react";
+import NullUser from '@/assets/header/basicUserProfile.png';
+import { imgUpload } from '@/lib/imageUpload';
+import style from '@/styles/wikiprofile.module.css';
+import { Profile } from '@/types/UserType';
+import Image from 'next/image';
+import React, { ChangeEvent, useState } from 'react';
 
 interface Props {
   profile: Profile;
@@ -26,7 +26,7 @@ function EditProfile({ profile, setProfile }: Props) {
     const file = event.target.files?.[0];
     if (file) {
       const formData = new FormData();
-      formData.append("image", file);
+      formData.append('image', file);
 
       try {
         setUploading(true); // 업로드 중 상태로 변경
@@ -40,7 +40,7 @@ function EditProfile({ profile, setProfile }: Props) {
           image: imageUrl,
         }));
       } catch (error) {
-        console.error("Image upload failed:", error);
+        console.error('Image upload failed:', error);
       } finally {
         setUploading(false); // 업로드 완료 상태로 변경
       }
@@ -50,68 +50,97 @@ function EditProfile({ profile, setProfile }: Props) {
   return (
     <>
       <div className={style.wrapper}>
-        <div className={style.profileImageWrapper} onClick={() => document.getElementById("imageUpload")?.click()}>
+        <div
+          className={style.profileImageWrapper}
+          onClick={() => document.getElementById('imageUpload')?.click()}
+        >
           <Image
             width={150}
             height={150}
             src={profile?.image || NullUser} //ProfileImg
-            alt="프로필 이미지"
+            alt='프로필 이미지'
             className={style.wikiProfileImg}
             priority
           />
           <div className={style.imgLayer}>
             <span>수정</span>
           </div>
-          {uploading && <div className={style.uploadingOverlay}>Uploading...</div>}
+          {uploading && (
+            <div className={style.uploadingOverlay}>Uploading...</div>
+          )}
         </div>
-        <input id="imageUpload" type="file" accept="image/*" style={{ display: "none" }} onChange={handleImageChange} />
+        <input
+          id='imageUpload'
+          type='file'
+          accept='image/*'
+          style={{ display: 'none' }}
+          onChange={handleImageChange}
+        />
         <div className={style.profileDetails}>
           <div className={style.profileItem}>
             <span className={style.label}>거주 도시</span>
             <span className={style.value}>
-              <input name="city" value={profile.city} onChange={handleChange} />
+              <input name='city' value={profile.city} onChange={handleChange} />
             </span>
           </div>
           <div className={style.profileItem}>
             <span className={style.label}>MBTI</span>
             <span className={style.value}>
-              <input name="mbti" value={profile.mbti} onChange={handleChange} />
+              <input name='mbti' value={profile.mbti} onChange={handleChange} />
             </span>
           </div>
           <div className={style.profileItem}>
             <span className={style.label}>직업</span>
             <span className={style.value}>
-              <input name="job" value={profile.job} onChange={handleChange} />
+              <input name='job' value={profile.job} onChange={handleChange} />
             </span>
           </div>
           <div className={style.profileItem}>
-            <span className={`${style.label} ${style.hideLabel}`}>SNS 계정</span>
+            <span className={`${style.label} ${style.hideLabel}`}>
+              SNS 계정
+            </span>
             <span className={`${style.value} ${style.hideValue}`}>
-              <input name="sns" value={profile.sns} onChange={handleChange} />
+              <input name='sns' value={profile.sns} onChange={handleChange} />
             </span>
           </div>
           <div className={style.profileItem}>
             <span className={`${style.label} ${style.hideLabel}`}>생일</span>
             <span className={`${style.value} ${style.hideValue}`}>
-              <input name="birthday" value={profile.birthday} onChange={handleChange} />
+              <input
+                name='birthday'
+                value={profile.birthday}
+                onChange={handleChange}
+              />
             </span>
           </div>
           <div className={style.profileItem}>
             <span className={`${style.label} ${style.hideLabel}`}>별명</span>
             <span className={`${style.value} ${style.hideValue}`}>
-              <input name="nickname" value={profile.nickname} onChange={handleChange} />
+              <input
+                name='nickname'
+                value={profile.nickname}
+                onChange={handleChange}
+              />
             </span>
           </div>
           <div className={style.profileItem}>
             <span className={`${style.label} ${style.hideLabel}`}>혈액형</span>
             <span className={`${style.value} ${style.hideValue}`}>
-              <input name="bloodType" value={profile.bloodType} onChange={handleChange} />
+              <input
+                name='bloodType'
+                value={profile.bloodType}
+                onChange={handleChange}
+              />
             </span>
           </div>
           <div className={style.profileItem}>
             <span className={`${style.label} ${style.hideLabel}`}>국적</span>
             <span className={`${style.value} ${style.hideValue}`}>
-              <input name="nationality" value={profile.nationality} onChange={handleChange} />
+              <input
+                name='nationality'
+                value={profile.nationality}
+                onChange={handleChange}
+              />
             </span>
           </div>
         </div>
@@ -121,13 +150,21 @@ function EditProfile({ profile, setProfile }: Props) {
           <div className={style.profileItem}>
             <span className={`${style.label} ${style.hideLabel}`}>질문</span>
             <span className={`${style.value} ${style.hideValue}`}>
-              <input name="securityQuestion" value={profile.securityQuestion} onChange={handleChange} />
+              <input
+                name='securityQuestion'
+                value={profile.securityQuestion}
+                onChange={handleChange}
+              />
             </span>
           </div>
           <div className={style.profileItem}>
             <span className={`${style.label} ${style.hideLabel}`}>답변</span>
             <span className={`${style.value} ${style.hideValue}`}>
-              <input name="securityAnswer" value={profile.securityAnswer} onChange={handleChange} />
+              <input
+                name='securityAnswer'
+                value={profile.securityAnswer}
+                onChange={handleChange}
+              />
             </span>
           </div>
         </div>
