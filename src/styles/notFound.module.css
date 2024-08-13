@@ -1,0 +1,22 @@
+.container {
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeBtn {
+  border: 1px solid;
+  padding: 10px 20px;
+  font-size: var(--font-size-lg);
+  border-radius: var(--rounded-normal);
+  background-color: var(--green300);
+  color: var(--gray50);
+}
+
+@media (max-width: 400px) {
+  .container {
+    margin-top: 50px;
+  }
+}
