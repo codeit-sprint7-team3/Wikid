@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import SearchBar from '@/components/search/SearchBar';
 import style from '@/styles/boards.module.css';
 import { Board } from '@/types/userArticle';
-import axios from 'axios';
 import useAuthStore from '@/store/AuthStore';
+import basicApi from '@/lib/basicAxios';
 
 interface BestArticlesProps {
   bestList: Board[];
@@ -28,13 +28,22 @@ export const getStaticProps: GetStaticProps<BestArticlesProps> = async () => {
     orderBy: 'recent',
   };
 
+  const likeArticlesParams = {
+    page: 1,
+    pageSize: 10,
+    orderBy: 'like',
+  };
+
   try {
     const [bestRes, recentRes] = await Promise.all([
-      axios.get('https://wikied-api.vercel.app/6-4/articles', {
+      basicApi.get('/articles', {
         params: bestArticlesParams,
       }),
-      axios.get('https://wikied-api.vercel.app/6-4/articles', {
+      basicApi.get('/articles', {
         params: recentArticlesParams,
+      }),
+      basicApi.get('/articles', {
+        params: likeArticlesParams,
       }),
     ]);
 
@@ -66,7 +75,6 @@ const Boards = ({
   initialRecentList,
   initialTotalCount,
 }: BestArticlesProps) => {
-  const { checkAuth } = useAuthStore();
   const [boardsItems, setBoardsItems] = useState(initialRecentList);
   const [totalCount, setTotalCount] = useState(initialTotalCount);
   const [page, setPage] = useState(1);
@@ -74,19 +82,16 @@ const Boards = ({
   const [orderBy, setOrderBy] = useState('recent');
   const [keyword, setKeyword] = useState('');
 
-  const fetchRecentArticles = async () => {
+  const fetchRecentArticles = async (pageNumber: number, order: string) => {
     try {
-      const response = await axios.get(
-        'https://wikied-api.vercel.app/6-4/articles',
-        {
-          params: {
-            page,
-            pageSize,
-            orderBy,
-            keyword,
-          },
-        }
-      );
+      const response = await basicApi.get('/articles', {
+        params: {
+          page: pageNumber,
+          pageSize,
+          orderBy: order,
+          keyword,
+        },
+      });
       setBoardsItems(response.data.list || []);
       setTotalCount(response.data.totalCount || 0);
     } catch (error) {
@@ -94,34 +99,33 @@ const Boards = ({
     }
   };
 
+  useEffect(() => {
+    fetchRecentArticles(page, orderBy);
+  }, [orderBy, page]);
+
+  useEffect(() => {
+    fetchRecentArticles(page, orderBy);
+  }, [orderBy, page]);
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
   };
 
   const handleOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOrderBy(e.target.value);
+    setPage(1);
   };
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
   };
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  useEffect(() => {
-    fetchRecentArticles();
-  }, [page, orderBy, keyword]);
-
   return (
     <div className={style.boardsConatiner}>
       <div className={style.bestContainer}>
         <div className={style.bestHeader}>
-          <h1>베스트 게시글</h1>
-          <button onClick={() => alert('게시물 등록 페이지로 이동합니다.')}>
-            게시물 등록하기
-          </button>
+          <h1 className={style.bestTitle}>베스트 게시글</h1>
+          <button className={style.bestButton}>게시물 등록하기</button>
         </div>
         <BestList list={bestList} />
       </div>
@@ -132,7 +136,10 @@ const Boards = ({
           value={keyword}
           onChange={handleSearchChange}
         />
-        <select onChange={handleOrderChange} value={orderBy}>
+        <select
+          onChange={handleOrderChange}
+          value={orderBy}
+        >
           <option value='recent'>최신순</option>
           <option value='like'>좋아요순</option>
         </select>
