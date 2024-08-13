@@ -26,6 +26,7 @@
   width: 200px;
   height: 200px;
   margin: 60px;
+  cursor: pointer;
 }
 
 .profileDetails {
@@ -69,9 +70,32 @@
 }
 
 @media (min-width: 768px) and (max-width: 1200px) {
-  .wrapper {
+  .container {
     width: 100%;
-    margin: 167px 60px 10px 60px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .wrapper {
+    margin-top: 167px;
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  .item1 {
+    flex: 1;
+  }
+
+  .item2 {
+    flex: 1;
+  }
+
+  .value {
+    flex: 1;
+  }
+
+  .value input {
+    width: 100%;
   }
 
   .profileDetails {
@@ -91,19 +115,54 @@
     margin-bottom: 32px;
   }
 
+  .profileItem {
+    flex: 1;
+  }
+
   .quizWrap {
     display: none;
   }
 }
 
 @media (max-width: 767px) {
-  .wrapper {
+  .container {
     width: 100%;
-    margin: 130px 20px 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .wrapper {
+    margin-top: 130px;
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  .profileDetails {
+    padding-bottom: 17px;
   }
 
   .wikiProfileImg {
     width: 62px;
     height: 62px;
+  }
+
+  .item1 {
+    flex: 1;
+  }
+
+  .item2 {
+    flex: 1;
+  }
+
+  .value {
+    flex: 1;
+  }
+
+  .value input {
+    width: 100%;
+  }
+
+  .quizWrap {
+    display: none;
   }
 }

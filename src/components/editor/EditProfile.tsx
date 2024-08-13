@@ -48,7 +48,7 @@ function EditProfile({ profile, setProfile }: Props) {
   };
 
   return (
-    <>
+    <div className={style.container}>
       <div className={style.wrapper}>
         <div
           className={style.profileImageWrapper}
@@ -172,7 +172,7 @@ function EditProfile({ profile, setProfile }: Props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
