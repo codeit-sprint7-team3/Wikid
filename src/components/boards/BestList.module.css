@@ -1,0 +1,64 @@
+.bestCard {
+  display: flex;
+  width: 1048px;
+  height: 220px;
+  justify-content: space-between;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-normal);
+}
+
+.articleImg {
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center 40%;
+}
+.downArea {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.textWrapper {
+  width: 212px;
+  height: 56px;
+  overflow: hidden;
+}
+
+.title {
+  max-width: 212px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: var(--font-weight-sb);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-lg);
+}
+
+.userInfo {
+  display: flex;
+  width: 212px;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.userInfo__left,
+.userInfo__right {
+  display: flex;
+  justify-content: space-between;
+  color: var(--gray400);
+}
+.userInfo__left {
+  width: 130px;
+}
+.userInfo__right {
+  width: 46px;
+}
