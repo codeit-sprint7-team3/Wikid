@@ -1,4 +1,5 @@
 import { Board } from '@/types/userArticle';
+import style from '@/components/boards/Table.module.css';
 
 interface TableProps {
   items: Board[];
@@ -7,7 +8,7 @@ interface TableProps {
 const Table = ({ items }: TableProps) => {
   return (
     <div>
-      <table>
+      <table className={style.table}>
         <thead>
           <tr>
             <th scope='col'>번호</th>
