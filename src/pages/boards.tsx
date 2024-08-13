@@ -1,13 +1,13 @@
 import BestList from '@/components/boards/BestList';
 import Table from '@/components/boards/Table';
 import Pagination from 'react-js-pagination';
-import api from '@/lib/basicAxios';
 import { GetStaticProps } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from '@/components/search/SearchBar';
 import style from '@/styles/boards.module.css';
 import { Board } from '@/types/userArticle';
 import axios from 'axios';
+import useAuthStore from '@/store/AuthStore';
 
 interface BestArticlesProps {
   bestList: Board[];
@@ -66,27 +66,28 @@ const Boards = ({
   initialRecentList,
   initialTotalCount,
 }: BestArticlesProps) => {
-  const [recentList, setRecentList] = useState(initialRecentList);
+  const { checkAuth } = useAuthStore();
+  const [boardsItems, setBoardsItems] = useState(initialRecentList);
   const [totalCount, setTotalCount] = useState(initialTotalCount);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(10);
   const [orderBy, setOrderBy] = useState('recent');
   const [keyword, setKeyword] = useState('');
 
-  const fetchRecentArticles = async (pageNumber: number) => {
+  const fetchRecentArticles = async () => {
     try {
       const response = await axios.get(
         'https://wikied-api.vercel.app/6-4/articles',
         {
           params: {
-            page: pageNumber,
+            page,
             pageSize,
             orderBy,
             keyword,
           },
         }
       );
-      setRecentList(response.data.list || []);
+      setBoardsItems(response.data.list || []);
       setTotalCount(response.data.totalCount || 0);
     } catch (error) {
       console.error('API 호출 중 오류 발생:', error);
@@ -103,32 +104,41 @@ const Boards = ({
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    fetchRecentArticles(pageNumber);
   };
 
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    fetchRecentArticles();
+  }, [page, orderBy, keyword]);
+
   return (
-    <>
+    <div className={style.boardsConatiner}>
       <div className={style.bestContainer}>
         <div className={style.bestHeader}>
           <h1>베스트 게시글</h1>
-          <button>게시물 등록하기</button>
+          <button onClick={() => alert('게시물 등록 페이지로 이동합니다.')}>
+            게시물 등록하기
+          </button>
         </div>
         <BestList list={bestList} />
       </div>
 
-      <div>
+      <div className={style.navBar}>
         <SearchBar
           placeholder='제목을 검색해 주세요'
           value={keyword}
           onChange={handleSearchChange}
         />
-        <select onChange={handleOrderChange}>
+        <select onChange={handleOrderChange} value={orderBy}>
           <option value='recent'>최신순</option>
           <option value='like'>좋아요순</option>
         </select>
       </div>
 
-      <Table items={recentList} />
+      <Table items={boardsItems} />
 
       <Pagination
         activePage={page}
@@ -143,7 +153,7 @@ const Boards = ({
         prevPageText={'<'}
         nextPageText={'>'}
       />
-    </>
+    </div>
   );
 };
 

@@ -1,13 +1,53 @@
-.bestContainer {
-  width: 1060px;
-  height: 325px;
+.boardsConatiner {
+  max-width: 1060px;
   margin: 0 auto;
   margin-top: 60px;
-  margin-bottom: 60px;
 }
-
+.bestContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
 .bestHeader {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 60px;
+}
+
+.navBar {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination {
+  margin-top: 72px;
+  margin-bottom: 72px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.paginationItem {
+  margin: 0 5px;
+}
+
+.pageLink {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.pageLink:hover {
+  background-color: #e9ecef;
+}
+
+.active .pageLink {
+  background-color: #5cb85c;
+  color: white;
+  border-color: #5cb85c;
 }
