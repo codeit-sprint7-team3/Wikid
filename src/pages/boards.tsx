@@ -1,9 +1,8 @@
 import BestList from '@/components/boards/BestList';
 import Table from '@/components/boards/Table';
 import Pagination from 'react-js-pagination';
-import api from '@/lib/basicAxios';
 import { GetStaticProps } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from '@/components/search/SearchBar';
 import style from '@/styles/boards.module.css';
 import { Board } from '@/types/userArticle';
@@ -28,6 +27,12 @@ export const getStaticProps: GetStaticProps<BestArticlesProps> = async () => {
     orderBy: 'recent',
   };
 
+  const likeArticlesParams = {
+    page: 1,
+    pageSize: 10,
+    orderBy: 'like',
+  };
+
   try {
     const [bestRes, recentRes] = await Promise.all([
       axios.get('https://wikied-api.vercel.app/6-4/articles', {
@@ -35,6 +40,9 @@ export const getStaticProps: GetStaticProps<BestArticlesProps> = async () => {
       }),
       axios.get('https://wikied-api.vercel.app/6-4/articles', {
         params: recentArticlesParams,
+      }),
+      axios.get('https://wikied-api.vercel.app/6-4/articles', {
+        params: likeArticlesParams,
       }),
     ]);
 
@@ -73,7 +81,7 @@ const Boards = ({
   const [orderBy, setOrderBy] = useState('recent');
   const [keyword, setKeyword] = useState('');
 
-  const fetchRecentArticles = async (pageNumber: number) => {
+  const fetchRecentArticles = async (pageNumber: number, order: string) => {
     try {
       const response = await axios.get(
         'https://wikied-api.vercel.app/6-4/articles',
@@ -81,7 +89,7 @@ const Boards = ({
           params: {
             page: pageNumber,
             pageSize,
-            orderBy,
+            orderBy: order,
             keyword,
           },
         }
@@ -93,25 +101,29 @@ const Boards = ({
     }
   };
 
+  useEffect(() => {
+    fetchRecentArticles(page, orderBy);
+  }, [orderBy, page]);
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
   };
 
   const handleOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOrderBy(e.target.value);
+    setPage(1);
   };
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    fetchRecentArticles(pageNumber);
   };
 
   return (
     <>
       <div className={style.bestContainer}>
         <div className={style.bestHeader}>
-          <h1>베스트 게시글</h1>
-          <button>게시물 등록하기</button>
+          <h1 className={style.bestTitle}>베스트 게시글</h1>
+          <button className={style.bestButton}>게시물 등록하기</button>
         </div>
         <BestList list={bestList} />
       </div>
@@ -122,7 +134,10 @@ const Boards = ({
           value={keyword}
           onChange={handleSearchChange}
         />
-        <select onChange={handleOrderChange}>
+        <select
+          onChange={handleOrderChange}
+          value={orderBy}
+        >
           <option value='recent'>최신순</option>
           <option value='like'>좋아요순</option>
         </select>

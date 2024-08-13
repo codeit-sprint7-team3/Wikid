@@ -11,3 +11,19 @@
   justify-content: space-between;
   margin-bottom: 60px;
 }
+
+.bestTitle {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-sb);
+  line-height: var(--line-height-xxl);
+  color: var(--gray500);
+}
+
+.bestButton {
+  width: 160px;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--green200);
+  color: var(--gray50);
+}
