@@ -1,26 +1,28 @@
-import authApi from "@/lib/authAxios";
-import useAuthStore from "@/store/AuthStore";
-import useEditmodeStore from "@/store/EditStore";
-import style from "@/styles/editpage.module.css";
-import qstyle from "@/styles/quizModal.module.css";
-import { Profile } from "@/types/UserType";
-import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import WikiProfile from "../WikiProfile";
-import TinyMceEditor from "./Editor";
-import EditProfile from "./EditProfile";
+import authApi from '@/lib/authAxios';
+import useAuthStore from '@/store/AuthStore';
+import useEditmodeStore from '@/store/EditStore';
+import style from '@/styles/editpage.module.css';
+import qstyle from '@/styles/quizModal.module.css';
+import { Profile } from '@/types/UserType';
+import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import WikiProfile from '../WikiProfile';
+import TinyMceEditor from './Editor';
+import EditProfile from './EditProfile';
 
 const Editboard: React.FC = () => {
   const editorRef = useRef<any>(null);
   const router = useRouter();
 
-  const { resetStore, profile, code, isOverTime } = useEditmodeStore((state) => ({
-    profile: state.profile,
-    code: state.code,
-    // fet: state.fetchPing,
-    isOverTime: state.isOverTime,
-    resetStore: state.resetStore,
-  }));
+  const { resetStore, profile, code, isOverTime } = useEditmodeStore(
+    (state) => ({
+      profile: state.profile,
+      code: state.code,
+      // fet: state.fetchPing,
+      isOverTime: state.isOverTime,
+      resetStore: state.resetStore,
+    })
+  );
 
   const { user } = useAuthStore((state) => ({ user: state.user }));
 
@@ -34,7 +36,14 @@ const Editboard: React.FC = () => {
       try {
         if (code === user?.profile.code) {
           // 내 위키
-          const { name, teamId, id, code: profileCode, updatedAt, ...data } = newProfile;
+          const {
+            name,
+            teamId,
+            id,
+            code: profileCode,
+            updatedAt,
+            ...data
+          } = newProfile;
           await authApi.patch(`/profiles/${profileCode}`, { ...data, content });
         } else {
           // 다른 위키
@@ -43,7 +52,7 @@ const Editboard: React.FC = () => {
         resetStore();
         router.replace(`/wiki/${code}`);
       } catch (e) {
-        console.error("Patch error:", e);
+        console.error('Patch error:', e);
       }
     }
   }, [code, newProfile, resetStore, router, user?.profile.code]);
@@ -64,11 +73,12 @@ const Editboard: React.FC = () => {
       <div className={style.container}>
         <div className={style.editor}>
           <div className={style.handleNav}>
-            <p>{user?.name}</p>
             <button onClick={saveContent} className={style.btnSave}>
-              저장하기
+              저장
             </button>
+            <button className={style.cancelButton}>취소</button>
           </div>
+          <h2 className={style.h2}>{user?.name}</h2>
           <TinyMceEditor initialValue={profile.content} editorRef={editorRef} />
         </div>
         {profile &&
