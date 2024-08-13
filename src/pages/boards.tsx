@@ -115,7 +115,7 @@ const Boards = ({
   }, [page, orderBy, keyword]);
 
   return (
-    <>
+    <div className={style.boardsConatiner}>
       <div className={style.bestContainer}>
         <div className={style.bestHeader}>
           <h1>베스트 게시글</h1>
@@ -126,7 +126,7 @@ const Boards = ({
         <BestList list={bestList} />
       </div>
 
-      <div>
+      <div className={style.navBar}>
         <SearchBar
           placeholder='제목을 검색해 주세요'
           value={keyword}
@@ -153,7 +153,7 @@ const Boards = ({
         prevPageText={'<'}
         nextPageText={'>'}
       />
-    </>
+    </div>
   );
 };
 
