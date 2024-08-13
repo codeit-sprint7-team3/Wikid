@@ -1,0 +1,13 @@
+.bestContainer {
+  width: 1060px;
+  height: 325px;
+  margin: 0 auto;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.bestHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
