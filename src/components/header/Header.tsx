@@ -10,7 +10,7 @@ import Modal from '@/components/header/HeaderModal';
 import UserModal from '@/components/header/HeaderUserModal';
 import authApi from '@/lib/authAxios';
 import useAuthStore from '@/store/AuthStore';
-import NotificationPopover from "../common/NotiPopover";
+import NotificationPopover from '../common/NotiPopover';
 
 const Header = () => {
   const { user } = useAuthStore();
@@ -45,14 +45,22 @@ const Header = () => {
   return (
     <div className={style.headerContainer}>
       <div className={style.headerNavContainer}>
-        <Link href="/">
-          <Image className={style.logo} src={logo} alt="logo" title="home" priority={true} width={650} height={650} />
+        <Link href='/'>
+          <Image
+            className={style.logo}
+            src={logo}
+            alt='logo'
+            title='home'
+            priority={true}
+            width={650}
+            height={650}
+          />
         </Link>
         <ul className={style.headerNav}>
-          <Link href={"/wikilist"}>
+          <Link href={'/wikilist'}>
             <li>위키목록</li>
           </Link>
-          <Link href={"#"}>
+          <Link href={'/boards'}>
             <li>자유게시판</li>
           </Link>
         </ul>
@@ -60,31 +68,42 @@ const Header = () => {
       {user ? (
         <div className={style.imgContainer}>
           <NotificationPopover>
-            <Image className={style.bell} src={bell} alt="alarmbell" title="🔔" />
+            <Image
+              className={style.bell}
+              src={bell}
+              alt='alarmbell'
+              title='🔔'
+            />
           </NotificationPopover>
-          <button style={{ background: "none", border: "none", padding: 0 }} onClick={toggleUserModal}>
+          <button
+            style={{ background: 'none', border: 'none', padding: 0 }}
+            onClick={toggleUserModal}
+          >
             <Image
               className={style.userProfile}
               src={userImg ? userImg : basicProfile}
-              alt="유저프로필"
-              title="❤️"
+              alt='유저프로필'
+              title='❤️'
               priority={true}
               height={650}
               width={650}
             />
           </button>
-          <UserModal isOpen={isUserModalOpen} onClose={() => setIsUserModalOpen(false)} />
+          <UserModal
+            isOpen={isUserModalOpen}
+            onClose={() => setIsUserModalOpen(false)}
+          />
         </div>
       ) : (
         <div>
-          <Link href="/login">
+          <Link href='/login'>
             <p className={style.loginText}>로그인</p>
           </Link>
           <Image
             className={style.menuImg}
             src={menuImg}
-            alt="menuImg"
-            title="menu"
+            alt='menuImg'
+            title='menu'
             onClick={toggleModal}
             priority={true}
           />
