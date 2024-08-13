@@ -3,11 +3,12 @@ import Table from '@/components/boards/Table';
 import Pagination from 'react-js-pagination';
 import api from '@/lib/basicAxios';
 import { GetStaticProps } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBar from '@/components/search/SearchBar';
 import style from '@/styles/boards.module.css';
 import { Board } from '@/types/userArticle';
 import axios from 'axios';
+import useAuthStore from '@/store/AuthStore';
 
 interface BestArticlesProps {
   bestList: Board[];
@@ -66,6 +67,7 @@ const Boards = ({
   initialRecentList,
   initialTotalCount,
 }: BestArticlesProps) => {
+  const { checkAuth } = useAuthStore();
   const [recentList, setRecentList] = useState(initialRecentList);
   const [totalCount, setTotalCount] = useState(initialTotalCount);
   const [page, setPage] = useState(1);
@@ -105,6 +107,10 @@ const Boards = ({
     setPage(pageNumber);
     fetchRecentArticles(pageNumber);
   };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   return (
     <>
