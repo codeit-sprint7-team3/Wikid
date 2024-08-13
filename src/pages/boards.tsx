@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import SearchBar from '@/components/search/SearchBar';
 import style from '@/styles/boards.module.css';
 import { Board } from '@/types/userArticle';
-import axios from 'axios';
+import useAuthStore from '@/store/AuthStore';
+import basicApi from '@/lib/basicAxios';
 
 interface BestArticlesProps {
   bestList: Board[];
@@ -35,13 +36,13 @@ export const getStaticProps: GetStaticProps<BestArticlesProps> = async () => {
 
   try {
     const [bestRes, recentRes] = await Promise.all([
-      axios.get('https://wikied-api.vercel.app/6-4/articles', {
+      basicApi.get('/articles', {
         params: bestArticlesParams,
       }),
-      axios.get('https://wikied-api.vercel.app/6-4/articles', {
+      basicApi.get('/articles', {
         params: recentArticlesParams,
       }),
-      axios.get('https://wikied-api.vercel.app/6-4/articles', {
+      basicApi.get('/articles', {
         params: likeArticlesParams,
       }),
     ]);
@@ -74,7 +75,7 @@ const Boards = ({
   initialRecentList,
   initialTotalCount,
 }: BestArticlesProps) => {
-  const [recentList, setRecentList] = useState(initialRecentList);
+  const [boardsItems, setBoardsItems] = useState(initialRecentList);
   const [totalCount, setTotalCount] = useState(initialTotalCount);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(10);
@@ -83,23 +84,24 @@ const Boards = ({
 
   const fetchRecentArticles = async (pageNumber: number, order: string) => {
     try {
-      const response = await axios.get(
-        'https://wikied-api.vercel.app/6-4/articles',
-        {
-          params: {
-            page: pageNumber,
-            pageSize,
-            orderBy: order,
-            keyword,
-          },
-        }
-      );
-      setRecentList(response.data.list || []);
+      const response = await basicApi.get('/articles', {
+        params: {
+          page: pageNumber,
+          pageSize,
+          orderBy: order,
+          keyword,
+        },
+      });
+      setBoardsItems(response.data.list || []);
       setTotalCount(response.data.totalCount || 0);
     } catch (error) {
       console.error('API 호출 중 오류 발생:', error);
     }
   };
+
+  useEffect(() => {
+    fetchRecentArticles(page, orderBy);
+  }, [orderBy, page]);
 
   useEffect(() => {
     fetchRecentArticles(page, orderBy);
@@ -119,7 +121,7 @@ const Boards = ({
   };
 
   return (
-    <>
+    <div className={style.boardsConatiner}>
       <div className={style.bestContainer}>
         <div className={style.bestHeader}>
           <h1 className={style.bestTitle}>베스트 게시글</h1>
@@ -128,22 +130,19 @@ const Boards = ({
         <BestList list={bestList} />
       </div>
 
-      <div>
+      <div className={style.navBar}>
         <SearchBar
           placeholder='제목을 검색해 주세요'
           value={keyword}
           onChange={handleSearchChange}
         />
-        <select
-          onChange={handleOrderChange}
-          value={orderBy}
-        >
+        <select onChange={handleOrderChange}>
           <option value='recent'>최신순</option>
           <option value='like'>좋아요순</option>
         </select>
       </div>
 
-      <Table items={recentList} />
+      <Table items={boardsItems} />
 
       <Pagination
         activePage={page}
@@ -158,7 +157,7 @@ const Boards = ({
         prevPageText={'<'}
         nextPageText={'>'}
       />
-    </>
+    </div>
   );
 };
 
