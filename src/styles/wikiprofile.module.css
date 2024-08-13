@@ -2,16 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 320px;
   border-radius: var(--rounded-normal);
   background-color: var(--gray50);
   box-shadow: var(--box-shadow-heavy);
 }
 
 .wikiProfileImg {
-  width: 100%;
-  height: 300px;
-  padding: 60px;
+  width: 200px;
+  height: 200px;
+  margin: 60px;
 }
 
 .profileDetails {
@@ -46,11 +45,10 @@
   .wrapper {
     display: flex;
     flex-direction: row;
-    width: 100%;
   }
 
   .wikiProfileImg {
-    padding: 20px 40px 40px 30px;
+    margin: 20px 40px 40px 30px;
   }
 
   .profileDetails {
@@ -81,11 +79,11 @@
   }
 
   .wikiProfileImg {
-    padding: 20px 40px 40px 30px;
+    margin: 20px 40px 40px 30px;
   }
 
   .profileDetails {
-    padding-top: 20px;
+    margin-top: 20px;
   }
 
   .profileItem {
