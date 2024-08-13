@@ -2,7 +2,7 @@ import authApi from '@/lib/authAxios';
 import useAuthStore from '@/store/AuthStore';
 import useEditmodeStore from '@/store/EditStore';
 import style from '@/styles/editpage.module.css';
-import qstyle from '@/styles/quizModal.module.css';
+import qstyle from '@/styles/minuteModal.module.css';
 import { Profile } from '@/types/UserType';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -93,11 +93,17 @@ const Editboard: React.FC = () => {
         <div className={qstyle.modalContainer}>
           <div className={qstyle.modalContent}>
             <div className={qstyle.contentWrap}>
-              <h3>5분 이상 글을 쓰지 않아 접속이 끊어졌어요</h3>
-              <p>위키 참여하기를 통해 다시 위키를 수정해주세요</p>
+              <h3 className={qstyle.h3}>
+                5분 이상 글을 쓰지 않아 접속이 끊어졌어요.
+              </h3>
+              <p className={qstyle.p}>
+                위키 참여하기를 통해 다시 위키를 수정해 주세요.
+              </p>
             </div>
             <div className={qstyle.bottWrap}>
-              <button onClick={overTimeOk}>확인</button>
+              <button className={qstyle.button} onClick={overTimeOk}>
+                확인
+              </button>
             </div>
           </div>
         </div>
