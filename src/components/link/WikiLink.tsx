@@ -10,7 +10,7 @@ interface WikiLinkProp {
 const WikiLink = ({ code, name }: WikiLinkProp) => {
   const handleLinkClick = () => {
     const currentUrl = process.env.NEXT_PUBLIC_CURRENT_URL;
-    const url = `${currentUrl}${code}`;
+    const url = `${currentUrl}/wiki/${code}`;
     navigator.clipboard
       .writeText(url)
       .then(() => {
