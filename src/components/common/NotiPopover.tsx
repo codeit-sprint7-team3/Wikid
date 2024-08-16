@@ -1,11 +1,21 @@
-import { dateConv } from "@/lib/common";
-import useNotificationStore from "@/store/NotiStore";
-import styles from "@/styles/Notification.module.css"; // CSS 모듈을 사용한다고 가정
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import { dateConv } from '@/lib/common';
+import useNotificationStore from '@/store/NotiStore';
+import styles from '@/styles/notification.module.css';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
-const NotificationPopover: React.FC<{ children: ReactNode }> = ({ children }: { children: ReactNode }) => {
+const NotificationPopover: React.FC<{ children: ReactNode }> = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [visible, setVisible] = useState(false);
-  const { notis, totalCount, fetchNotifications, fetchNextPage, deleteNotification } = useNotificationStore();
+  const {
+    notis,
+    totalCount,
+    fetchNotifications,
+    fetchNextPage,
+    deleteNotification,
+  } = useNotificationStore();
   const popoverRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,14 +26,17 @@ const NotificationPopover: React.FC<{ children: ReactNode }> = ({ children }: { 
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
+      if (
+        popoverRef.current &&
+        !popoverRef.current.contains(event.target as Node)
+      ) {
         setVisible(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [popoverRef]);
 
@@ -37,7 +50,10 @@ const NotificationPopover: React.FC<{ children: ReactNode }> = ({ children }: { 
 
   return (
     <div className={styles.popoverContainer}>
-      <button onClick={() => setVisible(!visible)} style={{ background: "none", border: "none", padding: 0 }}>
+      <button
+        onClick={() => setVisible(!visible)}
+        style={{ background: 'none', border: 'none', padding: 0 }}
+      >
         {children}
       </button>
       {visible && (
@@ -50,7 +66,10 @@ const NotificationPopover: React.FC<{ children: ReactNode }> = ({ children }: { 
                 <div key={noti.id} className={styles.notificationCard}>
                   <div>
                     <p>{noti.content}</p>
-                    <button onClick={() => handleDelete(noti.id)} className={styles.deleteButton}>
+                    <button
+                      onClick={() => handleDelete(noti.id)}
+                      className={styles.deleteButton}
+                    >
                       X
                     </button>
                   </div>
@@ -58,7 +77,10 @@ const NotificationPopover: React.FC<{ children: ReactNode }> = ({ children }: { 
                 </div>
               ))}
               {notis.length < totalCount && (
-                <button onClick={handleNextPage} className={styles.nextPageButton}>
+                <button
+                  onClick={handleNextPage}
+                  className={styles.nextPageButton}
+                >
                   다음
                 </button>
               )}
