@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import style from '@/styles/home.module.css';
+import style from '@/styles/Home.module.css';
 import {
   AlarmImg,
   BellImg,
@@ -56,7 +56,7 @@ const Home = () => {
           >
             위키 만들기
           </motion.button>
-          <Image className={style.profileImg} src={ProfileImg} alt="프로필" />
+          <Image className={style.profileImg} src={ProfileImg} alt='프로필' />
         </motion.section>
         <section className={style.writeSection}>
           <motion.div
@@ -74,10 +74,10 @@ const Home = () => {
               </p>
             </div>
             <div className={style.imageWrapper}>
-              <Image className={style.typingImg} src={TypingImg} alt="키보드" />
+              <Image className={style.typingImg} src={TypingImg} alt='키보드' />
             </div>
           </motion.div>
-          <Image className={style.introImg} src={IntroImg} alt="인트로" />
+          <Image className={style.introImg} src={IntroImg} alt='인트로' />
         </section>
 
         <motion.section
@@ -95,13 +95,13 @@ const Home = () => {
             </p>
           </div>
           <div className={style.iconWrapper}>
-            <Image className={style.speakerImg} src={SpeakerImg} alt="확성기" />
-            <Image className={style.wikiImg} src={WikiImg} alt="위키" />
-            <Image className={style.phoneImg} src={PhoneImg} alt="핸드폰" />
+            <Image className={style.speakerImg} src={SpeakerImg} alt='확성기' />
+            <Image className={style.wikiImg} src={WikiImg} alt='위키' />
+            <Image className={style.phoneImg} src={PhoneImg} alt='핸드폰' />
             <Image
               className={style.dialogueImg}
               src={DialogueImg}
-              alt="말풍선"
+              alt='말풍선'
             />
           </div>
         </motion.section>
@@ -121,10 +121,10 @@ const Home = () => {
             </p>
           </div>
           <div className={style.viewContainer}>
-            <Image className={style.infoImg} src={InfoImg} alt="정보" />
+            <Image className={style.infoImg} src={InfoImg} alt='정보' />
             <div className={style.viewWrapper}>
-              <Image className={style.bellImg} src={BellImg} alt="종" />
-              <Image className={style.alarmImg} src={AlarmImg} alt="알림" />
+              <Image className={style.bellImg} src={BellImg} alt='종' />
+              <Image className={style.alarmImg} src={AlarmImg} alt='알림' />
             </div>
           </div>
         </motion.section>
@@ -143,7 +143,7 @@ const Home = () => {
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
           >
-            <Link href="/login">지금 시작하기</Link>
+            <Link href='/login'>지금 시작하기</Link>
           </motion.button>
         </section>
       </motion.div>
