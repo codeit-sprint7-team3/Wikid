@@ -1,5 +1,5 @@
 import useAuthStore from '@/store/AuthStore';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import api from '@/lib/basicAxios';
 import Image from 'next/image';
 import style from '@/components/mypage/Profile.module.css';
@@ -16,7 +16,7 @@ const Profile = () => {
 
   const router = useRouter();
 
-  const getUserProfile = async () => {
+  const getUserProfile = useCallback(async () => {
     try {
       const res = await api.get(`/profiles/${code}`);
       const profile = res.data;
@@ -24,12 +24,12 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [code]);
 
   useEffect(() => {
     getUserProfile();
     checkAuth();
-  }, []);
+  }, [getUserProfile, checkAuth]);
 
   if (!user) return;
   return (

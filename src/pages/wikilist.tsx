@@ -1,6 +1,6 @@
 import SearchBar from '@/components/search/SearchBar';
 import style from '@/styles/wikilist.module.css';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { UserProfile } from '@/types/UserType';
 import basicProfile from '@/assets/header/basicUserProfile.png';
@@ -55,11 +55,12 @@ const Wikilist = () => {
     }
   }, []);
 
-  const debouncedFetchData = useCallback(
-    debounce((searchTerm: string) => {
-      setPage(1);
-      fetchData(searchTerm, 1);
-    }, 1000),
+  const debouncedFetchData = useMemo(
+    () =>
+      debounce((searchTerm: string) => {
+        setPage(1);
+        fetchData(searchTerm, 1);
+      }, 1000),
     [fetchData]
   );
 
@@ -100,7 +101,7 @@ const Wikilist = () => {
               <div className={style.notFoundText}>
                 {`"${inputValue}" 님은 아무래도 없는 것 같아요 ㅠㅠ`}
               </div>
-              <Image src={noSearch} alt="no-search" />
+              <Image src={noSearch} alt='no-search' />
             </div>
           ) : (
             <div className={style.foundUserTextContainer}>
@@ -128,7 +129,7 @@ const Wikilist = () => {
                 <div className={style.imgAndName}>
                   <Image
                     src={item.image || basicProfile}
-                    alt="프로필사진"
+                    alt='프로필사진'
                     width={50}
                     height={50}
                     className={style.userProfile}
@@ -150,10 +151,10 @@ const Wikilist = () => {
       </InfiniteScroll>
       <Image
         src={top}
-        alt="goTop"
+        alt='goTop'
         onClick={handleGotoTopBtn}
         className={style.goToTop}
-        title="Top"
+        title='Top'
       />
     </div>
   );
