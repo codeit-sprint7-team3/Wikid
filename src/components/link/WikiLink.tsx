@@ -9,7 +9,8 @@ interface WikiLinkProp {
 
 const WikiLink = ({ code, name }: WikiLinkProp) => {
   const handleLinkClick = () => {
-    const url = `https://배포주소/${code}`;
+    const currentUrl = process.env.NEXT_PUBLIC_CURRENT_URL;
+    const url = `${currentUrl}${code}`;
     navigator.clipboard
       .writeText(url)
       .then(() => {
@@ -24,10 +25,10 @@ const WikiLink = ({ code, name }: WikiLinkProp) => {
     <div
       className={style.container}
       onClick={handleLinkClick}
-      title="
-copy?"
+      title='
+copy?'
     >
-      <Image src={Link} alt="Image" className={style.linkIcon} />
+      <Image src={Link} alt='Image' className={style.linkIcon} />
       <div>{`https://www.wikied.kr/${name} `}</div>
     </div>
   );
