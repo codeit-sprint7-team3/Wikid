@@ -2,11 +2,10 @@ import BestList from '@/components/boards/BestList';
 import Table from '@/components/boards/Table';
 import Pagination from 'react-js-pagination';
 import { GetStaticProps } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import SearchBar from '@/components/search/SearchBar';
 import style from '@/styles/boards.module.css';
 import { Board } from '@/types/userArticle';
-import useAuthStore from '@/store/AuthStore';
 import basicApi from '@/lib/basicAxios';
 
 interface BestArticlesProps {
@@ -82,30 +81,29 @@ const Boards = ({
   const [orderBy, setOrderBy] = useState('recent');
   const [keyword, setKeyword] = useState('');
 
-  const fetchRecentArticles = async (pageNumber: number, order: string) => {
-    try {
-      const response = await basicApi.get('/articles', {
-        params: {
-          page: pageNumber,
-          pageSize,
-          orderBy: order,
-          keyword,
-        },
-      });
-      setBoardsItems(response.data.list || []);
-      setTotalCount(response.data.totalCount || 0);
-    } catch (error) {
-      console.error('API 호출 중 오류 발생:', error);
-    }
-  };
+  const fetchRecentArticles = useCallback(
+    async (pageNumber: number, order: string) => {
+      try {
+        const response = await basicApi.get('/articles', {
+          params: {
+            page: pageNumber,
+            pageSize,
+            orderBy: order,
+            keyword,
+          },
+        });
+        setBoardsItems(response.data.list || []);
+        setTotalCount(response.data.totalCount || 0);
+      } catch (error) {
+        console.error('API 호출 중 오류 발생:', error);
+      }
+    },
+    [pageSize, keyword]
+  );
 
   useEffect(() => {
     fetchRecentArticles(page, orderBy);
-  }, [orderBy, page]);
-
-  useEffect(() => {
-    fetchRecentArticles(page, orderBy);
-  }, [orderBy, page]);
+  }, [fetchRecentArticles, orderBy, page]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
@@ -136,10 +134,7 @@ const Boards = ({
           value={keyword}
           onChange={handleSearchChange}
         />
-        <select
-          onChange={handleOrderChange}
-          value={orderBy}
-        >
+        <select onChange={handleOrderChange} value={orderBy}>
           <option value='recent'>최신순</option>
           <option value='like'>좋아요순</option>
         </select>

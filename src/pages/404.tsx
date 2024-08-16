@@ -10,7 +10,7 @@ const Custom404 = () => {
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
   return (
     <div>
       <div className={style.container}>
